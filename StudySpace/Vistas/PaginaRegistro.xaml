@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:StudySpace.VistaModelos"
+             x:Class="StudySpace.Vistas.PaginaRegistro"
+             x:DataType="vm:RegistroVM"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24,40,24,24" Spacing="14"
+                             MaximumWidthRequest="420" HorizontalOptions="Fill">
+
+            <Label FontFamily="IconosMaterial" Text="&#xe5c4;" FontSize="28"
+                   TextColor="{AppThemeBinding Light=#141B35, Dark=White}"
+                   HorizontalOptions="Start">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding VolverCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Image Source="logo.png" HeightRequest="64" HorizontalOptions="Center" />
+
+            <Label Text="Crear cuenta" Style="{StaticResource Titulo}"
+                   HorizontalTextAlignment="Center" />
+            <Label Text="Únete a Study Space y organiza tu vida académica"
+                   Style="{StaticResource Subtitulo}"
+                   HorizontalTextAlignment="Center" Margin="0,0,0,12" />
+
+            <Border Style="{StaticResource CampoBorde}" Margin="0,6,0,0">
+                <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Nombre completo"
+                       Text="{Binding Nombre}" />
+            </Border>
+
+            <Border Style="{StaticResource CampoBorde}">
+                <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Correo electrónico"
+                       Keyboard="Email" Text="{Binding Correo}" />
+            </Border>
+
+            <Border Style="{StaticResource CampoBorde}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Entry x:Name="PasswordEntry" Style="{StaticResource EntradaLimpia}"
+                           Placeholder="Contraseña" IsPassword="True" Text="{Binding Password}" />
+                    <ImageButton x:Name="TogglePasswordButton" Grid.Column="1" Clicked="OnTogglePasswordClicked"
+                                 BackgroundColor="Transparent" Margin="8,0,0,0" Padding="6"
+                                 WidthRequest="36" HeightRequest="36" HorizontalOptions="End" VerticalOptions="Center">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="IconosMaterial" Glyph="&#xe8f4;" Size="20"
+                                             Color="{StaticResource TextoSecundarioClaro}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource CampoBorde}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Entry x:Name="ConfirmEntry" Style="{StaticResource EntradaLimpia}"
+                           Placeholder="Confirmar contraseña" IsPassword="True" Text="{Binding Confirmar}" />
+                    <ImageButton x:Name="ToggleConfirmButton" Grid.Column="1" Clicked="OnToggleConfirmClicked"
+                                 BackgroundColor="Transparent" Margin="8,0,0,0" Padding="6"
+                                 WidthRequest="36" HeightRequest="36" HorizontalOptions="End" VerticalOptions="Center">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="IconosMaterial" Glyph="&#xe8f4;" Size="20"
+                                             Color="{StaticResource TextoSecundarioClaro}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                </Grid>
+            </Border>
+
+            <Label Text="{Binding MensajeError}" IsVisible="{Binding TieneError}"
+                   TextColor="{StaticResource Rojo}" FontSize="13" />
+
+            <Frame HasShadow="True" CornerRadius="28" Padding="0"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource Violeta}, Dark={StaticResource PrimaryDark}}"
+                   HorizontalOptions="Fill" HeightRequest="56" Margin="0,12,0,18">
+                <Button Text="Crear cuenta" BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light=White, Dark=White}"
+                        FontFamily="OpenSansSemibold" FontSize="16"
+                        Command="{Binding CrearCuentaCommand}" />
+            </Frame>
+
+            <ActivityIndicator IsRunning="{Binding Ocupado}" Color="{StaticResource Azul}" />
+
+            <Label Text="Al registrarte, aceptas nuestros Términos y Condiciones"
+                   Style="{StaticResource Subtitulo}" FontSize="12"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Style="{StaticResource Subtitulo}" HorizontalOptions="Center" Margin="0,12,0,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="¿Ya tienes cuenta? " />
+                        <Span Text="Inicia sesión" TextColor="{StaticResource Azul}" FontAttributes="Bold" />
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding IrAInicioSesionCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

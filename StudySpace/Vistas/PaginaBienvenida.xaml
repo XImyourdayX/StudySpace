@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudySpace.Vistas.PaginaBienvenida"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <LinearGradientBrush x:Key="FondoDegradadoClaro" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#F8F9FF" Offset="0.0" />
+            <GradientStop Color="#EEEBFF" Offset="0.55" />
+            <GradientStop Color="#CFC8FF" Offset="1.0" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="FondoDegradadoOscuro" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#0F1426" Offset="0.0" />
+            <GradientStop Color="#1A2140" Offset="0.55" />
+            <GradientStop Color="#3A3180" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto" Padding="24,50,24,40"
+          Background="{AppThemeBinding Light={StaticResource FondoDegradadoClaro}, Dark={StaticResource FondoDegradadoOscuro}}">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="8" HorizontalOptions="Fill">
+            <Image Source="logo.png" HeightRequest="70" HorizontalOptions="Center" />
+            <Label Text="Study Space" Style="{StaticResource Titulo}"
+                   TextColor="{AppThemeBinding Light={StaticResource Azul}, Dark=#A5B4FF}"
+                   HorizontalTextAlignment="Center" />
+            <Label Text="Tu espacio para organizar tu vida académica"
+                   Style="{StaticResource Subtitulo}" HorizontalTextAlignment="Center" />
+
+            <Grid WidthRequest="340" HeightRequest="320" Margin="0,16,0,0" HorizontalOptions="Center">
+
+                <Border WidthRequest="300" HeightRequest="320" StrokeThickness="0"
+                        HorizontalOptions="Center" VerticalOptions="End"
+                        BackgroundColor="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="0,0,150,150" />
+                    </Border.StrokeShape>
+                    <Grid>
+                        <Border WidthRequest="300" HeightRequest="280" StrokeThickness="0"
+                                HorizontalOptions="Center" VerticalOptions="End"
+                                BackgroundColor="{AppThemeBinding Light=#DDD7FF, Dark=#5058B8}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="150" />
+                            </Border.StrokeShape>
+                        </Border>
+                        <Image Source="personaje.png" Aspect="AspectFit"
+                               HeightRequest="300" VerticalOptions="End" />
+                    </Grid>
+                </Border>
+
+                <Border WidthRequest="52" HeightRequest="52" StrokeThickness="0"
+        BackgroundColor="#EEEBFF" HorizontalOptions="Start"
+        VerticalOptions="Start" Margin="0,30,0,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="26" />
+                    </Border.StrokeShape>
+                    <Label FontFamily="IconosMaterial" Text="&#xe935;" FontSize="26"
+           TextColor="#5544E9" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+
+                <Border WidthRequest="52" HeightRequest="52" StrokeThickness="0"
+        BackgroundColor="#D7F5EA" HorizontalOptions="End"
+        VerticalOptions="Start" Margin="0,75,0,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="26" />
+                    </Border.StrokeShape>
+                    <Label FontFamily="IconosMaterial" Text="&#xe92d;" FontSize="26"
+           TextColor="#22B981" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+
+                <Border WidthRequest="52" HeightRequest="52" StrokeThickness="0"
+        BackgroundColor="#FDEBCB" HorizontalOptions="Start"
+        VerticalOptions="Start" Margin="0,120,0,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="26" />
+                    </Border.StrokeShape>
+                    <Label FontFamily="IconosMaterial" Text="&#xe7f4;" FontSize="26"
+           TextColor="#F59E0B" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+
+            </Grid>
+        </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="1" Spacing="6"
+                             MaximumWidthRequest="420" HorizontalOptions="Fill">
+                <Frame HasShadow="True" CornerRadius="28" Padding="0"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource Violeta}, Dark={StaticResource PrimaryDark}}"
+                       HorizontalOptions="Fill" HeightRequest="56" Margin="0,12,0,18">
+                    <Button Text="Comenzar" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=White, Dark=White}"
+                            FontFamily="OpenSansSemibold" FontSize="16" HorizontalOptions="Fill" VerticalOptions="Fill"
+                            Clicked="OnComenzar" />
+                </Frame>
+
+                <Button Text="Ya tengo una cuenta" BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light=#141B35, Dark=White}"
+                        FontAttributes="Bold" Clicked="OnTengoCuenta" />
+            </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

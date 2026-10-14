@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Aplicacion/Aplicacion.csproj" Id="9fdb853b-18b4-469f-93ee-855018ffd497" />
+  <Project Path="Dominio/Dominio.csproj" Id="df785b51-2597-473c-a554-bfc607075626" />
+  <Project Path="Infraestructura/Infraestructura.csproj" Id="86e86680-22eb-48d8-b12e-64c80c058c2f" />
+  <Project Path="StudySpace/AppInterfaz.csproj" />
+</Solution>

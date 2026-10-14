@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudySpace.Vistas.PaginaNuevaTarea"
+             Shell.NavBarIsVisible="False"
+             Title="Nueva tarea">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="12" MaximumWidthRequest="420" HorizontalOptions="Center">
+
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12" Margin="0,0,0,8">
+                <Label Text="&#xe5c4;" FontFamily="IconosMaterial" FontSize="28" VerticalOptions="Center"
+                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VolverCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Grid.Column="1" Text="Nueva tarea" Style="{StaticResource Titulo}" />
+            </Grid>
+
+            <Label Text="Título" Style="{StaticResource Etiqueta}" />
+            <Border Style="{StaticResource CampoBorde}">
+                <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Ej. Informe de Administración Web"
+                       Text="{Binding Titulo}" />
+            </Border>
+
+            <Label Text="Descripción (opcional)" Style="{StaticResource Etiqueta}" />
+            <Border Style="{StaticResource CampoBorde}">
+                <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Detalles de la tarea"
+                       Text="{Binding Descripcion}" />
+            </Border>
+
+            <Label Text="Curso" Style="{StaticResource Etiqueta}" />
+            <Border Style="{StaticResource CampoBorde}">
+                <Picker ItemsSource="{Binding Cursos}" ItemDisplayBinding="{Binding Nombre}"
+                        SelectedItem="{Binding CursoSeleccionado}"
+                        TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+            </Border>
+
+            <Label Text="Fecha límite" Style="{StaticResource Etiqueta}" />
+            <Border Style="{StaticResource CampoBorde}">
+                <DatePicker Date="{Binding Fecha}" Format="dd/MM/yyyy"
+                            TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+            </Border>
+
+            <Label Text="Hora" Style="{StaticResource Etiqueta}" />
+            <Border Style="{StaticResource CampoBorde}">
+                <TimePicker Time="{Binding Hora}" Format="hh:mm tt"
+                            TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+            </Border>
+
+            <Label Text="Prioridad" Style="{StaticResource Etiqueta}" />
+            <Border Style="{StaticResource CampoBorde}">
+                <Picker ItemsSource="{Binding Prioridades}" SelectedItem="{Binding Prioridad}"
+                        TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+            </Border>
+
+            <Label Text="Recordatorio" Style="{StaticResource Etiqueta}" />
+            <Border Style="{StaticResource CampoBorde}">
+                <Picker ItemsSource="{Binding Avisos}" SelectedIndex="{Binding IndiceAviso}"
+                        TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+            </Border>
+
+            <Label Text="{Binding MensajeError}" IsVisible="{Binding TieneError}"
+                   TextColor="{StaticResource Rojo}" FontSize="13" />
+
+            <Button Text="Guardar tarea" Style="{StaticResource BotonPrincipal}"
+                    Command="{Binding GuardarCommand}" Margin="0,8,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

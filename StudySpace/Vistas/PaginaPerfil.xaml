@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:StudySpace.VistaModelos"
+             x:Class="StudySpace.Vistas.PaginaPerfil"
+             x:DataType="vm:PerfilVM"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout Padding="24,40,24,24" Spacing="16"
+                         MaximumWidthRequest="420" HorizontalOptions="Fill">
+        <Label Text="Perfil" Style="{StaticResource Titulo}" />
+
+        <Border Style="{StaticResource Tarjeta}">
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                <Border WidthRequest="56" HeightRequest="56" StrokeThickness="0"
+                        BackgroundColor="{StaticResource Violeta}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="28" />
+                    </Border.StrokeShape>
+                    <Label FontFamily="IconosMaterial" Text="&#xe7fd;" FontSize="30" TextColor="White"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                    <Label Text="{Binding Nombre}" Style="{StaticResource Etiqueta}" FontSize="16" />
+                    <Label Text="{Binding Correo}" Style="{StaticResource Subtitulo}" FontSize="13" />
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <Button Text="Cerrar sesión" Style="{StaticResource BotonPrincipal}"
+                BackgroundColor="{StaticResource Rojo}"
+                Command="{Binding CerrarSesionCommand}" Margin="0,16,0,0" />
+    </VerticalStackLayout>
+</ContentPage>
