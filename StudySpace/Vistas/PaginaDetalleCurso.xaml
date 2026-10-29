@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:StudySpace.VistaModelos"
+    xmlns:dto="clr-namespace:Aplicacion.DTOs;assembly=Aplicacion"
+    x:Class="StudySpace.Vistas.PaginaDetalleCurso"
+    x:DataType="vm:DetalleCursoVM"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto"
+          RowSpacing="16"
+          Padding="20,20,20,16"
+          MaximumWidthRequest="420"
+          HorizontalOptions="Fill">
+
+        <!-- ENCABEZADO -->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="44,*,44"
+              HeightRequest="48">
+
+            <Grid Grid.Column="0"
+                  WidthRequest="44"
+                  HeightRequest="44">
+
+                <Label Text="&#xe5c4;"
+                       FontFamily="IconosMaterial"
+                       FontSize="25"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="{AppThemeBinding
+                           Light={StaticResource TextoClaro},
+                           Dark={StaticResource TextoOscuro}}" />
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding VolverCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+
+            <Label Grid.Column="1"
+                   Text="Detalle del curso"
+                   FontSize="17"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   TextColor="{AppThemeBinding
+                       Light={StaticResource TextoClaro},
+                       Dark={StaticResource TextoOscuro}}" />
+        </Grid>
+
+        <!-- INFORMACIÓN DEL CURSO -->
+        <Border Grid.Row="1"
+                StrokeThickness="0"
+                Padding="16"
+                BackgroundColor="{AppThemeBinding
+                    Light={StaticResource LavandaClaro},
+                    Dark={StaticResource LavandaOscuro}}">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="16" />
+            </Border.StrokeShape>
+
+            <Grid ColumnDefinitions="Auto,*"
+                  ColumnSpacing="14">
+
+                <Border WidthRequest="50"
+                        HeightRequest="50"
+                        StrokeThickness="0"
+                        BackgroundColor="{Binding ColorCurso}">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="13" />
+                    </Border.StrokeShape>
+
+                    <Label Text="&#xea19;"
+                           FontFamily="IconosMaterial"
+                           FontSize="25"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Border>
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="6"
+                                     VerticalOptions="Center">
+
+                    <Label Text="{Binding NombreCurso}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           LineBreakMode="WordWrap"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoClaro},
+                               Dark={StaticResource TextoOscuro}}" />
+
+                    <Label Text="Organiza tus entregas"
+                           FontSize="12"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- RESUMEN -->
+        <Grid Grid.Row="2"
+              ColumnDefinitions="*,*,*"
+              ColumnSpacing="8">
+
+            <!-- TOTAL -->
+            <Border BackgroundColor="{AppThemeBinding
+                        Light=#E5F0FF,
+                        Dark=#1B3457}"
+                    StrokeThickness="0"
+                    Padding="12">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="{Binding TotalTareas}"
+                           FontSize="23"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding
+                               Light=#3085DA,
+                               Dark=#82BDFF}" />
+                    <Label Text="Total"
+                           FontSize="11"
+                           TextColor="{AppThemeBinding
+                               Light=#3085DA,
+                               Dark=#B8D8FF}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- PENDIENTES -->
+            <Border Grid.Column="1"
+                    BackgroundColor="{AppThemeBinding
+                        Light=#FFF2DE,
+                        Dark=#493924}"
+                    StrokeThickness="0"
+                    Padding="12">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="{Binding TareasPendientes}"
+                           FontSize="23"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding
+                               Light=#D99414,
+                               Dark=#FFD081}" />
+                    <Label Text="Pendientes"
+                           FontSize="11"
+                           TextColor="{AppThemeBinding
+                               Light=#D99414,
+                               Dark=#FFD081}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- COMPLETADAS -->
+            <Border Grid.Column="2"
+                    BackgroundColor="{AppThemeBinding
+                        Light=#DFF7EB,
+                        Dark=#193D38}"
+                    StrokeThickness="0"
+                    Padding="12">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="{Binding TareasCompletadas}"
+                           FontSize="23"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding
+                               Light=#22A879,
+                               Dark=#6BE0AE}" />
+                    <Label Text="Completadas"
+                           FontSize="11"
+                           TextColor="{AppThemeBinding
+                               Light=#22A879,
+                               Dark=#A1E8C9}" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- LISTA DE TAREAS -->
+        <Grid Grid.Row="3"
+              RowDefinitions="Auto,*"
+              RowSpacing="12">
+
+            <Label Grid.Row="0"
+                   Text="Tareas del curso"
+                   FontSize="17"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding
+                       Light={StaticResource TextoClaro},
+                       Dark={StaticResource TextoOscuro}}" />
+
+            <Grid Grid.Row="1">
+
+                <CollectionView ItemsSource="{Binding Tareas}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="dto:TareaDTO">
+
+                            <Border Padding="13"
+                                    StrokeThickness="0"
+                                    BackgroundColor="{AppThemeBinding
+                                        Light={StaticResource TarjetaClaro},
+                                        Dark={StaticResource TarjetaOscuro}}">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12" />
+                                </Border.StrokeShape>
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DetalleCursoVM}}, Path=AbrirTareaCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+
+                                <Grid ColumnDefinitions="4,*,Auto"
+                                      ColumnSpacing="12">
+
+                                    <!-- PRIORIDAD -->
+                                    <BoxView Color="{Binding PrioridadColor}"
+                                             VerticalOptions="Fill" />
+
+                                    <!-- INFORMACIÓN -->
+                                    <VerticalStackLayout Grid.Column="1"
+                                                         Spacing="5">
+
+                                        <Label Text="{Binding Titulo}"
+                                               FontSize="14"
+                                               FontAttributes="Bold"
+                                               LineBreakMode="TailTruncation"
+                                               TextColor="{AppThemeBinding
+                                                   Light={StaticResource TextoClaro},
+                                                   Dark={StaticResource TextoOscuro}}" />
+
+                                        <Label Text="{Binding FechaTexto}"
+                                               FontSize="11"
+                                               TextColor="{AppThemeBinding
+                                                   Light={StaticResource TextoSecundarioClaro},
+                                                   Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                                        <Label Text="Completada"
+                                               FontSize="11"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource Verde}"
+                                               IsVisible="{Binding Completada}" />
+                                    </VerticalStackLayout>
+
+                                    <!-- ETIQUETA -->
+                                    <Border Grid.Column="2"
+                                            StrokeThickness="0"
+                                            Padding="8,5"
+                                            VerticalOptions="Start"
+                                            BackgroundColor="{Binding PrioridadColor}">
+
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="8" />
+                                        </Border.StrokeShape>
+
+                                        <Label Text="{Binding Prioridad}"
+                                               FontSize="10"
+                                               FontAttributes="Bold"
+                                               TextColor="White" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- SIN TAREAS -->
+                <Label Text="Este curso todavía no tiene tareas."
+                       IsVisible="{Binding EstaVacio}"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Start"
+                       Margin="10,30"
+                       FontSize="13"
+                       TextColor="{AppThemeBinding
+                           Light={StaticResource TextoSecundarioClaro},
+                           Dark={StaticResource TextoSecundarioOscuro}}" />
+            </Grid>
+        </Grid>
+
+        <!-- BOTÓN NUEVA TAREA -->
+        <Button Grid.Row="4"
+                Text="+ Nueva tarea"
+                Command="{Binding NuevaTareaCommand}"
+                Style="{StaticResource BotonPrincipal}"
+                BackgroundColor="{StaticResource Violeta}"
+                HeightRequest="52" />
+
+    </Grid>
+</ContentPage>

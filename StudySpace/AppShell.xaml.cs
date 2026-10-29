@@ -1,4 +1,5 @@
-﻿using StudySpace.Vistas;
+﻿
+using StudySpace.Vistas;
 
 namespace StudySpace;
 
@@ -7,8 +8,29 @@ public partial class AppShell : Shell
     public AppShell()
     {
         InitializeComponent();
-        Routing.RegisterRoute("login", typeof(PaginaInicioSesion));
-        Routing.RegisterRoute("registro", typeof(PaginaRegistro));
-        Routing.RegisterRoute("nuevatarea", typeof(PaginaNuevaTarea));
+
+        // AUTENTICACIÓN
+        Routing.RegisterRoute(
+            "login",
+            typeof(PaginaInicioSesion));
+
+        Routing.RegisterRoute(
+            "registro",
+            typeof(PaginaRegistro));
+
+        // NUEVA TAREA
+        Routing.RegisterRoute(
+            "nuevatarea",
+            typeof(PaginaNuevaTarea));
+
+        // HU12 - DETALLE DE TAREA
+        Routing.RegisterRoute(
+            "detalletarea",
+            typeof(PaginaDetalleTarea));
+
+        // DETALLE DE CURSO
+        Routing.RegisterRoute(
+            "detallecurso",
+            typeof(PaginaDetalleCurso));
     }
 }

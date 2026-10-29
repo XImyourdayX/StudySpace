@@ -10,28 +10,73 @@
     Shell.TabBarTitleColor="{StaticResource Azul}"
     Shell.TabBarUnselectedColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}">
 
-    <ShellContent Route="bienvenida" ContentTemplate="{DataTemplate vistas:PaginaBienvenida}" />
+    <!-- PANTALLA DE BIENVENIDA -->
+    <ShellContent
+        Route="bienvenida"
+        ContentTemplate="{DataTemplate vistas:PaginaBienvenida}" />
 
+    <!-- NAVEGACIÓN PRINCIPAL -->
     <TabBar Route="principal">
-        <ShellContent Title="Inicio" Route="inicio"
-                      ContentTemplate="{DataTemplate vistas:PaginaPrincipal}">
+
+        <!-- INICIO -->
+        <ShellContent
+            Title="Inicio"
+            Route="inicio"
+            ContentTemplate="{DataTemplate vistas:PaginaPrincipal}">
+
             <ShellContent.Icon>
-                <FontImageSource FontFamily="IconosMaterial" Glyph="&#xe88a;" Size="24" Color="#6B7194" />
+                <FontImageSource
+                    FontFamily="IconosMaterial"
+                    Glyph="&#xe88a;"
+                    Size="24"
+                    Color="#6B7194" />
             </ShellContent.Icon>
         </ShellContent>
 
-        <ShellContent Title="Cursos" Route="cursos"
-                      ContentTemplate="{DataTemplate vistas:PaginaCursos}">
+        <!-- CURSOS -->
+        <ShellContent
+            Title="Cursos"
+            Route="cursos"
+            ContentTemplate="{DataTemplate vistas:PaginaCursos}">
+
             <ShellContent.Icon>
-                <FontImageSource FontFamily="IconosMaterial" Glyph="&#xea19;" Size="24" Color="#6B7194" />
+                <FontImageSource
+                    FontFamily="IconosMaterial"
+                    Glyph="&#xea19;"
+                    Size="24"
+                    Color="#6B7194" />
             </ShellContent.Icon>
         </ShellContent>
 
-        <ShellContent Title="Perfil" Route="perfil"
-                      ContentTemplate="{DataTemplate vistas:PaginaPerfil}">
+        <!-- HU09 - CALENDARIO -->
+        <ShellContent
+            Title="Calendario"
+            Route="calendario"
+            ContentTemplate="{DataTemplate vistas:PaginaCalendario}">
+
             <ShellContent.Icon>
-                <FontImageSource FontFamily="IconosMaterial" Glyph="&#xe7fd;" Size="24" Color="#6B7194" />
+                <FontImageSource
+                    FontFamily="IconosMaterial"
+                    Glyph="&#xebcc;"
+                    Size="24"
+                    Color="#6B7194" />
             </ShellContent.Icon>
         </ShellContent>
+
+        <!-- PERFIL -->
+        <ShellContent
+            Title="Perfil"
+            Route="perfil"
+            ContentTemplate="{DataTemplate vistas:PaginaPerfil}">
+
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="IconosMaterial"
+                    Glyph="&#xe7fd;"
+                    Size="24"
+                    Color="#6B7194" />
+            </ShellContent.Icon>
+        </ShellContent>
+
     </TabBar>
 </Shell>

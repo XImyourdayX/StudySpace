@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:StudySpace.VistaModelos"
+    x:Class="StudySpace.Vistas.PaginaDetalleTarea"
+    x:DataType="vm:DetalleTareaVM"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*,Auto"
+          RowSpacing="12"
+          Padding="18,16,18,16"
+          MaximumWidthRequest="420"
+          HorizontalOptions="Fill">
+
+        <!-- ENCABEZADO CENTRADO -->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="40,*,40"
+              HeightRequest="48"
+              ColumnSpacing="0">
+
+            <!-- VOLVER -->
+            <Grid Grid.Column="0"
+                  WidthRequest="40"
+                  HeightRequest="44">
+
+                <Label Text="&#xe5c4;"
+                       FontFamily="IconosMaterial"
+                       FontSize="25"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="{AppThemeBinding
+                           Light={StaticResource TextoClaro},
+                           Dark={StaticResource TextoOscuro}}" />
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding VolverCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+
+            <!-- TÍTULO DE PANTALLA -->
+            <Label Grid.Column="1"
+                   Text="Detalle de tarea"
+                   FontSize="17"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   TextColor="{AppThemeBinding
+                       Light={StaticResource TextoClaro},
+                       Dark={StaticResource TextoOscuro}}" />
+
+            <!-- ESPACIO PARA CENTRAR EL TÍTULO -->
+            <BoxView Grid.Column="2"
+                     Opacity="0"
+                     WidthRequest="40" />
+
+        </Grid>
+
+        <!-- CONTENIDO DESPLAZABLE -->
+        <ScrollView Grid.Row="1">
+
+            <VerticalStackLayout Spacing="20"
+                                 Padding="2,8,2,16">
+
+                <!-- INFORMACIÓN PRINCIPAL -->
+                <VerticalStackLayout Spacing="12">
+
+                    <!-- TÍTULO DE LA TAREA -->
+                    <Label Text="{Binding Tarea.Titulo}"
+                           FontSize="21"
+                           FontAttributes="Bold"
+                           LineBreakMode="WordWrap"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoClaro},
+                               Dark={StaticResource TextoOscuro}}" />
+
+                    <!-- PRIORIDAD -->
+                    <HorizontalStackLayout Spacing="10">
+
+                        <Border Padding="11,5"
+                                StrokeThickness="0"
+                                HorizontalOptions="Start"
+                                BackgroundColor="{Binding Tarea.PrioridadColor}">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="9" />
+                            </Border.StrokeShape>
+
+                            <Label Text="{Binding Tarea.Prioridad}"
+                                   FontSize="11"
+                                   FontAttributes="Bold"
+                                   TextColor="White" />
+                        </Border>
+
+                        <Label Text="Completada"
+                               FontSize="12"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               IsVisible="{Binding EstaCompletada}"
+                               TextColor="{StaticResource Verde}" />
+
+                    </HorizontalStackLayout>
+
+                    <!-- CURSO -->
+                    <HorizontalStackLayout Spacing="9">
+
+                        <Label Text="&#xea19;"
+                               FontFamily="IconosMaterial"
+                               FontSize="20"
+                               VerticalOptions="Center"
+                               TextColor="{Binding Tarea.CursoColor}" />
+
+                        <Label Text="{Binding Tarea.CursoNombre}"
+                               FontSize="13"
+                               VerticalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource TextoSecundarioClaro},
+                                   Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+
+                <!-- FECHA DE ENTREGA -->
+                <Border Padding="16"
+                        StrokeThickness="0"
+                        BackgroundColor="{AppThemeBinding
+                            Light=#FFF0F2,
+                            Dark=#462934}">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <Grid ColumnDefinitions="Auto,*"
+                          ColumnSpacing="12">
+
+                        <Label Grid.Column="0"
+                               Text="&#xe878;"
+                               FontFamily="IconosMaterial"
+                               FontSize="23"
+                               VerticalOptions="Center"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource Rojo},
+                                   Dark=#FF939D}" />
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="5">
+
+                            <Label Text="Fecha de entrega"
+                                   FontSize="12"
+                                   TextColor="{AppThemeBinding
+                                       Light={StaticResource TextoSecundarioClaro},
+                                       Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                            <Label Text="{Binding Tarea.FechaTexto}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   LineBreakMode="WordWrap"
+                                   TextColor="{AppThemeBinding
+                                       Light={StaticResource Rojo},
+                                       Dark=#FF939D}" />
+
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- DESCRIPCIÓN -->
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Descripción"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoClaro},
+                               Dark={StaticResource TextoOscuro}}" />
+
+                    <Label Text="{Binding Tarea.Descripcion, TargetNullValue='Sin descripción'}"
+                           FontSize="13"
+                           LineBreakMode="WordWrap"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- BOTONES INFERIORES -->
+        <VerticalStackLayout Grid.Row="2"
+                             Spacing="10">
+
+            <!-- COMPLETAR -->
+            <Button Text="{Binding TextoCompletar}"
+                    Command="{Binding CompletarCommand}"
+                    BackgroundColor="{StaticResource Verde}"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="52"
+                    FontSize="14"
+                    FontAttributes="Bold" />
+
+            <!-- EDITAR Y ELIMINAR -->
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="10">
+
+                <Button Grid.Column="0"
+                        Text="Editar"
+                        Clicked="OnEditarClicked"
+                        BackgroundColor="{AppThemeBinding
+                            Light=#E2DCFF,
+                            Dark=#35305D}"
+                        TextColor="{AppThemeBinding
+                            Light={StaticResource Violeta},
+                            Dark=#C5B9FF}"
+                        CornerRadius="12"
+                        HeightRequest="50"
+                        FontSize="14"
+                        FontAttributes="Bold" />
+
+                <Button Grid.Column="1"
+                        Text="Eliminar"
+                        Command="{Binding EliminarCommand}"
+                        BackgroundColor="{AppThemeBinding
+                            Light=#FFE0E4,
+                            Dark=#512B39}"
+                        TextColor="{AppThemeBinding
+                            Light={StaticResource Rojo},
+                            Dark=#FF939D}"
+                        CornerRadius="12"
+                        HeightRequest="50"
+                        FontSize="14"
+                        FontAttributes="Bold" />
+
+            </Grid>
+
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

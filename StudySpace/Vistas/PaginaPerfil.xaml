@@ -1,34 +1,289 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:StudySpace.VistaModelos"
-             x:Class="StudySpace.Vistas.PaginaPerfil"
-             x:DataType="vm:PerfilVM"
-             Shell.NavBarIsVisible="False">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:StudySpace.VistaModelos"
+    x:Class="StudySpace.Vistas.PaginaPerfil"
+    x:DataType="vm:PerfilVM"
+    Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout Padding="24,40,24,24" Spacing="16"
-                         MaximumWidthRequest="420" HorizontalOptions="Fill">
-        <Label Text="Perfil" Style="{StaticResource Titulo}" />
+    <Grid RowDefinitions="Auto,*"
+          RowSpacing="22"
+          Padding="20,28,20,20"
+          MaximumWidthRequest="420"
+          HorizontalOptions="Fill">
 
-        <Border Style="{StaticResource Tarjeta}">
-            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
-                <Border WidthRequest="56" HeightRequest="56" StrokeThickness="0"
-                        BackgroundColor="{StaticResource Violeta}">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="28" />
-                    </Border.StrokeShape>
-                    <Label FontFamily="IconosMaterial" Text="&#xe7fd;" FontSize="30" TextColor="White"
-                           HorizontalOptions="Center" VerticalOptions="Center" />
-                </Border>
-                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                    <Label Text="{Binding Nombre}" Style="{StaticResource Etiqueta}" FontSize="16" />
-                    <Label Text="{Binding Correo}" Style="{StaticResource Subtitulo}" FontSize="13" />
-                </VerticalStackLayout>
-            </Grid>
-        </Border>
+        <!-- ENCABEZADO -->
+        <Label Grid.Row="0"
+               Text="Mi perfil"
+               FontSize="23"
+               FontAttributes="Bold"
+               TextColor="{AppThemeBinding
+                   Light={StaticResource TextoClaro},
+                   Dark={StaticResource TextoOscuro}}" />
 
-        <Button Text="Cerrar sesión" Style="{StaticResource BotonPrincipal}"
-                BackgroundColor="{StaticResource Rojo}"
-                Command="{Binding CerrarSesionCommand}" Margin="0,16,0,0" />
-    </VerticalStackLayout>
+        <!-- CONTENIDO DESPLAZABLE -->
+        <ScrollView Grid.Row="1">
+
+            <VerticalStackLayout Spacing="0">
+
+                <!-- INFORMACIÓN DEL USUARIO -->
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="16"
+                      Padding="4,18,4,24">
+
+                    <Border WidthRequest="64"
+                            HeightRequest="64"
+                            StrokeThickness="0"
+                            BackgroundColor="{AppThemeBinding
+                                Light={StaticResource LavandaClaro},
+                                Dark={StaticResource LavandaOscuro}}">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="32" />
+                        </Border.StrokeShape>
+
+                        <Label Text="&#xe7fd;"
+                               FontFamily="IconosMaterial"
+                               FontSize="33"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource Violeta},
+                                   Dark=#AFA4FF}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1"
+                                         Spacing="6"
+                                         VerticalOptions="Center">
+
+                        <Label Text="{Binding Nombre}"
+                               FontSize="17"
+                               FontAttributes="Bold"
+                               LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource TextoClaro},
+                                   Dark={StaticResource TextoOscuro}}" />
+
+                        <Label Text="{Binding Correo}"
+                               FontSize="12"
+                               LineBreakMode="TailTruncation"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource TextoSecundarioClaro},
+                                   Dark={StaticResource TextoSecundarioOscuro}}" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- SEPARACIÓN DEL PERFIL -->
+                <BoxView HeightRequest="1"
+                         Margin="0,0,0,18"
+                         Color="{AppThemeBinding
+                             Light={StaticResource BordeClaro},
+                             Dark={StaticResource BordeOscuro}}" />
+
+                <!-- NOTIFICACIONES -->
+                <Grid ColumnDefinitions="34,*,Auto"
+                      ColumnSpacing="12"
+                      Padding="10,0"
+                      HeightRequest="72">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NotificacionesCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Label Text="&#xe7f4;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                    <Label Grid.Column="1"
+                           Text="Notificaciones"
+                           FontSize="15"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoClaro},
+                               Dark={StaticResource TextoOscuro}}" />
+
+                    <Label Grid.Column="2"
+                           Text="&#xe5cc;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+                </Grid>
+
+                <BoxView HeightRequest="1"
+                         Color="{AppThemeBinding
+                             Light={StaticResource BordeClaro},
+                             Dark={StaticResource BordeOscuro}}" />
+
+                <!-- RECORDATORIOS -->
+                <Grid ColumnDefinitions="34,*,Auto"
+                      ColumnSpacing="12"
+                      Padding="10,0"
+                      HeightRequest="72">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding RecordatoriosCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Label Text="&#xe878;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                    <Label Grid.Column="1"
+                           Text="Recordatorios"
+                           FontSize="15"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoClaro},
+                               Dark={StaticResource TextoOscuro}}" />
+
+                    <Label Grid.Column="2"
+                           Text="&#xe5cc;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+                </Grid>
+
+                <BoxView HeightRequest="1"
+                         Color="{AppThemeBinding
+                             Light={StaticResource BordeClaro},
+                             Dark={StaticResource BordeOscuro}}" />
+
+                <!-- TEMA DE LA APLICACIÓN -->
+                <Grid ColumnDefinitions="34,*,Auto,Auto"
+                      ColumnSpacing="10"
+                      Padding="10,0"
+                      HeightRequest="72">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding CambiarTemaCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Label Text="&#xe3a9;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                    <Label Grid.Column="1"
+                           Text="Tema de la aplicación"
+                           FontSize="14"
+                           VerticalOptions="Center"
+                           LineBreakMode="TailTruncation"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoClaro},
+                               Dark={StaticResource TextoOscuro}}" />
+
+                    <Label Grid.Column="2"
+                           Text="{Binding TemaActual}"
+                           FontSize="12"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                    <Label Grid.Column="3"
+                           Text="&#xe5cc;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+                </Grid>
+
+                <BoxView HeightRequest="1"
+                         Color="{AppThemeBinding
+                             Light={StaticResource BordeClaro},
+                             Dark={StaticResource BordeOscuro}}" />
+
+                <!-- AYUDA Y SOPORTE -->
+                <Grid ColumnDefinitions="34,*,Auto"
+                      ColumnSpacing="12"
+                      Padding="10,0"
+                      HeightRequest="72">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding AyudaCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Label Text="&#xe887;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                    <Label Grid.Column="1"
+                           Text="Ayuda y soporte"
+                           FontSize="15"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoClaro},
+                               Dark={StaticResource TextoOscuro}}" />
+
+                    <Label Grid.Column="2"
+                           Text="&#xe5cc;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding
+                               Light={StaticResource TextoSecundarioClaro},
+                               Dark={StaticResource TextoSecundarioOscuro}}" />
+                </Grid>
+
+                <BoxView HeightRequest="1"
+                         Color="{AppThemeBinding
+                             Light={StaticResource BordeClaro},
+                             Dark={StaticResource BordeOscuro}}" />
+
+                <!-- CERRAR SESIÓN -->
+                <Grid ColumnDefinitions="34,*"
+                      ColumnSpacing="12"
+                      Padding="10,0"
+                      HeightRequest="76"
+                      Margin="0,16,0,0">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding CerrarSesionCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <Label Text="&#xe9ba;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{StaticResource Rojo}" />
+
+                    <Label Grid.Column="1"
+                           Text="Cerrar sesión"
+                           FontSize="15"
+                           VerticalOptions="Center"
+                           TextColor="{StaticResource Rojo}" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

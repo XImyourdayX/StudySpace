@@ -1,3 +1,4 @@
+
 using Aplicacion.DTOs;
 using StudySpace.VistaModelos;
 
@@ -19,9 +20,32 @@ public partial class PaginaPrincipal : ContentPage
         await _vm.Cargar();
     }
 
-    private async void OnCompletarTapped(object? sender, TappedEventArgs e)
+    // MARCAR TAREA COMO COMPLETADA
+    private async void OnCompletarTapped(
+        object? sender,
+        TappedEventArgs e)
     {
-        if ((sender as BindableObject)?.BindingContext is TareaDTO tarea)
+        if ((sender as BindableObject)?.BindingContext
+            is TareaDTO tarea)
+        {
             await _vm.Completar(tarea);
+        }
+    }
+
+    // ABRIR DETALLE DE TAREA
+    private async void OnTareaTapped(
+        object? sender,
+        TappedEventArgs e)
+    {
+        if ((sender as BindableObject)?.BindingContext
+            is TareaDTO tarea)
+        {
+            await Shell.Current.GoToAsync(
+                "detalletarea",
+                new Dictionary<string, object>
+                {
+                    { "id", tarea.Id }
+                });
+        }
     }
 }

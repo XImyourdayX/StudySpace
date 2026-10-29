@@ -1,132 +1,487 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:StudySpace.VistaModelos"
-             xmlns:dto="clr-namespace:Aplicacion.DTOs;assembly=Aplicacion"
-             x:Class="StudySpace.Vistas.PaginaPrincipal"
-             x:DataType="vm:PrincipalVM"
-             Shell.NavBarIsVisible="False">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:StudySpace.VistaModelos"
+    xmlns:dto="clr-namespace:Aplicacion.DTOs;assembly=Aplicacion"
+    x:Class="StudySpace.Vistas.PaginaPrincipal"
+    x:DataType="vm:PrincipalVM"
+    Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="24,48,24,0"
-          MaximumWidthRequest="420" HorizontalOptions="Fill">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto"
+          Padding="20,30,20,12"
+          RowSpacing="16"
+          MaximumWidthRequest="420"
+          HorizontalOptions="Fill">
 
-        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,16">
-            <VerticalStackLayout VerticalOptions="Center" Spacing="2">
-                <Label Text="{Binding Saludo}" Style="{StaticResource Titulo}" />
-                <Label Text="Esto es lo que tienes por hacer" Style="{StaticResource Subtitulo}" />
+        <!-- ENCABEZADO -->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,Auto,Auto"
+              ColumnSpacing="12">
+
+            <VerticalStackLayout Spacing="4"
+                                 VerticalOptions="Center">
+
+                <Label Text="{Binding Saludo}"
+                       FontSize="23"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding
+                           Light={StaticResource TextoClaro},
+                           Dark={StaticResource TextoOscuro}}" />
+
+                <Label Text="Aquí está tu resumen de hoy."
+                       FontSize="12"
+                       TextColor="{AppThemeBinding
+                           Light={StaticResource TextoSecundarioClaro},
+                           Dark={StaticResource TextoSecundarioOscuro}}" />
+
             </VerticalStackLayout>
-            <Frame Grid.Column="1" WidthRequest="56" HeightRequest="56" CornerRadius="28" Padding="0"
-                   HasShadow="True"
-                   BackgroundColor="{AppThemeBinding Light={StaticResource Violeta}, Dark={StaticResource PrimaryDark}}"
-                   HorizontalOptions="End" VerticalOptions="Center">
-                <Label FontFamily="IconosMaterial" Text="&#xe145;" FontSize="26"
-                       TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NuevaTareaCommand}" />
-                </Frame.GestureRecognizers>
-            </Frame>
-        </Grid>
 
-        <Grid Grid.Row="1" ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="0,0,0,20">
-            <Border Grid.Column="0" Style="{StaticResource Tarjeta}" HeightRequest="88">
-                <VerticalStackLayout Spacing="4" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label Text="{Binding Pendientes}" FontSize="30" FontAttributes="Bold"
-                           TextColor="{StaticResource Azul}" HorizontalOptions="Center" />
-                    <Label Text="Pendientes" Style="{StaticResource Subtitulo}" FontSize="12" HorizontalOptions="Center" />
-                </VerticalStackLayout>
-            </Border>
-            <Border Grid.Column="1" Style="{StaticResource Tarjeta}" HeightRequest="88">
-                <VerticalStackLayout Spacing="4" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label Text="{Binding Completadas}" FontSize="30" FontAttributes="Bold"
-                           TextColor="{StaticResource Verde}" HorizontalOptions="Center" />
-                    <Label Text="Completadas" Style="{StaticResource Subtitulo}" FontSize="12" HorizontalOptions="Center" />
-                </VerticalStackLayout>
-            </Border>
-            <Border Grid.Column="2" Style="{StaticResource Tarjeta}" HeightRequest="88">
-                <VerticalStackLayout Spacing="4" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label Text="{Binding Vencidas}" FontSize="30" FontAttributes="Bold"
-                           TextColor="{StaticResource Rojo}" HorizontalOptions="Center" />
-                    <Label Text="Vencidas" Style="{StaticResource Subtitulo}" FontSize="12" HorizontalOptions="Center" />
-                </VerticalStackLayout>
+            <!-- CAMPANA DECORATIVA -->
+            <Label Grid.Column="1"
+                   Text="&#xe7f4;"
+                   FontFamily="IconosMaterial"
+                   FontSize="24"
+                   VerticalOptions="Center"
+                   TextColor="{AppThemeBinding
+                       Light={StaticResource TextoSecundarioClaro},
+                       Dark={StaticResource TextoSecundarioOscuro}}" />
+
+            <!-- AVATAR -->
+            <Border Grid.Column="2"
+                    WidthRequest="42"
+                    HeightRequest="42"
+                    StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding
+                        Light={StaticResource LavandaClaro},
+                        Dark={StaticResource LavandaOscuro}}">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="21" />
+                </Border.StrokeShape>
+
+                <Label Text="&#xe7fd;"
+                       FontFamily="IconosMaterial"
+                       FontSize="25"
+                       TextColor="{StaticResource Violeta}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
             </Border>
         </Grid>
 
-        <Label Grid.Row="2" Text="Próximas tareas" Style="{StaticResource Etiqueta}"
-               FontSize="17" Margin="0,0,0,10" />
+        <!-- TARJETAS DE RESUMEN -->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,*,*"
+              ColumnSpacing="8">
 
-        <CollectionView Grid.Row="3" ItemsSource="{Binding Tareas}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="dto:TareaDTO">
-                    <Border Style="{StaticResource Tarjeta}">
-                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+            <!-- PENDIENTES -->
+            <Border Grid.Column="0"
+                    HeightRequest="96"
+                    Padding="10"
+                    StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding
+                        Light=#E5F0FF,
+                        Dark=#1B3457}">
 
-                            <Border WidthRequest="44" HeightRequest="44" StrokeThickness="1"
-                                    Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}"
-                                    BackgroundColor="Transparent" VerticalOptions="Center">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="22" />
-                                </Border.StrokeShape>
-                                <Label Text="&#xe92d;" FontFamily="IconosMaterial" FontSize="22"
-                                       HorizontalOptions="Center" VerticalOptions="Center"
-                                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                                <Border.Triggers>
-                                    <DataTrigger TargetType="Border" Binding="{Binding Completada}" Value="True">
-                                        <Setter Property="BackgroundColor" Value="{StaticResource Verde}" />
-                                        <Setter Property="Stroke" Value="{StaticResource Verde}" />
-                                    </DataTrigger>
-                                </Border.Triggers>
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnCompletarTapped" />
-                                </Border.GestureRecognizers>
-                            </Border>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
 
-                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
-                                <Label Text="{Binding Titulo}" Style="{StaticResource Etiqueta}"
-                                       FontSize="15" LineBreakMode="TailTruncation">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Completada}" Value="True">
-                                            <Setter Property="TextDecorations" Value="Strikethrough" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                                <Label FontSize="12"
-                                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding CursoNombre}" TextColor="{Binding CursoColor}"
-                                                  FontAttributes="Bold" />
-                                            <Span Text="  ·  " />
-                                            <Span Text="{Binding FechaTexto}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding EstaVencida}" Value="True">
-                                            <Setter Property="TextColor" Value="{StaticResource Rojo}" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </VerticalStackLayout>
+                <VerticalStackLayout Spacing="5"
+                                     VerticalOptions="Center">
 
-                            <Border Grid.Column="2" StrokeThickness="0" Padding="8,3"
-                                    VerticalOptions="Center" BackgroundColor="{Binding PrioridadColor}">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="8" />
-                                </Border.StrokeShape>
-                                <Label Text="{Binding Prioridad}" TextColor="White"
-                                       FontSize="11" FontAttributes="Bold" />
-                            </Border>
-                        </Grid>
+                    <Label Text="{Binding Pendientes}"
+                           FontSize="27"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding
+                               Light=#3085DA,
+                               Dark=#82BDFF}" />
+
+                    <Label Text="Tareas pendientes"
+                           FontSize="11"
+                           LineBreakMode="WordWrap"
+                           TextColor="{AppThemeBinding
+                               Light=#3085DA,
+                               Dark=#B8D8FF}" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- VENCIDAS -->
+            <Border Grid.Column="1"
+                    HeightRequest="96"
+                    Padding="10"
+                    StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding
+                        Light=#FFE7EB,
+                        Dark=#512B39}">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="5"
+                                     VerticalOptions="Center">
+
+                    <Label Text="{Binding Vencidas}"
+                           FontSize="27"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding
+                               Light=#EF4444,
+                               Dark=#FF939D}" />
+
+                    <Label Text="Tareas vencidas"
+                           FontSize="11"
+                           LineBreakMode="WordWrap"
+                           TextColor="{AppThemeBinding
+                               Light=#EF4444,
+                               Dark=#FFB8C0}" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- CURSOS ACTIVOS -->
+            <Border Grid.Column="2"
+                    HeightRequest="96"
+                    Padding="10"
+                    StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding
+                        Light=#DFF7EB,
+                        Dark=#193D38}">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="5"
+                                     VerticalOptions="Center">
+
+                    <Label Text="{Binding CursosActivos}"
+                           FontSize="27"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding
+                               Light=#22A879,
+                               Dark=#6BE0AE}" />
+
+                    <Label Text="Cursos activos"
+                           FontSize="11"
+                           LineBreakMode="WordWrap"
+                           TextColor="{AppThemeBinding
+                               Light=#22A879,
+                               Dark=#A1E8C9}" />
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- PROGRESO ACADÉMICO MEJORADO -->
+        <Border Grid.Row="2"
+                Padding="16"
+                StrokeThickness="0"
+                BackgroundColor="{AppThemeBinding
+                    Light=#EEE8FF,
+                    Dark=#25295A}">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="18" />
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Spacing="14">
+
+                <Grid ColumnDefinitions="Auto,*,Auto"
+                      ColumnSpacing="12">
+
+                    <!-- ICONO -->
+                    <Border WidthRequest="38"
+                            HeightRequest="38"
+                            StrokeThickness="0"
+                            VerticalOptions="Start"
+                            BackgroundColor="{AppThemeBinding
+                                Light=#DDD1FF,
+                                Dark=#373D78}">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <Label Text="&#xe885;"
+                               FontFamily="IconosMaterial"
+                               FontSize="20"
+                               TextColor="{StaticResource Violeta}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
                     </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
 
-        <Label Grid.Row="3" Text="Aún no tienes tareas. Toca + para crear la primera."
-               Style="{StaticResource Subtitulo}" HorizontalTextAlignment="Center"
-               VerticalOptions="Start" Margin="0,30,0,0"
-               IsVisible="{Binding EstaVacio}" />
+                    <!-- TEXTO -->
+                    <VerticalStackLayout Grid.Column="1"
+                                         Spacing="3"
+                                         VerticalOptions="Center">
+
+                        <Label Text="Tu progreso académico"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource TextoClaro},
+                                   Dark={StaticResource TextoOscuro}}" />
+
+                        <Label Text="Avance según tus tareas completadas"
+                               FontSize="11"
+                               LineBreakMode="TailTruncation"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource TextoSecundarioClaro},
+                                   Dark={StaticResource TextoSecundarioOscuro}}" />
+                    </VerticalStackLayout>
+
+                    <!-- PORCENTAJE -->
+                    <Border Grid.Column="2"
+                            Padding="12,6"
+                            StrokeThickness="0"
+                            VerticalOptions="Center"
+                            BackgroundColor="{AppThemeBinding
+                                Light=#DDD1FF,
+                                Dark=#373D78}">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <Label Text="{Binding PorcentajeProgreso, StringFormat='{0}%'}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Violeta}" />
+                    </Border>
+                </Grid>
+
+                <!-- BARRA -->
+                <VerticalStackLayout Spacing="7">
+
+                    <Border Padding="6"
+                            StrokeThickness="0"
+                            BackgroundColor="{AppThemeBinding
+                                Light=#DCCFFF,
+                                Dark=#353A70}">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="999" />
+                        </Border.StrokeShape>
+
+                        <ProgressBar Progress="{Binding Progreso}"
+                                     ProgressColor="{StaticResource Violeta}"
+                                     BackgroundColor="Transparent"
+                                     HeightRequest="8"
+                                     ScaleY="1.4"
+                                     HorizontalOptions="Fill" />
+                    </Border>
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <Label Text="{Binding Completadas, StringFormat='Completaste {0} tarea(s)'}"
+                               FontSize="11"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource TextoSecundarioClaro},
+                                   Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                        <Label Grid.Column="1"
+                               FontSize="11"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource TextoSecundarioClaro},
+                                   Dark={StaticResource TextoSecundarioOscuro}}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Tareas.Count}" />
+                                    <Span Text=" en total" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- TÍTULO DE LISTA -->
+        <Grid Grid.Row="3"
+              ColumnDefinitions="*,Auto">
+
+            <Label Text="Próximas entregas"
+                   FontSize="17"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding
+                       Light={StaticResource TextoClaro},
+                       Dark={StaticResource TextoOscuro}}" />
+
+            <Label Grid.Column="1"
+                   Text="Ver todas"
+                   FontSize="12"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource Violeta}" />
+        </Grid>
+
+        <!-- LISTA DE TAREAS -->
+        <Grid Grid.Row="4">
+
+            <CollectionView ItemsSource="{Binding Tareas}"
+                            VerticalOptions="Fill">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:TareaDTO">
+
+                        <Border StrokeThickness="0"
+                                Padding="0"
+                                BackgroundColor="{AppThemeBinding
+                                    Light={StaticResource TarjetaClaro},
+                                    Dark={StaticResource TarjetaOscuro}}">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Grid ColumnDefinitions="4,*"
+                                  ColumnSpacing="0"
+                                  MinimumHeightRequest="75">
+
+                                <!-- BARRA LATERAL -->
+                                <BoxView Grid.Column="0"
+                                         Color="{Binding PrioridadColor}"
+                                         VerticalOptions="Fill" />
+
+                                <Grid Grid.Column="1"
+                                      ColumnDefinitions="Auto,*"
+                                      ColumnSpacing="9"
+                                      Padding="10,12">
+
+                                    <!-- ICONO PARA COMPLETAR -->
+                                    <Label Grid.Column="0"
+                                           Text="&#xe92d;"
+                                           FontFamily="IconosMaterial"
+                                           FontSize="22"
+                                           VerticalOptions="Start"
+                                           TextColor="{AppThemeBinding
+                                               Light={StaticResource TextoSecundarioClaro},
+                                               Dark={StaticResource TextoSecundarioOscuro}}">
+
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Completada}"
+                                                         Value="True">
+                                                <Setter Property="Text"
+                                                        Value="&#xe2e6;" />
+                                                <Setter Property="TextColor"
+                                                        Value="{StaticResource Verde}" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnCompletarTapped" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <!-- ZONA QUE ABRE EL DETALLE -->
+                                    <Grid Grid.Column="1"
+                                          ColumnDefinitions="*,Auto"
+                                          ColumnSpacing="9"
+                                          MinimumHeightRequest="55">
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnTareaTapped" />
+                                        </Grid.GestureRecognizers>
+
+                                        <!-- INFORMACIÓN -->
+                                        <VerticalStackLayout Grid.Column="0"
+                                                             Spacing="4"
+                                                             VerticalOptions="Center">
+
+                                            <Label Text="{Binding Titulo}"
+                                                   FontSize="13"
+                                                   FontAttributes="Bold"
+                                                   LineBreakMode="TailTruncation"
+                                                   TextColor="{AppThemeBinding
+                                                       Light={StaticResource TextoClaro},
+                                                       Dark={StaticResource TextoOscuro}}">
+
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label"
+                                                                 Binding="{Binding Completada}"
+                                                                 Value="True">
+                                                        <Setter Property="TextDecorations"
+                                                                Value="Strikethrough" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+
+                                            <Label Text="{Binding CursoNombre}"
+                                                   FontSize="11"
+                                                   LineBreakMode="TailTruncation"
+                                                   TextColor="{AppThemeBinding
+                                                       Light={StaticResource TextoSecundarioClaro},
+                                                       Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                                            <Label Text="{Binding FechaTexto}"
+                                                   FontSize="10"
+                                                   TextColor="{AppThemeBinding
+                                                       Light={StaticResource TextoSecundarioClaro},
+                                                       Dark={StaticResource TextoSecundarioOscuro}}">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label"
+                                                                 Binding="{Binding EstaVencida}"
+                                                                 Value="True">
+                                                        <Setter Property="TextColor"
+                                                                Value="{StaticResource Rojo}" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+
+                                        </VerticalStackLayout>
+
+                                        <!-- PRIORIDAD -->
+                                        <Border Grid.Column="1"
+                                                StrokeThickness="0"
+                                                Padding="7,4"
+                                                VerticalOptions="Start"
+                                                BackgroundColor="{Binding PrioridadColor}">
+
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="8" />
+                                            </Border.StrokeShape>
+
+                                            <Label Text="{Binding Prioridad}"
+                                                   FontSize="10"
+                                                   FontAttributes="Bold"
+                                                   TextColor="White" />
+                                        </Border>
+
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- MENSAJE CUANDO NO HAY TAREAS -->
+            <Label Text="Aún no tienes tareas. Crea tu primera tarea."
+                   IsVisible="{Binding EstaVacio}"
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="Start"
+                   Margin="10,35"
+                   FontSize="13"
+                   TextColor="{AppThemeBinding
+                       Light={StaticResource TextoSecundarioClaro},
+                       Dark={StaticResource TextoSecundarioOscuro}}" />
+        </Grid>
+
+        <!-- BOTÓN INFERIOR -->
+        <Button Grid.Row="5"
+                Text="+ Nueva tarea"
+                Style="{StaticResource BotonPrincipal}"
+                BackgroundColor="{StaticResource Violeta}"
+                Command="{Binding NuevaTareaCommand}"
+                HeightRequest="52" />
+
     </Grid>
 </ContentPage>

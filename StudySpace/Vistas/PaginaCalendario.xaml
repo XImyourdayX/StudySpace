@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:StudySpace.VistaModelos"
+    xmlns:dto="clr-namespace:Aplicacion.DTOs;assembly=Aplicacion"
+    x:Class="StudySpace.Vistas.PaginaCalendario"
+    x:DataType="vm:CalendarioVM"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto"
+          RowSpacing="14"
+          Padding="20,24,20,12"
+          MaximumWidthRequest="420"
+          HorizontalOptions="Fill">
+
+        <!-- ENCABEZADO -->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,Auto">
+
+            <Label Text="Calendario académico"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   TextColor="{AppThemeBinding
+                       Light={StaticResource TextoClaro},
+                       Dark={StaticResource TextoOscuro}}" />
+
+            <Label Grid.Column="1"
+                   Text="&#xebcc;"
+                   FontFamily="IconosMaterial"
+                   FontSize="25"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource Violeta}" />
+        </Grid>
+
+        <!-- NAVEGACIÓN DEL MES -->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="44,*,44"
+              HeightRequest="48">
+
+            <Button Grid.Column="0"
+                    Text="&#xe5cb;"
+                    FontFamily="IconosMaterial"
+                    FontSize="24"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding
+                        Light={StaticResource TextoClaro},
+                        Dark={StaticResource TextoOscuro}}"
+                    Command="{Binding MesAnteriorCommand}" />
+
+            <Label Grid.Column="1"
+                   Text="{Binding TituloMes}"
+                   FontSize="17"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   TextColor="{AppThemeBinding
+                       Light={StaticResource TextoClaro},
+                       Dark={StaticResource TextoOscuro}}" />
+
+            <Button Grid.Column="2"
+                    Text="&#xe5cc;"
+                    FontFamily="IconosMaterial"
+                    FontSize="24"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding
+                        Light={StaticResource TextoClaro},
+                        Dark={StaticResource TextoOscuro}}"
+                    Command="{Binding MesSiguienteCommand}" />
+        </Grid>
+
+        <!-- NOMBRES DE LOS DÍAS -->
+        <Grid Grid.Row="2"
+              ColumnDefinitions="*,*,*,*,*,*,*"
+              ColumnSpacing="0">
+
+            <Label Grid.Column="0" Text="Lun"
+                   HorizontalTextAlignment="Center"
+                   Style="{StaticResource Subtitulo}" />
+
+            <Label Grid.Column="1" Text="Mar"
+                   HorizontalTextAlignment="Center"
+                   Style="{StaticResource Subtitulo}" />
+
+            <Label Grid.Column="2" Text="Mié"
+                   HorizontalTextAlignment="Center"
+                   Style="{StaticResource Subtitulo}" />
+
+            <Label Grid.Column="3" Text="Jue"
+                   HorizontalTextAlignment="Center"
+                   Style="{StaticResource Subtitulo}" />
+
+            <Label Grid.Column="4" Text="Vie"
+                   HorizontalTextAlignment="Center"
+                   Style="{StaticResource Subtitulo}" />
+
+            <Label Grid.Column="5" Text="Sáb"
+                   HorizontalTextAlignment="Center"
+                   Style="{StaticResource Subtitulo}" />
+
+            <Label Grid.Column="6" Text="Dom"
+                   HorizontalTextAlignment="Center"
+                   Style="{StaticResource Subtitulo}" />
+        </Grid>
+
+        <!-- CUADRÍCULA DEL CALENDARIO -->
+        <CollectionView Grid.Row="3"
+                        ItemsSource="{Binding Dias}"
+                        SelectionMode="None"
+                        HeightRequest="315">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="7"
+                                 HorizontalItemSpacing="2"
+                                 VerticalItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:DiaCalendario">
+
+                    <Grid HeightRequest="46"
+                          IsVisible="{Binding EsVisible}">
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CalendarioVM}}, Path=SeleccionarDiaCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            Spacing="3"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+
+                            <!-- CÍRCULO DEL DÍA -->
+                            <Border WidthRequest="34"
+                                    HeightRequest="34"
+                                    StrokeThickness="0"
+                                    BackgroundColor="Transparent">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="17" />
+                                </Border.StrokeShape>
+
+                                <Border.Triggers>
+                                    <DataTrigger TargetType="Border"
+                                                 Binding="{Binding EstaSeleccionado}"
+                                                 Value="True">
+                                        <Setter Property="BackgroundColor"
+                                                Value="{StaticResource Violeta}" />
+                                    </DataTrigger>
+                                </Border.Triggers>
+
+                                <Label Text="{Binding Numero}"
+                                       FontSize="13"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="{AppThemeBinding
+                                           Light={StaticResource TextoClaro},
+                                           Dark={StaticResource TextoOscuro}}">
+
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding EstaSeleccionado}"
+                                                     Value="True">
+                                            <Setter Property="TextColor"
+                                                    Value="White" />
+                                            <Setter Property="FontAttributes"
+                                                    Value="Bold" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Border>
+
+                            <!-- INDICADOR DE TAREAS -->
+                            <Border WidthRequest="6"
+                                    HeightRequest="6"
+                                    StrokeThickness="0"
+                                    IsVisible="{Binding TieneTareas}"
+                                    BackgroundColor="{Binding ColorIndicador}">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="3" />
+                                </Border.StrokeShape>
+                            </Border>
+
+                        </VerticalStackLayout>
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- TAREAS DEL DÍA -->
+        <Grid Grid.Row="4"
+              RowDefinitions="Auto,*"
+              RowSpacing="10">
+
+            <Grid Grid.Row="0"
+                  ColumnDefinitions="*,Auto">
+
+                <Label Text="{Binding TituloFecha}"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="{AppThemeBinding
+                           Light={StaticResource TextoClaro},
+                           Dark={StaticResource TextoOscuro}}" />
+
+                <Button Grid.Column="1"
+                        Text="Hoy"
+                        FontSize="12"
+                        Padding="12,5"
+                        BackgroundColor="{AppThemeBinding
+                            Light={StaticResource LavandaClaro},
+                            Dark={StaticResource LavandaOscuro}}"
+                        TextColor="{AppThemeBinding
+                            Light={StaticResource Violeta},
+                            Dark=#C5B9FF}"
+                        Command="{Binding IrAHoyCommand}" />
+            </Grid>
+
+            <Grid Grid.Row="1">
+
+                <CollectionView ItemsSource="{Binding TareasDelDia}"
+                                SelectionMode="None">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="dto:TareaDTO">
+
+                            <Border Padding="13"
+                                    StrokeThickness="0"
+                                    BackgroundColor="{AppThemeBinding
+                                        Light={StaticResource TarjetaClaro},
+                                        Dark={StaticResource TarjetaOscuro}}">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12" />
+                                </Border.StrokeShape>
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CalendarioVM}}, Path=AbrirTareaCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+
+                                <Grid ColumnDefinitions="4,*,Auto"
+                                      ColumnSpacing="10">
+
+                                    <BoxView Color="{Binding PrioridadColor}" />
+
+                                    <VerticalStackLayout Grid.Column="1"
+                                                         Spacing="5">
+
+                                        <Label Text="{Binding Titulo}"
+                                               FontSize="13"
+                                               FontAttributes="Bold"
+                                               LineBreakMode="TailTruncation"
+                                               TextColor="{AppThemeBinding
+                                                   Light={StaticResource TextoClaro},
+                                                   Dark={StaticResource TextoOscuro}}" />
+
+                                        <Label Text="{Binding CursoNombre}"
+                                               FontSize="11"
+                                               TextColor="{AppThemeBinding
+                                                   Light={StaticResource TextoSecundarioClaro},
+                                                   Dark={StaticResource TextoSecundarioOscuro}}" />
+
+                                        <Label Text="{Binding FechaTexto}"
+                                               FontSize="10"
+                                               TextColor="{AppThemeBinding
+                                                   Light={StaticResource TextoSecundarioClaro},
+                                                   Dark={StaticResource TextoSecundarioOscuro}}" />
+                                    </VerticalStackLayout>
+
+                                    <Border Grid.Column="2"
+                                            Padding="8,5"
+                                            StrokeThickness="0"
+                                            VerticalOptions="Start"
+                                            BackgroundColor="{Binding PrioridadColor}">
+
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="8" />
+                                        </Border.StrokeShape>
+
+                                        <Label Text="{Binding Prioridad}"
+                                               FontSize="10"
+                                               FontAttributes="Bold"
+                                               TextColor="White" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="No tienes tareas para este día."
+                       IsVisible="{Binding SinTareas}"
+                       FontSize="13"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Start"
+                       Margin="8,25"
+                       TextColor="{AppThemeBinding
+                           Light={StaticResource TextoSecundarioClaro},
+                           Dark={StaticResource TextoSecundarioOscuro}}" />
+            </Grid>
+        </Grid>
+
+        <!-- BOTÓN NUEVA TAREA -->
+        <Button Grid.Row="5"
+                Text="+ Nueva tarea"
+                Style="{StaticResource BotonPrincipal}"
+                BackgroundColor="{StaticResource Violeta}"
+                HeightRequest="52"
+                Command="{Binding NuevaTareaCommand}" />
+
+    </Grid>
+</ContentPage>

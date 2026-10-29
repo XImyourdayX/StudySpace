@@ -1,0 +1,6 @@
+@StudySpaceAPI_HostAddress = http://localhost:5252
+
+GET {{StudySpaceAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
