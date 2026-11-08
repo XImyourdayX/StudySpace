@@ -18,6 +18,16 @@ public partial class AppShell : Shell
             "registro",
             typeof(PaginaRegistro));
 
+        // RECUPERACIÓN DE CONTRASEÑA
+        Routing.RegisterRoute(
+            "recuperarcontrasena",
+            typeof(PaginaRecuperarContrasena));
+
+        // VERIFICACIÓN DE CORREO
+        Routing.RegisterRoute(
+            "verificarcorreo",
+            typeof(PaginaVerificarCorreo));
+
         // NUEVA TAREA
         Routing.RegisterRoute(
             "nuevatarea",

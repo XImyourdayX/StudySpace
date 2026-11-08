@@ -35,7 +35,7 @@ public partial class PrincipalVM : ObservableObject
     [ObservableProperty]
     private bool estaVacio = true;
 
-    // HU08 - PROGRESO ACADÉMICO
+    // HU08 - PROGRESO ACADEMICO
     [ObservableProperty]
     private int porcentajeProgreso;
 
@@ -54,7 +54,7 @@ public partial class PrincipalVM : ObservableObject
         _notificaciones = notificaciones;
     }
 
-    // HU06 - OBTENER EL ORDEN DE PRIORIDAD
+    // HU06 - ORDEN DE PRIORIDAD
     private static int OrdenPrioridad(string? prioridad)
     {
         return prioridad?.Trim().ToLowerInvariant() switch
@@ -66,9 +66,13 @@ public partial class PrincipalVM : ObservableObject
         };
     }
 
-    // CARGAR INFORMACIÓN DE INICIO
+    // =====================================================
+    // CARGAR INFORMACION DE INICIO
+    // =====================================================
+
     public async Task Cargar()
     {
+        // SALUDO PERSONALIZADO
         var nombre = _auth.UsuarioActual?.Nombre ?? "";
 
         var primero = nombre.Split(
@@ -80,14 +84,18 @@ public partial class PrincipalVM : ObservableObject
             ? "Hola"
             : $"Hola, {primero}";
 
-        // OBTENER TAREAS DEL USUARIO
+        // OBTENER TAREAS DEL USUARIO ACTUAL
         var todas = await _tareas.ObtenerTareas();
 
+        // ESTADISTICAS
         Pendientes = todas.Count(t => !t.Completada);
         Completadas = todas.Count(t => t.Completada);
         Vencidas = todas.Count(t => t.EstaVencida);
 
-        // HU08 - CALCULAR PROGRESO ACADÉMICO
+        // ============================================
+        // HU08 - PROGRESO ACADEMICO
+        // ============================================
+
         int totalTareas = todas.Count;
 
         if (totalTareas == 0)
@@ -104,16 +112,37 @@ public partial class PrincipalVM : ObservableObject
                 MidpointRounding.AwayFromZero);
         }
 
-        // CONTAR CURSOS REGISTRADOS
+        // ============================================
+        // CONTAR CURSOS ACTIVOS
+        // ============================================
+
         var cursos = await _cursos.ObtenerCursos();
 
         CursosActivos = cursos.Count;
 
-        // HU06 - ORDENAR POR ESTADO Y PRIORIDAD
+        // ============================================
+        // HU10 - PROXIMAS ENTREGAS
+        // ============================================
+        //
+        // NUEVO ORDEN:
+        //
+        // 1. TAREAS PENDIENTES PRIMERO.
+        // 2. FECHA LIMITE MAS CERCANA.
+        // 3. SI COINCIDE LA FECHA,
+        //    PRIORIDAD ALTA, MEDIA, BAJA.
+        //
+        // LAS TAREAS COMPLETADAS QUEDAN
+        // DESPUES DE LAS PENDIENTES.
+        //
+        // HU06: LAS ETIQUETAS DE PRIORIDAD
+        // SIGUEN MOSTRANDO LA IMPORTANCIA
+        // DE CADA TAREA.
+        // ============================================
+
         var tareasOrdenadas = todas
             .OrderBy(t => t.Completada)
-            .ThenBy(t => OrdenPrioridad(t.Prioridad))
             .ThenBy(t => t.FechaLimite)
+            .ThenBy(t => OrdenPrioridad(t.Prioridad))
             .ToList();
 
         Tareas.Clear();
@@ -126,7 +155,10 @@ public partial class PrincipalVM : ObservableObject
         EstaVacio = Tareas.Count == 0;
     }
 
+    // =====================================================
     // COMPLETAR O REABRIR TAREA DESDE INICIO
+    // =====================================================
+
     public async Task Completar(TareaDTO tarea)
     {
         if (tarea == null)
@@ -201,11 +233,13 @@ public partial class PrincipalVM : ObservableObject
         }
     }
 
+    // =====================================================
     // NAVEGAR A NUEVA TAREA
+    // =====================================================
+
     [RelayCommand]
     private async Task NuevaTarea()
     {
         await Shell.Current.GoToAsync("nuevatarea");
     }
 }
-

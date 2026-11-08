@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:StudySpace.VistaModelos"
+    x:Class="StudySpace.Vistas.PaginaRecuperarContrasena"
+    x:DataType="vm:RecuperarContrasenaVM"
+    Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="24,50,24,35"
+            Spacing="16"
+            MaximumWidthRequest="420"
+            HorizontalOptions="Fill">
+
+            <!-- VOLVER -->
+            <Label
+                FontFamily="IconosMaterial"
+                Text="&#xe5c4;"
+                FontSize="28"
+                TextColor="{AppThemeBinding
+                    Light=#141B35,
+                    Dark=White}"
+                HorizontalOptions="Start">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding VolverCommand}" />
+                </Label.GestureRecognizers>
+
+            </Label>
+
+            <!-- LOGO -->
+            <Image
+                Source="logo.png"
+                HeightRequest="85"
+                HorizontalOptions="Center"
+                Margin="0,5,0,0" />
+
+            <!-- TITULO -->
+            <Label
+                Text="Recuperar contraseña"
+                Style="{StaticResource Titulo}"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,10,0,0" />
+
+            <!-- DESCRIPCION BREVE -->
+            <Label
+                Text="Restablece tu contraseña de forma segura."
+                Style="{StaticResource Subtitulo}"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Margin="0,0,0,15" />
+
+            <!-- CORREO -->
+            <Label
+                Text="Correo electrónico"
+                FontFamily="OpenSansSemibold"
+                FontSize="14"
+                TextColor="{AppThemeBinding
+                    Light=#141B35,
+                    Dark=White}" />
+
+            <Border
+                Style="{StaticResource CampoBorde}">
+
+                <Entry
+                    Style="{StaticResource EntradaLimpia}"
+                    Placeholder="Ingresa tu correo"
+                    Keyboard="Email"
+                    Text="{Binding Correo}" />
+
+            </Border>
+
+            <!-- ENVIAR CODIGO -->
+            <Frame
+                HasShadow="True"
+                CornerRadius="28"
+                Padding="0"
+                BackgroundColor="{AppThemeBinding
+                    Light={StaticResource Violeta},
+                    Dark={StaticResource PrimaryDark}}"
+                HorizontalOptions="Fill"
+                HeightRequest="56"
+                Margin="0,10,0,0">
+
+                <Button
+                    Text="Enviar código"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="16"
+                    Command="{Binding SolicitarCodigoCommand}" />
+
+            </Frame>
+
+            <!-- MENSAJE INFORMATIVO UNICO -->
+            <Label
+                Text="{Binding MensajeInfo}"
+                IsVisible="{Binding TieneMensajeInfo}"
+                TextColor="{StaticResource Violeta}"
+                FontSize="13"
+                HorizontalTextAlignment="Center"
+                Margin="0,4,0,0" />
+
+            <!-- SEGUNDA ETAPA -->
+            <VerticalStackLayout
+                IsVisible="{Binding CodigoSolicitado}"
+                Spacing="16"
+                Margin="0,18,0,0">
+
+                <!-- CODIGO -->
+                <Label
+                    Text="Código de recuperación"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="14"
+                    TextColor="{AppThemeBinding
+                        Light=#141B35,
+                        Dark=White}" />
+
+                <Border
+                    Style="{StaticResource CampoBorde}">
+
+                    <Entry
+                        Style="{StaticResource EntradaLimpia}"
+                        Placeholder="Código de 6 dígitos"
+                        Keyboard="Numeric"
+                        MaxLength="6"
+                        Text="{Binding Codigo}" />
+
+                </Border>
+
+                <!-- NUEVA CONTRASENA -->
+                <Label
+                    Text="Nueva contraseña"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="14"
+                    TextColor="{AppThemeBinding
+                        Light=#141B35,
+                        Dark=White}"
+                    Margin="0,4,0,0" />
+
+                <Border
+                    Style="{StaticResource CampoBorde}">
+
+                    <Entry
+                        Style="{StaticResource EntradaLimpia}"
+                        Placeholder="Mínimo 8 caracteres"
+                        IsPassword="True"
+                        Text="{Binding NuevaContrasena}" />
+
+                </Border>
+
+                <!-- CONFIRMAR CONTRASENA -->
+                <Label
+                    Text="Confirmar contraseña"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="14"
+                    TextColor="{AppThemeBinding
+                        Light=#141B35,
+                        Dark=White}"
+                    Margin="0,4,0,0" />
+
+                <Border
+                    Style="{StaticResource CampoBorde}">
+
+                    <Entry
+                        Style="{StaticResource EntradaLimpia}"
+                        Placeholder="Repite tu nueva contraseña"
+                        IsPassword="True"
+                        Text="{Binding ConfirmarContrasena}" />
+
+                </Border>
+
+                <!-- CAMBIAR CONTRASENA -->
+                <Frame
+                    HasShadow="True"
+                    CornerRadius="28"
+                    Padding="0"
+                    BackgroundColor="{AppThemeBinding
+                        Light={StaticResource Violeta},
+                        Dark={StaticResource PrimaryDark}}"
+                    HorizontalOptions="Fill"
+                    HeightRequest="56"
+                    Margin="0,12,0,0">
+
+                    <Button
+                        Text="Cambiar contraseña"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="16"
+                        Command="{Binding RestablecerCommand}" />
+
+                </Frame>
+
+            </VerticalStackLayout>
+
+            <!-- ERROR -->
+            <Label
+                Text="{Binding MensajeError}"
+                IsVisible="{Binding TieneError}"
+                TextColor="{StaticResource Rojo}"
+                FontSize="13"
+                HorizontalTextAlignment="Center" />
+
+            <!-- INDICADOR DE CARGA -->
+            <ActivityIndicator
+                IsRunning="{Binding Ocupado}"
+                IsVisible="{Binding Ocupado}"
+                Color="{StaticResource Azul}"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

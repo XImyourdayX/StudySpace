@@ -1,6 +1,15 @@
-﻿using Aplicacion.CasosDeUso;
+﻿using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Aplicacion.CasosDeUso;
+using Infraestructura.Repositorios;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Storage;
 using StudySpace.Servicios;
 
 namespace StudySpace.VistaModelos;
@@ -10,6 +19,13 @@ public partial class PerfilVM : ObservableObject
     private readonly ServicioAutenticacion _auth;
     private readonly ServicioTareas _tareas;
     private readonly ServicioNotificaciones _notificaciones;
+    private readonly HttpClient _clientePhp;
+    private readonly RepositorioVinculosUsuario _vinculos;
+    private int _versionCargaPerfil;
+
+    // Misma clave usada por InicioSesionVM.
+    // El token se guarda en SecureStorage, no en Preferences.
+    private const string ClaveToken = "studyspace_api_php_token";
 
     // HU11 - CLAVES DE CONFIGURACIÓN
     private const string ClaveNotificaciones =
@@ -52,21 +68,119 @@ public partial class PerfilVM : ObservableObject
     public PerfilVM(
         ServicioAutenticacion auth,
         ServicioTareas tareas,
-        ServicioNotificaciones notificaciones)
+        ServicioNotificaciones notificaciones,
+        [FromKeyedServices("ApiPHP")] HttpClient clientePhp,
+        RepositorioVinculosUsuario vinculos)
     {
         _auth = auth;
         _tareas = tareas;
         _notificaciones = notificaciones;
+        _clientePhp = clientePhp;
+        _vinculos = vinculos;
     }
 
     // CARGAR PERFIL
     public void Cargar()
     {
-        Nombre = _auth.UsuarioActual?.Nombre ?? "";
-        Correo = _auth.UsuarioActual?.Correo ?? "";
+        var usuarioLocal = _auth.UsuarioActual;
+
+        Nombre = usuarioLocal?.Nombre ?? "";
+
+        // SQLite utiliza un correo interno para relacionar
+        // el perfil con los cursos y las tareas. Ese correo
+        // no se debe mostrar como el correo real del usuario.
+        string correoLocal = usuarioLocal?.Correo ?? "";
+        Correo = correoLocal.EndsWith(
+            "@studyspace.invalid",
+            StringComparison.OrdinalIgnoreCase)
+            ? "Cuenta vinculada a Study Space"
+            : correoLocal;
 
         ActualizarTextoTema();
         CargarPreferenciasNotificaciones();
+
+        // La pagina llama a Cargar() de forma sincronica.
+        // Consultar el perfil remoto sin bloquear la pantalla.
+        // La tarea controla sus propias excepciones.
+        int version = ++_versionCargaPerfil;
+
+        if (usuarioLocal != null)
+        {
+            _ = CargarDatosRemotosAsync(usuarioLocal.Id, version);
+        }
+    }
+
+    // LEER EL NOMBRE Y CORREO REALES DESDE MYSQL
+    // SIN GUARDARLOS EN PREFERENCES NI EN SQLITE.
+    private async Task CargarDatosRemotosAsync(
+        int usuarioLocalId,
+        int version)
+    {
+        try
+        {
+            string? token = await SecureStorage.Default.GetAsync(
+                ClaveToken);
+
+            if (string.IsNullOrWhiteSpace(token) ||
+                token.Length != 64 ||
+                !token.All(Uri.IsHexDigit))
+            {
+                return;
+            }
+
+            using var solicitud = new HttpRequestMessage(
+                HttpMethod.Get,
+                "sesion-validar.php");
+
+            // El token solamente se envia en esta solicitud.
+            solicitud.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            using var respuesta = await _clientePhp.SendAsync(
+                solicitud);
+
+            if (!respuesta.IsSuccessStatusCode)
+                return;
+
+            var contenido = await respuesta.Content
+                .ReadFromJsonAsync<RespuestaValidarSesion>();
+
+            var usuarioRemoto = contenido?.Usuario;
+
+            if (contenido?.Estado != "sesion_valida" ||
+                usuarioRemoto == null ||
+                usuarioRemoto.Id <= 0 ||
+                string.IsNullOrWhiteSpace(usuarioRemoto.Nombre) ||
+                string.IsNullOrWhiteSpace(usuarioRemoto.Correo))
+            {
+                return;
+            }
+
+            // Asegurarnos de que la identidad devuelta por
+            // MySQL corresponde al perfil SQLite activo.
+            int? idLocalVinculado = await _vinculos
+                .ObtenerUsuarioLocalIdAsync(usuarioRemoto.Id);
+
+            if (idLocalVinculado != usuarioLocalId)
+                return;
+
+            // Descartar respuestas antiguas si la pantalla
+            // se recargo o el usuario cerro/cambio sesion.
+            if (version != _versionCargaPerfil ||
+                _auth.UsuarioActual?.Id != usuarioLocalId)
+            {
+                return;
+            }
+
+            Nombre = usuarioRemoto.Nombre.Trim();
+            Correo = usuarioRemoto.Correo.Trim();
+        }
+        catch (Exception)
+        {
+            // Sin conexion o error temporal: conservar el
+            // perfil local sin mostrar correos internos.
+            // El token y los cursos/tareas no se modifican.
+        }
     }
 
     // CARGAR PREFERENCIAS GUARDADAS
@@ -447,11 +561,24 @@ public partial class PerfilVM : ObservableObject
             "Entendido");
     }
 
-    // CERRAR SESIÓN
+    // =====================================================
+    // CERRAR SESION EN MYSQL Y EN EL DISPOSITIVO
+    // =====================================================
+    //
+    // Primero se revoca el token en Wopres.
+    // Despues se borra de SecureStorage y se limpia
+    // el perfil local que usan cursos y tareas.
+    //
+    // Si no hay conexion, la sesion se conserva para
+    // poder reintentar la revocacion mas tarde.
+    // =====================================================
     [RelayCommand]
     private async Task CerrarSesion()
     {
-        var confirmar = await Shell.Current.DisplayAlert(
+        if (Ocupado)
+            return;
+
+        bool confirmar = await Shell.Current.DisplayAlert(
             "Cerrar sesión",
             "¿Seguro que quieres salir?",
             "Sí",
@@ -460,8 +587,144 @@ public partial class PerfilVM : ObservableObject
         if (!confirmar)
             return;
 
-        _auth.CerrarSesion();
+        Ocupado = true;
+        bool sesionLocalLimpiada = false;
 
-        await Shell.Current.GoToAsync("//bienvenida");
+        try
+        {
+            // La clave coincide con InicioSesionVM.
+            string? token = await SecureStorage.Default.GetAsync(
+                ClaveToken);
+
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                // Cabecera exclusiva de esta peticion.
+                // No modificar DefaultRequestHeaders de un
+                // HttpClient compartido por otros servicios.
+                using var solicitud = new HttpRequestMessage(
+                    HttpMethod.Post,
+                    "sesion-cerrar.php");
+
+                solicitud.Headers.Authorization =
+                    new AuthenticationHeaderValue(
+                        "Bearer",
+                        token);
+
+                using var respuesta =
+                    await _clientePhp.SendAsync(solicitud);
+
+                var contenido = await respuesta.Content
+                    .ReadFromJsonAsync<RespuestaCerrarSesion>();
+
+                // El token puede estar ya revocado o vencido.
+                // En ese caso tambien se puede limpiar el
+                // dispositivo si el servidor lo confirma.
+                bool cierreConfirmado =
+                    respuesta.IsSuccessStatusCode &&
+                    contenido?.Estado == "sesion_cerrada";
+
+                bool sesionYaInvalida =
+                    (respuesta.IsSuccessStatusCode ||
+                     respuesta.StatusCode == HttpStatusCode.Unauthorized) &&
+                    contenido?.Estado == "sesion_invalida";
+
+                if (!cierreConfirmado && !sesionYaInvalida)
+                {
+                    await Shell.Current.DisplayAlert(
+                        "No se pudo cerrar sesión",
+                        contenido?.Mensaje ??
+                        "El servidor no confirmó el cierre de sesión. " +
+                        "Inténtalo nuevamente.",
+                        "Aceptar");
+
+                    return;
+                }
+            }
+
+            // Solo despues de confirmar el cierre remoto
+            // (o si ya no existe un token en el dispositivo).
+            SecureStorage.Default.Remove(ClaveToken);
+            _auth.CerrarSesion();
+            sesionLocalLimpiada = true;
+
+            await Shell.Current.GoToAsync("//bienvenida");
+        }
+        catch (TaskCanceledException)
+        {
+            await MostrarErrorCierreAsync(
+                sesionLocalLimpiada,
+                "Se agotó el tiempo de espera. Revisa tu conexión " +
+                "a internet e inténtalo nuevamente.");
+        }
+        catch (HttpRequestException)
+        {
+            await MostrarErrorCierreAsync(
+                sesionLocalLimpiada,
+                "No se pudo conectar con el servidor de Study Space. " +
+                "La sesión sigue abierta para que puedas reintentarlo.");
+        }
+        catch (JsonException)
+        {
+            await MostrarErrorCierreAsync(
+                sesionLocalLimpiada,
+                "El servidor devolvió una respuesta no válida. " +
+                "Inténtalo nuevamente.");
+        }
+        catch (Exception)
+        {
+            await MostrarErrorCierreAsync(
+                sesionLocalLimpiada,
+                "No se pudo completar el cierre de sesión. " +
+                "Inténtalo nuevamente.");
+        }
+        finally
+        {
+            Ocupado = false;
+        }
     }
+
+    private static Task MostrarErrorCierreAsync(
+        bool sesionLocalLimpiada,
+        string mensaje)
+    {
+        return Shell.Current.DisplayAlert(
+            sesionLocalLimpiada
+                ? "Sesión cerrada"
+                : "No se pudo cerrar sesión",
+            sesionLocalLimpiada
+                ? "La sesión ya se cerró, pero no fue posible " +
+                  "abrir la pantalla de bienvenida."
+                : mensaje,
+            "Aceptar");
+    }
+
+    private sealed class RespuestaCerrarSesion
+    {
+        [JsonPropertyName("estado")]
+        public string? Estado { get; set; }
+
+        [JsonPropertyName("mensaje")]
+        public string? Mensaje { get; set; }
+    }
+    private sealed class RespuestaValidarSesion
+    {
+        [JsonPropertyName("estado")]
+        public string? Estado { get; set; }
+
+        [JsonPropertyName("usuario")]
+        public UsuarioRemotoApi? Usuario { get; set; }
+    }
+
+    private sealed class UsuarioRemotoApi
+    {
+        [JsonPropertyName("id")]
+        public long Id { get; set; }
+
+        [JsonPropertyName("nombre")]
+        public string? Nombre { get; set; }
+
+        [JsonPropertyName("correo")]
+        public string? Correo { get; set; }
+    }
+
 }

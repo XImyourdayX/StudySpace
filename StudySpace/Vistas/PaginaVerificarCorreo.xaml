@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:StudySpace.VistaModelos"
+    x:Class="StudySpace.Vistas.PaginaVerificarCorreo"
+    x:DataType="vm:VerificarCorreoVM"
+    Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="24,40,24,24"
+            Spacing="16"
+            MaximumWidthRequest="420"
+            HorizontalOptions="Fill">
+
+            <!-- VOLVER AL REGISTRO -->
+            <Label
+                Text="&#xe5c4;"
+                FontFamily="IconosMaterial"
+                FontSize="28"
+                HorizontalOptions="Start"
+                TextColor="{AppThemeBinding
+                    Light=#141B35,
+                    Dark=White}">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding VolverCommand}" />
+                </Label.GestureRecognizers>
+
+            </Label>
+
+            <!-- LOGO -->
+            <Image
+                Source="logo.png"
+                HeightRequest="64"
+                HorizontalOptions="Center" />
+
+            <!-- TÍTULO -->
+            <Label
+                Text="Verifica tu correo"
+                Style="{StaticResource Titulo}"
+                HorizontalTextAlignment="Center" />
+
+            <Label
+                Text="Ingresa el código de 6 dígitos que enviamos a tu correo electrónico."
+                Style="{StaticResource Subtitulo}"
+                HorizontalTextAlignment="Center"
+                Margin="0,0,0,8" />
+
+            <!-- CORREO DEL REGISTRO -->
+            <Label
+                Text="Correo electrónico registrado"
+                FontFamily="OpenSansSemibold"
+                FontSize="13"
+                TextColor="{AppThemeBinding
+                    Light={StaticResource TextoClaro},
+                    Dark={StaticResource TextoOscuro}}" />
+
+            <Border Style="{StaticResource CampoBorde}">
+
+                <Entry
+                    Style="{StaticResource EntradaLimpia}"
+                    Text="{Binding Correo, Mode=OneWay}"
+                    IsReadOnly="True"
+                    Keyboard="Email"
+                    TextColor="{AppThemeBinding
+                        Light={StaticResource TextoClaro},
+                        Dark={StaticResource TextoOscuro}}" />
+
+            </Border>
+
+            <Label
+                Text="Este es el correo que ingresaste al crear tu cuenta."
+                Style="{StaticResource Subtitulo}"
+                FontSize="12" />
+
+            <!-- CÓDIGO DE VERIFICACIÓN -->
+            <Label
+                Text="Código de verificación"
+                FontFamily="OpenSansSemibold"
+                FontSize="13"
+                Margin="0,12,0,0"
+                TextColor="{AppThemeBinding
+                    Light={StaticResource TextoClaro},
+                    Dark={StaticResource TextoOscuro}}" />
+
+            <Border Style="{StaticResource CampoBorde}">
+
+                <Entry
+                    Style="{StaticResource EntradaLimpia}"
+                    Placeholder="Ingresa los 6 dígitos"
+                    Keyboard="Numeric"
+                    MaxLength="6"
+                    Text="{Binding Codigo}"
+                    HorizontalTextAlignment="Center"
+                    FontSize="20"
+                    CharacterSpacing="4" />
+
+            </Border>
+
+            <Label
+                Text="El código tiene una validez de 10 minutos."
+                Style="{StaticResource Subtitulo}"
+                FontSize="12"
+                HorizontalTextAlignment="Center" />
+
+            <!-- MENSAJES DE ERROR -->
+            <Label
+                Text="{Binding MensajeError}"
+                IsVisible="{Binding TieneError}"
+                TextColor="{StaticResource Rojo}"
+                FontSize="13"
+                HorizontalTextAlignment="Center" />
+
+            <!-- MENSAJES INFORMATIVOS -->
+            <Label
+                Text="{Binding MensajeInfo}"
+                IsVisible="{Binding TieneMensajeInfo}"
+                FontSize="13"
+                HorizontalTextAlignment="Center"
+                TextColor="{StaticResource Verde}" />
+
+            <!-- BOTÓN PRINCIPAL -->
+            <Border
+                StrokeThickness="0"
+                HeightRequest="56"
+                Margin="0,12,0,0"
+                BackgroundColor="{AppThemeBinding
+                    Light={StaticResource Violeta},
+                    Dark={StaticResource PrimaryDark}}">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="28" />
+                </Border.StrokeShape>
+
+                <Button
+                    Text="Verificar correo"
+                    Command="{Binding VerificarCodigoCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="16" />
+
+            </Border>
+
+            <!-- REENVIAR CÓDIGO -->
+            <Button
+                Text="¿No recibiste el código? Reenviar"
+                Command="{Binding EnviarCodigoCommand}"
+                BackgroundColor="{AppThemeBinding
+                    Light={StaticResource LavandaClaro},
+                    Dark={StaticResource LavandaOscuro}}"
+                TextColor="{StaticResource Violeta}"
+                FontFamily="OpenSansSemibold"
+                FontSize="14"
+                CornerRadius="18"
+                HeightRequest="50" />
+
+            <!-- CARGA -->
+            <ActivityIndicator
+                IsRunning="{Binding Ocupado}"
+                IsVisible="{Binding Ocupado}"
+                Color="{StaticResource Azul}"
+                HorizontalOptions="Center" />
+
+            <!-- AYUDA -->
+            <Label
+                Text="Si no encuentras el mensaje, revisa la carpeta de spam o correo no deseado."
+                Style="{StaticResource Subtitulo}"
+                FontSize="12"
+                HorizontalTextAlignment="Center"
+                Margin="0,8,0,0" />
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
