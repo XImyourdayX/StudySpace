@@ -34,4 +34,22 @@ public class RepositorioCursos : IRepositorioCursos
         var db = await _contexto.ObtenerDb();
         await db.InsertAsync(curso);
     }
+
+    // Comprobacion atomica: no borrar cursos con tareas (pendientes o completadas).
+    // La consulta tambien comprueba que el curso sea del usuario autenticado.
+    public async Task<bool> EliminarSiNoTieneTareas(int usuarioId, int cursoId)
+    {
+        var db = await _contexto.ObtenerDb();
+
+        int filasEliminadas = await db.ExecuteAsync(
+            "DELETE FROM Curso " +
+            "WHERE Id = ? AND UsuarioId = ? " +
+            "AND NOT EXISTS (" +
+            "SELECT 1 FROM Tarea WHERE CursoId = ?)",
+            cursoId,
+            usuarioId,
+            cursoId);
+
+        return filasEliminadas == 1;
+    }
 }

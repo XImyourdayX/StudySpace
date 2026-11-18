@@ -81,11 +81,11 @@
                              Light={StaticResource BordeClaro},
                              Dark={StaticResource BordeOscuro}}" />
 
-                <!-- NOTIFICACIONES -->
+                <!-- NOTIFICACIONES: MOSTRAR ESTADO GUARDADO -->
                 <Grid ColumnDefinitions="34,*,Auto"
                       ColumnSpacing="12"
                       Padding="10,0"
-                      HeightRequest="72">
+                      HeightRequest="78">
 
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer
@@ -100,13 +100,29 @@
                                Light={StaticResource TextoSecundarioClaro},
                                Dark={StaticResource TextoSecundarioOscuro}}" />
 
-                    <Label Grid.Column="1"
-                           Text="Notificaciones"
-                           FontSize="15"
-                           VerticalOptions="Center"
-                           TextColor="{AppThemeBinding
-                               Light={StaticResource TextoClaro},
-                               Dark={StaticResource TextoOscuro}}" />
+                    <VerticalStackLayout Grid.Column="1"
+                                         Spacing="5"
+                                         VerticalOptions="Center">
+                        <Label Text="Notificaciones"
+                               FontSize="15"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource TextoClaro},
+                                   Dark={StaticResource TextoOscuro}}" />
+
+                        <Label Text="Activadas"
+                               FontSize="12"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource TextoSecundarioClaro},
+                                   Dark={StaticResource TextoSecundarioOscuro}}">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label"
+                                             Binding="{Binding NotificacionesActivas}"
+                                             Value="False">
+                                    <Setter Property="Text" Value="Desactivadas" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </VerticalStackLayout>
 
                     <Label Grid.Column="2"
                            Text="&#xe5cc;"
@@ -123,11 +139,11 @@
                              Light={StaticResource BordeClaro},
                              Dark={StaticResource BordeOscuro}}" />
 
-                <!-- RECORDATORIOS -->
+                <!-- RECORDATORIOS: MOSTRAR ANTICIPACIÓN Y HORARIO GUARDADOS -->
                 <Grid ColumnDefinitions="34,*,Auto"
                       ColumnSpacing="12"
                       Padding="10,0"
-                      HeightRequest="72">
+                      HeightRequest="98">
 
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer
@@ -142,13 +158,73 @@
                                Light={StaticResource TextoSecundarioClaro},
                                Dark={StaticResource TextoSecundarioOscuro}}" />
 
-                    <Label Grid.Column="1"
-                           Text="Recordatorios"
-                           FontSize="15"
-                           VerticalOptions="Center"
-                           TextColor="{AppThemeBinding
-                               Light={StaticResource TextoClaro},
-                               Dark={StaticResource TextoOscuro}}" />
+                    <VerticalStackLayout Grid.Column="1"
+                                         Spacing="4"
+                                         VerticalOptions="Center">
+                        <Label Text="Recordatorios"
+                               FontSize="15"
+                               TextColor="{AppThemeBinding
+                                   Light={StaticResource TextoClaro},
+                                   Dark={StaticResource TextoOscuro}}" />
+
+                        <!-- El valor visible responde al guardado en Preferences -->
+                        <HorizontalStackLayout Spacing="4">
+                            <Label Text="Anticipación:"
+                                   FontSize="12"
+                                   TextColor="{AppThemeBinding
+                                       Light={StaticResource TextoSecundarioClaro},
+                                       Dark={StaticResource TextoSecundarioOscuro}}" />
+                            <Label Text="1 día antes"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Violeta}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding MinutosAnticipacion}"
+                                                 Value="15">
+                                        <Setter Property="Text" Value="15 minutos antes" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding MinutosAnticipacion}"
+                                                 Value="60">
+                                        <Setter Property="Text" Value="1 hora antes" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding MinutosAnticipacion}"
+                                                 Value="1440">
+                                        <Setter Property="Text" Value="1 día antes" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding MinutosAnticipacion}"
+                                                 Value="2880">
+                                        <Setter Property="Text" Value="2 días antes" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="4">
+                            <Label Text="Horario:"
+                                   FontSize="11"
+                                   TextColor="{AppThemeBinding
+                                       Light={StaticResource TextoSecundarioClaro},
+                                       Dark={StaticResource TextoSecundarioOscuro}}" />
+                            <Label Text="{Binding HoraInicio, StringFormat='{0:00}:00'}"
+                                   FontSize="11"
+                                   TextColor="{AppThemeBinding
+                                       Light={StaticResource TextoSecundarioClaro},
+                                       Dark={StaticResource TextoSecundarioOscuro}}" />
+                            <Label Text="–"
+                                   FontSize="11"
+                                   TextColor="{AppThemeBinding
+                                       Light={StaticResource TextoSecundarioClaro},
+                                       Dark={StaticResource TextoSecundarioOscuro}}" />
+                            <Label Text="{Binding HoraFin, StringFormat='{0:00}:00'}"
+                                   FontSize="11"
+                                   TextColor="{AppThemeBinding
+                                       Light={StaticResource TextoSecundarioClaro},
+                                       Dark={StaticResource TextoSecundarioOscuro}}" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
 
                     <Label Grid.Column="2"
                            Text="&#xe5cc;"

@@ -17,6 +17,16 @@ public partial class PrincipalVM : ObservableObject
 
     public ObservableCollection<TareaDTO> Tareas { get; } = new();
 
+    // VISTA COMPLETA DE TAREAS DESDE INICIO
+    [ObservableProperty]
+    private bool mostrarResumen = true;
+
+    [ObservableProperty]
+    private string tituloSeccion = "Próximas entregas";
+
+    [ObservableProperty]
+    private string textoVerTodas = "Ver todas";
+
     [ObservableProperty]
     private string saludo = "";
 
@@ -66,10 +76,7 @@ public partial class PrincipalVM : ObservableObject
         };
     }
 
-    // =====================================================
     // CARGAR INFORMACION DE INICIO
-    // =====================================================
-
     public async Task Cargar()
     {
         // SALUDO PERSONALIZADO
@@ -92,10 +99,7 @@ public partial class PrincipalVM : ObservableObject
         Completadas = todas.Count(t => t.Completada);
         Vencidas = todas.Count(t => t.EstaVencida);
 
-        // ============================================
         // HU08 - PROGRESO ACADEMICO
-        // ============================================
-
         int totalTareas = todas.Count;
 
         if (totalTareas == 0)
@@ -112,32 +116,15 @@ public partial class PrincipalVM : ObservableObject
                 MidpointRounding.AwayFromZero);
         }
 
-        // ============================================
         // CONTAR CURSOS ACTIVOS
-        // ============================================
-
         var cursos = await _cursos.ObtenerCursos();
 
         CursosActivos = cursos.Count;
 
-        // ============================================
         // HU10 - PROXIMAS ENTREGAS
-        // ============================================
-        //
-        // NUEVO ORDEN:
-        //
-        // 1. TAREAS PENDIENTES PRIMERO.
-        // 2. FECHA LIMITE MAS CERCANA.
-        // 3. SI COINCIDE LA FECHA,
-        //    PRIORIDAD ALTA, MEDIA, BAJA.
-        //
-        // LAS TAREAS COMPLETADAS QUEDAN
-        // DESPUES DE LAS PENDIENTES.
-        //
-        // HU06: LAS ETIQUETAS DE PRIORIDAD
-        // SIGUEN MOSTRANDO LA IMPORTANCIA
-        // DE CADA TAREA.
-        // ============================================
+        // 1. PENDIENTES ANTES QUE COMPLETADAS.
+        // 2. FECHA MAS CERCANA PRIMERO.
+        // 3. PRIORIDAD COMO DESEMPATE.
 
         var tareasOrdenadas = todas
             .OrderBy(t => t.Completada)
@@ -155,10 +142,7 @@ public partial class PrincipalVM : ObservableObject
         EstaVacio = Tareas.Count == 0;
     }
 
-    // =====================================================
     // COMPLETAR O REABRIR TAREA DESDE INICIO
-    // =====================================================
-
     public async Task Completar(TareaDTO tarea)
     {
         if (tarea == null)
@@ -233,10 +217,22 @@ public partial class PrincipalVM : ObservableObject
         }
     }
 
-    // =====================================================
-    // NAVEGAR A NUEVA TAREA
-    // =====================================================
+    // MOSTRAR TODAS LAS TAREAS O VOLVER AL RESUMEN
+    [RelayCommand]
+    private void AlternarVistaTareas()
+    {
+        MostrarResumen = !MostrarResumen;
 
+        TituloSeccion = MostrarResumen
+            ? "Próximas entregas"
+            : "Todas las tareas";
+
+        TextoVerTodas = MostrarResumen
+            ? "Ver todas"
+            : "Volver";
+    }
+
+    // NAVEGAR A NUEVA TAREA
     [RelayCommand]
     private async Task NuevaTarea()
     {

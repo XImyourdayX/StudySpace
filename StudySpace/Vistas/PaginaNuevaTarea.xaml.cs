@@ -7,6 +7,7 @@ public partial class PaginaNuevaTarea : ContentPage, IQueryAttributable
 {
     private readonly NuevaTareaVM _vm;
     private int _tareaId;
+    private int _cursoId;
 
     public PaginaNuevaTarea(NuevaTareaVM vm)
     {
@@ -14,17 +15,25 @@ public partial class PaginaNuevaTarea : ContentPage, IQueryAttributable
         BindingContext = _vm = vm;
     }
 
-    // RECIBIR ID DE LA TAREA QUE SE EDITARÁ
+    // RECIBIR ID DE TAREA (EDICIÓN) O CURSO (NUEVA TAREA)
     public void ApplyQueryAttributes(
         IDictionary<string, object> query)
     {
         _tareaId = 0;
+        _cursoId = 0;
 
         if (query.TryGetValue("id", out var valor) &&
             int.TryParse(valor?.ToString(), out int id) &&
             id > 0)
         {
             _tareaId = id;
+        }
+
+        if (query.TryGetValue("cursoId", out var cursoValor) &&
+            int.TryParse(cursoValor?.ToString(), out int cursoId) &&
+            cursoId > 0)
+        {
+            _cursoId = cursoId;
         }
     }
 
@@ -33,6 +42,6 @@ public partial class PaginaNuevaTarea : ContentPage, IQueryAttributable
     {
         base.OnAppearing();
 
-        await _vm.Cargar(_tareaId);
+        await _vm.Cargar(_tareaId, _cursoId);
     }
 }

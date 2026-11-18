@@ -16,6 +16,7 @@
 
         <!-- ENCABEZADO -->
         <Grid Grid.Row="0"
+              IsVisible="{Binding MostrarResumen}"
               ColumnDefinitions="*,Auto,Auto"
               ColumnSpacing="12">
 
@@ -71,6 +72,7 @@
 
         <!-- TARJETAS DE RESUMEN -->
         <Grid Grid.Row="1"
+              IsVisible="{Binding MostrarResumen}"
               ColumnDefinitions="*,*,*"
               ColumnSpacing="8">
 
@@ -174,8 +176,9 @@
             </Border>
         </Grid>
 
-        <!-- PROGRESO ACADÉMICO MEJORADO -->
+        <!-- PROGRESO ACADÉMICO -->
         <Border Grid.Row="2"
+                IsVisible="{Binding MostrarResumen}"
                 Padding="16"
                 StrokeThickness="0"
                 BackgroundColor="{AppThemeBinding
@@ -252,7 +255,7 @@
                     </Border>
                 </Grid>
 
-                <!-- BARRA -->
+                <!-- BARRA DE PROGRESO -->
                 <VerticalStackLayout Spacing="7">
 
                     <Border Padding="6"
@@ -303,7 +306,7 @@
         <Grid Grid.Row="3"
               ColumnDefinitions="*,Auto">
 
-            <Label Text="Próximas entregas"
+            <Label Text="{Binding TituloSeccion}"
                    FontSize="17"
                    FontAttributes="Bold"
                    TextColor="{AppThemeBinding
@@ -311,10 +314,15 @@
                        Dark={StaticResource TextoOscuro}}" />
 
             <Label Grid.Column="1"
-                   Text="Ver todas"
+                   Text="{Binding TextoVerTodas}"
                    FontSize="12"
                    VerticalOptions="Center"
-                   TextColor="{StaticResource Violeta}" />
+                   TextColor="{StaticResource Violeta}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding AlternarVistaTareasCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
         </Grid>
 
         <!-- LISTA DE TAREAS -->

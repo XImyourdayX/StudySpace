@@ -9,8 +9,8 @@
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto"
-          RowSpacing="14"
-          Padding="20,24,20,12"
+          RowSpacing="8"
+          Padding="20,18,20,10"
           MaximumWidthRequest="420"
           HorizontalOptions="Fill">
 
@@ -37,7 +37,7 @@
         <!-- NAVEGACIÓN DEL MES -->
         <Grid Grid.Row="1"
               ColumnDefinitions="44,*,44"
-              HeightRequest="48">
+              HeightRequest="44">
 
             <Button Grid.Column="0"
                     Text="&#xe5cb;"
@@ -108,19 +108,19 @@
         <CollectionView Grid.Row="3"
                         ItemsSource="{Binding Dias}"
                         SelectionMode="None"
-                        HeightRequest="315">
+                        HeightRequest="252">
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
                                  Span="7"
                                  HorizontalItemSpacing="2"
-                                 VerticalItemSpacing="5" />
+                                 VerticalItemSpacing="2" />
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:DiaCalendario">
 
-                    <Grid HeightRequest="46"
+                    <Grid HeightRequest="40"
                           IsVisible="{Binding EsVisible}">
 
                         <Grid.GestureRecognizers>
@@ -130,18 +130,18 @@
                         </Grid.GestureRecognizers>
 
                         <VerticalStackLayout
-                            Spacing="3"
+                            Spacing="2"
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
 
                             <!-- CÍRCULO DEL DÍA -->
-                            <Border WidthRequest="34"
-                                    HeightRequest="34"
+                            <Border WidthRequest="32"
+                                    HeightRequest="32"
                                     StrokeThickness="0"
                                     BackgroundColor="Transparent">
 
                                 <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="17" />
+                                    <RoundRectangle CornerRadius="16" />
                                 </Border.StrokeShape>
 
                                 <Border.Triggers>
@@ -175,14 +175,14 @@
                             </Border>
 
                             <!-- INDICADOR DE TAREAS -->
-                            <Border WidthRequest="6"
-                                    HeightRequest="6"
+                            <Border WidthRequest="5"
+                                    HeightRequest="5"
                                     StrokeThickness="0"
                                     IsVisible="{Binding TieneTareas}"
                                     BackgroundColor="{Binding ColorIndicador}">
 
                                 <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="3" />
+                                    <RoundRectangle CornerRadius="2.5" />
                                 </Border.StrokeShape>
                             </Border>
 

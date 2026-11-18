@@ -122,11 +122,73 @@ public partial class DetalleCursoVM : ObservableObject
             });
     }
 
-    // CREAR UNA NUEVA TAREA
+    // CREAR UNA NUEVA TAREA DESDE EL CURSO ACTUAL
     [RelayCommand]
     private async Task NuevaTarea()
     {
-        await Shell.Current.GoToAsync("nuevatarea");
+        if (_cursoId <= 0 || Ocupado)
+            return;
+
+        await Shell.Current.GoToAsync(
+            "nuevatarea",
+            new Dictionary<string, object>
+            {
+                { "cursoId", _cursoId }
+            });
+    }
+
+    // ELIMINAR CURSO (SOLO SI NO CONTIENE TAREAS)
+    [RelayCommand]
+    private async Task EliminarCurso()
+    {
+        if (_cursoId <= 0 || Ocupado)
+            return;
+
+        if (TotalTareas > 0)
+        {
+            await Shell.Current.DisplayAlert(
+                "No se puede eliminar",
+                "Este curso tiene tareas registradas. " +
+                "Eliminalas o reasignalas antes de borrar el curso.",
+                "Entendido");
+            return;
+        }
+
+        bool confirmado = await Shell.Current.DisplayAlert(
+            "Eliminar curso",
+            $"¿Deseas eliminar '{NombreCurso}'? Esta accion no se puede deshacer.",
+            "Eliminar",
+            "Cancelar");
+
+        if (!confirmado)
+            return;
+
+        Ocupado = true;
+
+        try
+        {
+            var (exito, mensaje) = await _cursos.EliminarCurso(_cursoId);
+
+            if (!exito)
+            {
+                await Shell.Current.DisplayAlert(
+                    "No se pudo eliminar", mensaje, "OK");
+                return;
+            }
+
+            await Shell.Current.GoToAsync("..");
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert(
+                "Error al eliminar",
+                $"No se pudo eliminar el curso: {ex.Message}",
+                "OK");
+        }
+        finally
+        {
+            Ocupado = false;
+        }
     }
 
     // VOLVER A MIS CURSOS

@@ -105,7 +105,7 @@ public partial class NuevaTareaVM : ObservableObject
     }
 
     // CARGAR FORMULARIO
-    public async Task Cargar(int id = 0)
+    public async Task Cargar(int id = 0, int cursoId = 0)
     {
         _tareaId = 0;
         EsEdicion = false;
@@ -124,7 +124,15 @@ public partial class NuevaTareaVM : ObservableObject
         // VALORES PARA UNA TAREA NUEVA
         Titulo = "";
         Descripcion = "";
-        CursoSeleccionado = Cursos.FirstOrDefault();
+
+        // PRESELECCIONAR EL CURSO DE ORIGEN
+        // CUANDO SE ABRE DESDE SU DETALLE.
+        // DESDE INICIO O CALENDARIO SE CONSERVA
+        // EL COMPORTAMIENTO PREDETERMINADO.
+        CursoSeleccionado = cursoId > 0
+            ? Cursos.FirstOrDefault(c => c.Id == cursoId)
+            : Cursos.FirstOrDefault();
+
         Fecha = DateTime.Today;
         Hora = new TimeSpan(23, 59, 0);
         Prioridad = "Media";

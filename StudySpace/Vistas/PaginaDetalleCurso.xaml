@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -225,6 +225,7 @@
 
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer
+                                        x:DataType="{x:Null}"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DetalleCursoVM}}, Path=AbrirTareaCommand}"
                                         CommandParameter="{Binding .}" />
                                 </Border.GestureRecognizers>
@@ -296,13 +297,25 @@
             </Grid>
         </Grid>
 
-        <!-- BOTÓN NUEVA TAREA -->
-        <Button Grid.Row="4"
-                Text="+ Nueva tarea"
-                Command="{Binding NuevaTareaCommand}"
-                Style="{StaticResource BotonPrincipal}"
-                BackgroundColor="{StaticResource Violeta}"
-                HeightRequest="52" />
+        <!-- ACCIONES DEL CURSO -->
+        <VerticalStackLayout Grid.Row="4" Spacing="9">
+            <Button Text="+ Nueva tarea"
+                    Command="{Binding NuevaTareaCommand}"
+                    Style="{StaticResource BotonPrincipal}"
+                    BackgroundColor="{StaticResource Violeta}"
+                    HeightRequest="52" />
+
+            <!-- Nunca elimina tareas: confirmacion y bloqueo en ViewModel/SQLite -->
+            <Button Text="Eliminar curso"
+                    Command="{Binding EliminarCursoCommand}"
+                    HeightRequest="42"
+                    BackgroundColor="Transparent"
+                    BorderColor="{StaticResource Rojo}"
+                    BorderWidth="1"
+                    TextColor="{StaticResource Rojo}"
+                    FontSize="13"
+                    CornerRadius="12" />
+        </VerticalStackLayout>
 
     </Grid>
 </ContentPage>

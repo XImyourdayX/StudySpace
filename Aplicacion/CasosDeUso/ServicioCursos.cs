@@ -56,4 +56,35 @@ public class ServicioCursos
         });
         return (true, "");
     }
+
+    public async Task<(bool Exito, string Mensaje)> EliminarCurso(int cursoId)
+    {
+        if (cursoId <= 0)
+            return (false, "El curso seleccionado no es valido.");
+
+        if (_auth.UsuarioActual == null)
+            return (false, "No hay sesion iniciada.");
+
+        int usuarioId = _auth.UsuarioActual.Id;
+        var cursos = await _cursos.ObtenerPorUsuario(usuarioId);
+        var curso = cursos.FirstOrDefault(c => c.Id == cursoId);
+
+        if (curso == null)
+            return (false, "El curso no existe o no pertenece a tu cuenta.");
+
+        // Protege todas las tareas del curso, incluso las completadas.
+        var tareas = await _tareas.ObtenerPorUsuario(usuarioId);
+
+        if (tareas.Any(t => t.CursoId == cursoId))
+            return (false,
+                "Este curso tiene tareas registradas. " +
+                "Eliminalas o reasignalas antes de borrar el curso.");
+
+        // Segunda proteccion dentro de SQLite, en una sola sentencia DELETE.
+        bool eliminado = await _cursos.EliminarSiNoTieneTareas(usuarioId, cursoId);
+
+        return eliminado
+            ? (true, "Curso eliminado correctamente.")
+            : (false, "No se pudo eliminar el curso. Verifica que no contenga tareas.");
+    }
 }
