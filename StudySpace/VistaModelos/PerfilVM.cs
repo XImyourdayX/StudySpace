@@ -228,8 +228,15 @@ public partial class PerfilVM : ObservableObject
 
         foreach (var tarea in tareas)
         {
-            // CANCELAR AVISO ANTERIOR
-            _notificaciones.CancelarRecordatorio(tarea.Id);
+            // HU13: no borrar una posposición válida al cambiar el
+            // horario u otras preferencias de notificaciones.
+            bool puedeMantenerPosposicion =
+                activar && !tarea.Completada &&
+                tarea.FechaLimite > DateTime.Now;
+
+            _notificaciones.CancelarRecordatorio(
+                tarea.Id,
+                borrarPosposicion: !puedeMantenerPosposicion);
 
             // NO PROGRAMAR SI ESTÁN DESACTIVADAS
             // O SI LA TAREA YA ESTÁ COMPLETADA

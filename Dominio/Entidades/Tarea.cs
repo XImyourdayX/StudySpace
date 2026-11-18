@@ -10,5 +10,8 @@ public class Tarea
     public DateTime FechaLimite { get; set; } = DateTime.Today.AddDays(1);
     public string Prioridad { get; set; } = "Media";   // Alta, Media, Baja
     public bool Completada { get; set; }
+    // HU14: fecha local del último marcado como completada.
+    // Nula en tareas pendientes y en tareas históricas sin este dato.
+    public DateTime? FechaCompletada { get; set; }
     public int MinutosAviso { get; set; } = 1440;      // 1 día antes
 }

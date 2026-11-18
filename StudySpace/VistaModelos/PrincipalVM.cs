@@ -1,4 +1,3 @@
-﻿
 using System.Collections.ObjectModel;
 using Aplicacion.CasosDeUso;
 using Aplicacion.DTOs;
@@ -230,6 +229,13 @@ public partial class PrincipalVM : ObservableObject
         TextoVerTodas = MostrarResumen
             ? "Ver todas"
             : "Volver";
+    }
+
+    // HU14 - IR A REPORTES MENSUALES
+    [RelayCommand]
+    private async Task VerReportes()
+    {
+        await Shell.Current.GoToAsync("reportes");
     }
 
     // NAVEGAR A NUEVA TAREA

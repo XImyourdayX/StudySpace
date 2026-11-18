@@ -1,4 +1,3 @@
-﻿
 using StudySpace.Vistas;
 
 namespace StudySpace;
@@ -42,5 +41,10 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(
             "detallecurso",
             typeof(PaginaDetalleCurso));
+
+        // HU14 - Reportes mensuales (se abre desde Inicio)
+        Routing.RegisterRoute(
+            "reportes",
+            typeof(PaginaReportes));
     }
 }

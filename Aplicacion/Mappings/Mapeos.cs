@@ -22,6 +22,7 @@ public static class Mapeos
         FechaLimite = t.FechaLimite,
         Prioridad = t.Prioridad,
         Completada = t.Completada,
+        FechaCompletada = t.FechaCompletada,
         MinutosAviso = t.MinutosAviso
     };
 }

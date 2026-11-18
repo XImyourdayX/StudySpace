@@ -3,24 +3,48 @@ using System.Diagnostics;
 using Aplicacion.CasosDeUso;
 using StudySpace.Servicios;
 
+#if ANDROID
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.EventArgs;
+#endif
+
 namespace StudySpace;
 
 public partial class App : Application
 {
     private readonly ServicioSesionRemota _sesionRemota;
     private readonly ServicioAutenticacion _auth;
+    private readonly ServicioTareas _tareas;
+    private readonly ServicioNotificaciones _notificaciones;
+
+    // HU13: se retiene la acción hasta que la sesión remota se valide.
+    private readonly SemaphoreSlim _bloqueoPosponer = new(1, 1);
+    private int _tareaPendienteDePosponer;
+#if ANDROID
+    private bool _accionDeArranqueRevisada;
+#endif
 
     // Evitar validaciones simultaneas.
     private bool _validandoSesion;
 
     public App(
         ServicioSesionRemota sesionRemota,
-        ServicioAutenticacion auth)
+        ServicioAutenticacion auth,
+        ServicioTareas tareas,
+        ServicioNotificaciones notificaciones)
     {
         InitializeComponent();
 
         _sesionRemota = sesionRemota;
         _auth = auth;
+        _tareas = tareas;
+        _notificaciones = notificaciones;
+
+#if ANDROID
+        // HU13: registrar el manejador de la acción configurada en MauiProgram.
+        LocalNotificationCenter.Current.NotificationActionTapped +=
+            AlPulsarAccionDeNotificacion;
+#endif
 
         // CONSERVAR EL TEMA ELEGIDO
         RestaurarTema();
@@ -78,6 +102,11 @@ public partial class App : Application
             return;
 
         shell.Loaded -= AlCargarShell;
+
+#if ANDROID
+        // Si Android inició la app desde la acción, conservar la tarea.
+        RecuperarAccionDeArranque();
+#endif
 
         await ComprobarSesionAsync(
             shell,
@@ -159,6 +188,10 @@ public partial class App : Application
                     await shell.GoToAsync("//principal");
                 }
 
+                // HU13: procesar únicamente después de validar la identidad.
+                // Se mantiene en cola si el usuario está sin conexión o sin sesión.
+                await ProcesarPosposicionPendienteAsync();
+
                 // Al regresar desde segundo plano,
                 // conservar la pestaña actual.
                 return;
@@ -209,6 +242,104 @@ public partial class App : Application
             shell.IsEnabled = true;
 
             _validandoSesion = false;
+        }
+    }
+    // =====================================================
+    // HU13 - POSPONER DESDE UNA NOTIFICACIÓN ANDROID
+    // =====================================================
+
+#if ANDROID
+    private void AlPulsarAccionDeNotificacion(NotificationActionEventArgs e)
+    {
+        // El ID 1301 coincide con MauiProgram.cs.
+        // Ignorar el toque normal y el descarte de notificaciones.
+        if (e.ActionId != 1301 || e.IsTapped || e.IsDismissed ||
+            e.Request is null)
+        {
+            return;
+        }
+
+        RegistrarPosposicionPendiente(e.Request.NotificationId);
+    }
+
+    private void RecuperarAccionDeArranque()
+    {
+        if (_accionDeArranqueRevisada)
+            return;
+
+        _accionDeArranqueRevisada = true;
+        var detalles = LocalNotificationCenter.LaunchNotificationDetails;
+
+        if (detalles?.DidNotificationLaunchApp == true &&
+            detalles.ActionId == 1301 &&
+            detalles.Request is not null)
+        {
+            RegistrarPosposicionPendiente(
+                detalles.Request.NotificationId);
+        }
+    }
+
+    private void RegistrarPosposicionPendiente(int tareaId)
+    {
+        if (tareaId <= 0)
+            return;
+
+        // Una sola petición pendiente; las pulsaciones repetidas de
+        // la misma notificación se ignoran al programar el aviso.
+        Interlocked.Exchange(ref _tareaPendienteDePosponer, tareaId);
+
+        if (_auth.UsuarioActual is not null && !_validandoSesion)
+        {
+            _ = MainThread.InvokeOnMainThreadAsync(
+                ProcesarPosposicionPendienteAsync);
+        }
+    }
+#endif
+
+    private async Task ProcesarPosposicionPendienteAsync()
+    {
+        await _bloqueoPosponer.WaitAsync();
+        try
+        {
+            if (_auth.UsuarioActual is null)
+                return;
+
+            int tareaId = Interlocked.Exchange(
+                ref _tareaPendienteDePosponer, 0);
+
+            if (tareaId <= 0)
+                return;
+
+            // El caso de uso comprueba que la tarea pertenece
+            // al usuario local actualmente autenticado.
+            var tarea = await _tareas.ObtenerPorId(tareaId);
+
+            if (tarea is null || tarea.Completada ||
+                tarea.FechaLimite <= DateTime.Now)
+            {
+                Debug.WriteLine(
+                    $"HU13: se descartó la posposición de tarea {tareaId}.");
+                return;
+            }
+
+            bool pospuesta = await _notificaciones.PosponerRecordatorioAsync(
+                tarea.Id,
+                tarea.Titulo,
+                tarea.FechaLimite,
+                tarea.MinutosAviso,
+                tarea.CursoNombre);
+
+            Debug.WriteLine(
+                $"HU13: tarea {tareaId}, pospuesta: {pospuesta}.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(
+                $"HU13: error al posponer: {ex.GetType().Name}: {ex.Message}");
+        }
+        finally
+        {
+            _bloqueoPosponer.Release();
         }
     }
 }

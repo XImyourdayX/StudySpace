@@ -211,7 +211,12 @@ public class ServicioTareas
             tarea.UsuarioId != _auth.UsuarioActual.Id)
             return;
 
+        // HU14: conservar la fecha real de finalización para los reportes.
+        // Al reabrir una tarea se borra la fecha actual de finalización.
         tarea.Completada = !tarea.Completada;
+        tarea.FechaCompletada = tarea.Completada
+            ? DateTime.Now
+            : null;
 
         await _tareas.Actualizar(tarea);
     }

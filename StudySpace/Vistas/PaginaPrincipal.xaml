@@ -299,6 +299,16 @@
                     </Grid>
                 </VerticalStackLayout>
 
+                <!-- HU14 - ACCESO A LOS REPORTES MENSUALES -->
+                <Button Text="Ver reportes por mes y curso  ›"
+                        FontSize="12"
+                        FontAttributes="Bold"
+                        BackgroundColor="{StaticResource Violeta}"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="42"
+                        Command="{Binding VerReportesCommand}" />
+
             </VerticalStackLayout>
         </Border>
 

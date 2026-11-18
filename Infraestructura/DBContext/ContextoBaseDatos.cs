@@ -1,4 +1,4 @@
-﻿
+
 using Dominio.Entidades;
 using SQLite;
 
@@ -77,6 +77,10 @@ public class ContextoBaseDatos
 
             await conexion.CreateTableAsync<VinculoUsuarioRemoto>(
                 banderas);
+
+            // HU15 - Vinculación local con los eventos que Study Space
+            // crea en los calendarios del teléfono. No modifica tablas previas.
+            await conexion.CreateTableAsync<VinculoEventoCalendario>();
 
             // ============================================
             // CONFIGURACION EXISTENTE DE USUARIOS

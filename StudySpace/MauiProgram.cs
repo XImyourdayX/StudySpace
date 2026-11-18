@@ -1,4 +1,4 @@
-﻿using Aplicacion.CasosDeUso;
+using Aplicacion.CasosDeUso;
 using Aplicacion.Interfaces;
 using Infraestructura.DBContext;
 using Infraestructura.Repositorios;
@@ -9,6 +9,7 @@ using StudySpace.Vistas;
 
 #if ANDROID
 using Plugin.LocalNotification;
+using Plugin.LocalNotification.Core.Models;
 using Xamarin.Android.Net;
 #endif
 
@@ -24,7 +25,28 @@ public static class MauiProgram
 
 #if ANDROID
         // HU05 - NOTIFICACIONES LOCALES
-        builder.UseLocalNotification();
+        // HU13 - Registrar la acción para posponer un aviso.
+        // El manejo de la pulsación se añadirá en un paso posterior.
+        builder.UseLocalNotification(config =>
+        {
+            config.AddCategory(
+                new NotificationCategory(NotificationCategoryType.Status)
+                {
+                    ActionList = new HashSet<NotificationAction>
+                    {
+                        new NotificationAction(1301)
+                        {
+                            Title = "Posponer 10 min",
+                            Android =
+                            {
+                                // Abrir la app para gestionar el aviso
+                                // y comprobar la sesión y la tarea.
+                                LaunchAppWhenTapped = true
+                            }
+                        }
+                    }
+                });
+        });
 #endif
 
         builder.ConfigureFonts(fonts =>
@@ -86,6 +108,8 @@ public static class MauiProgram
 
         // HU05 - NOTIFICACIONES
         builder.Services.AddSingleton<ServicioNotificaciones>();
+        // HU15 - Calendar Provider de Android (sin OAuth)
+        builder.Services.AddSingleton<ServicioCalendarioAndroid>();
 
         // ============================================
         // API PHP DE WOPRES
@@ -135,6 +159,8 @@ public static class MauiProgram
         builder.Services.AddTransient<NuevaTareaVM>();
         builder.Services.AddTransient<PrincipalVM>();
         builder.Services.AddTransient<PerfilVM>();
+        // HU14 - Reportes académicos
+        builder.Services.AddTransient<ReportesVM>();
 
         // HU12 - DETALLE DE TAREA
         builder.Services.AddTransient<DetalleTareaVM>();
@@ -161,6 +187,7 @@ public static class MauiProgram
         builder.Services.AddTransient<PaginaNuevaTarea>();
         builder.Services.AddTransient<PaginaPrincipal>();
         builder.Services.AddTransient<PaginaPerfil>();
+        builder.Services.AddTransient<PaginaReportes>();
 
         // HU12 - DETALLE DE TAREA
         builder.Services.AddTransient<PaginaDetalleTarea>();

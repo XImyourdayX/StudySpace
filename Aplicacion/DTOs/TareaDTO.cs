@@ -11,6 +11,7 @@ public class TareaDTO
     public DateTime FechaLimite { get; set; }
     public string Prioridad { get; set; } = "Media";
     public bool Completada { get; set; }
+    public DateTime? FechaCompletada { get; set; }
     public int MinutosAviso { get; set; }
 
     public string FechaTexto => FechaLimite.ToString("dd/MM/yyyy hh:mm tt");

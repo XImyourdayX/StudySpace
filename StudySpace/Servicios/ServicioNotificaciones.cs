@@ -23,6 +23,36 @@ public class ServicioNotificaciones
     private const string ClaveHoraFin =
         "HU11_HoraFin";
 
+    // HU13: recordar la hora pospuesta por tarea en preferencias locales.
+    // Guardamos un instante (Unix ms), sin modificar la fecha límite en SQLite.
+    private static string ClavePospuestaHasta(int tareaId) =>
+        $"HU13_PospuestaHasta_{tareaId}";
+
+    private static DateTime? ObtenerFechaPospuesta(int tareaId)
+    {
+        long valor = Preferences.Default.Get(
+            ClavePospuestaHasta(tareaId), 0L);
+
+        if (valor <= 0)
+            return null;
+
+        try
+        {
+            return DateTimeOffset.FromUnixTimeMilliseconds(valor)
+                .LocalDateTime;
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            Preferences.Default.Remove(ClavePospuestaHasta(tareaId));
+            return null;
+        }
+    }
+
+    private static void LimpiarPosposicion(int tareaId)
+    {
+        Preferences.Default.Remove(ClavePospuestaHasta(tareaId));
+    }
+
     // HU11 - CONSULTAR SI LAS NOTIFICACIONES
     // ESTÁN ACTIVADAS EN LAS PREFERENCIAS
     public bool NotificacionesActivas()
@@ -164,6 +194,22 @@ public class ServicioNotificaciones
         DateTime fechaAviso =
             fechaLimite.AddMinutes(-minutosAviso);
 
+        // HU13: al reprogramar (p. ej., por cambios en Perfil),
+        // conservar un aviso pospuesto que sigue siendo válido.
+        var fechaPospuesta = ObtenerFechaPospuesta(tareaId);
+        if (fechaPospuesta is not null)
+        {
+            if (fechaPospuesta.Value > DateTime.Now &&
+                fechaPospuesta.Value < fechaLimite)
+            {
+                fechaAviso = fechaPospuesta.Value;
+            }
+            else
+            {
+                LimpiarPosposicion(tareaId);
+            }
+        }
+
         // HU11 - SI LA TAREA YA TENÍA UN AVISO,
         // CANCELARLO ANTES DE APLICAR NUEVOS AJUSTES
         LocalNotificationCenter.Current.Cancel(tareaId);
@@ -171,6 +217,7 @@ public class ServicioNotificaciones
         // HU11 - RESPETAR NOTIFICACIONES DESACTIVADAS
         if (!NotificacionesActivas())
         {
+            LimpiarPosposicion(tareaId);
             System.Diagnostics.Debug.WriteLine(
                 "HU11 - Las notificaciones están desactivadas.");
 
@@ -193,6 +240,16 @@ public class ServicioNotificaciones
         }
 
         fechaAviso = fechaPermitida.Value;
+
+        // HU13: si el horario permitido desplaza el aviso,
+        // conservar la hora efectivamente programada.
+        if (fechaPospuesta is not null &&
+            Preferences.Default.ContainsKey(ClavePospuestaHasta(tareaId)))
+        {
+            Preferences.Default.Set(
+                ClavePospuestaHasta(tareaId),
+                new DateTimeOffset(fechaAviso).ToUnixTimeMilliseconds());
+        }
 
         // COMPROBAR PERMISOS DE ANDROID
         if (!await SolicitarPermiso())
@@ -237,6 +294,11 @@ public class ServicioNotificaciones
         var notificacion = new NotificationRequest
         {
             NotificationId = tareaId,
+
+            // HU13 - Vincular este aviso con la categoria
+            // registrada en MauiProgram.cs, que muestra
+            // la accion "Posponer 10 min" en Android.
+            CategoryType = NotificationCategoryType.Status,
 
             Title = "Study Space",
 
@@ -283,15 +345,75 @@ public class ServicioNotificaciones
 #endif
     }
 
-    // CANCELAR RECORDATORIO
-    public void CancelarRecordatorio(int tareaId)
+    // HU13 - POSPONER DIEZ MINUTOS SIN MODIFICAR EL VENCIMIENTO.
+    // La aplicación debe validar antes la propiedad y estado de la tarea.
+    public async Task<bool> PosponerRecordatorioAsync(
+        int tareaId,
+        string titulo,
+        DateTime fechaLimite,
+        int minutosAviso,
+        string nombreCurso = "")
     {
 #if ANDROID
-        if (tareaId > 0)
+        if (tareaId <= 0 || minutosAviso < 0 ||
+            !NotificacionesActivas() ||
+            fechaLimite <= DateTime.Now)
         {
-            LocalNotificationCenter.Current
-                .Cancel(tareaId);
+            return false;
         }
+
+        // Evitar pulsaciones repetidas mientras ya existe
+        // una posposición futura para la misma tarea.
+        var anterior = ObtenerFechaPospuesta(tareaId);
+        if (anterior is not null && anterior.Value > DateTime.Now)
+            return false;
+
+        var nuevaHora = CalcularHoraPermitida(
+            DateTime.Now.AddMinutes(10), fechaLimite);
+
+        if (nuevaHora is null)
+            return false;
+
+        // ProgramarRecordatorio conservará esta hora y volverá
+        // a aplicar los permisos y ajustes actuales de Android.
+        Preferences.Default.Set(
+            ClavePospuestaHasta(tareaId),
+            new DateTimeOffset(nuevaHora.Value).ToUnixTimeMilliseconds());
+
+        try
+        {
+            bool correcto = await ProgramarRecordatorio(
+                tareaId, titulo, fechaLimite, minutosAviso, nombreCurso);
+
+            if (!correcto)
+                LimpiarPosposicion(tareaId);
+
+            return correcto;
+        }
+        catch
+        {
+            LimpiarPosposicion(tareaId);
+            throw;
+        }
+#else
+        await Task.CompletedTask;
+        return false;
 #endif
+    }
+
+    // CANCELAR RECORDATORIO
+    // En Perfil podemos mantener una posposición al aplicar ajustes.
+    public void CancelarRecordatorio(
+        int tareaId,
+        bool borrarPosposicion = true)
+    {
+        if (tareaId <= 0)
+            return;
+
+#if ANDROID
+        LocalNotificationCenter.Current.Cancel(tareaId);
+#endif
+        if (borrarPosposicion)
+            LimpiarPosposicion(tareaId);
     }
 }
