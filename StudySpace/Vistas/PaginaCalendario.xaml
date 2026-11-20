@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -125,7 +125,7 @@
 
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CalendarioVM}}, Path=SeleccionarDiaCommand}"
+                                Tapped="OnDiaTapped"
                                 CommandParameter="{Binding .}" />
                         </Grid.GestureRecognizers>
 
@@ -247,7 +247,7 @@
 
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CalendarioVM}}, Path=AbrirTareaCommand}"
+                                        Tapped="OnTareaTapped"
                                         CommandParameter="{Binding .}" />
                                 </Border.GestureRecognizers>
 

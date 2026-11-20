@@ -203,41 +203,6 @@
                     FontSize="14"
                     FontAttributes="Bold" />
 
-            <!-- HU15: estado claro del calendario y botón inactivo si ya está guardada -->
-            <Border Padding="14,12"
-                    StrokeThickness="0"
-                    BackgroundColor="{AppThemeBinding Light=#F3F1FF, Dark=#26233C}">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="12" />
-                </Border.StrokeShape>
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Calendario"
-                           FontAttributes="Bold"
-                           FontSize="13"
-                           TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                    <Label Text="{Binding EstadoCalendario}"
-                           FontSize="12"
-                           LineBreakMode="WordWrap"
-                           TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                    <Button Text="{Binding TextoBotonCalendario}"
-                            Command="{Binding GuardarCalendarioAndroidCommand}"
-                            IsEnabled="{Binding PuedeGuardarCalendario}"
-                            BackgroundColor="{StaticResource Violeta}"
-                            TextColor="White"
-                            CornerRadius="12"
-                            HeightRequest="50"
-                            FontSize="13"
-                            FontAttributes="Bold" />
-                    <Button Text="Cambiar calendario de destino"
-                            Command="{Binding CambiarCalendarioCommand}"
-                            IsVisible="{Binding MostrarCambiarCalendario}"
-                            BackgroundColor="Transparent"
-                            TextColor="{AppThemeBinding Light={StaticResource Violeta}, Dark=#C5B9FF}"
-                            HeightRequest="40"
-                            FontSize="12" />
-                </VerticalStackLayout>
-            </Border>
-
             <!-- EDITAR Y ELIMINAR -->
             <Grid ColumnDefinitions="*,*"
                   ColumnSpacing="10">

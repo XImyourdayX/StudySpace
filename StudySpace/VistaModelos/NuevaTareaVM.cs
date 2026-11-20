@@ -1,4 +1,4 @@
-﻿
+
 using Aplicacion.CasosDeUso;
 using Aplicacion.DTOs;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -13,6 +13,7 @@ public partial class NuevaTareaVM : ObservableObject
     private readonly ServicioTareas _tareas;
     private readonly ServicioCursos _cursos;
     private readonly ServicioNotificaciones _notificaciones;
+    private readonly ServicioIntegracionCalendario _integracionCalendario;
 
     // HU11 - CLAVE DE LA PREFERENCIA GUARDADA
     private const string ClaveAnticipacion =
@@ -83,11 +84,13 @@ public partial class NuevaTareaVM : ObservableObject
     public NuevaTareaVM(
         ServicioTareas tareas,
         ServicioCursos cursos,
-        ServicioNotificaciones notificaciones)
+        ServicioNotificaciones notificaciones,
+        ServicioIntegracionCalendario integracionCalendario)
     {
         _tareas = tareas;
         _cursos = cursos;
         _notificaciones = notificaciones;
+        _integracionCalendario = integracionCalendario;
     }
 
     // HU11 - OBTENER ANTICIPACIÓN PREDETERMINADA
@@ -254,6 +257,23 @@ public partial class NuevaTareaVM : ObservableObject
                 return;
             }
 
+            // HU15: SQLite ya confirmó la tarea. La sincronización Phone
+            // solo se realiza si el usuario la activó en Perfil.
+            // Si falla el calendario, NO perdemos la tarea local.
+            string avisoCalendario = "";
+            if (tareaId > 0)
+            {
+                var sync = await _integracionCalendario
+                    .SincronizarGuardadoAsync(tareaId);
+                if (sync.Intentado)
+                {
+                    avisoCalendario = sync.Exito
+                        ? "\nCalendario del teléfono actualizado."
+                        : "\nLa tarea se guardó en Study Space, pero no en el calendario del teléfono: "
+                          + sync.Mensaje;
+                }
+            }
+
             // HU05 Y HU11 - PROGRAMAR RECORDATORIO
             bool notificacionProgramada = false;
 
@@ -312,6 +332,8 @@ public partial class NuevaTareaVM : ObservableObject
                     "\nLa hora del recordatorio ya pasó.";
             }
 #endif
+
+            mensajeFinal += avisoCalendario;
 
             await Shell.Current.DisplayAlert(
                 "Listo",

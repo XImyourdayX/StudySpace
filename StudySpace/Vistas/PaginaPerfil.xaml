@@ -241,6 +241,48 @@
                              Light={StaticResource BordeClaro},
                              Dark={StaticResource BordeOscuro}}" />
 
+                <!-- HU15 - CALENDARIO EXTERNO, OPTATIVO Y SIN SELECTOR -->
+                <Grid ColumnDefinitions="34,*,Auto"
+                      ColumnSpacing="12"
+                      Padding="10,0"
+                      HeightRequest="96">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ConfigurarCalendarioExternoCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Label Text="&#xe935;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                    <VerticalStackLayout Grid.Column="1"
+                                         VerticalOptions="Center" Spacing="5">
+                        <Label Text="Calendario del teléfono"
+                               FontSize="15"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                        <Label Text="Sincronización desactivada"
+                               FontSize="12"
+                               LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label"
+                                             Binding="{Binding CalendarioExternoActivo}"
+                                             Value="True">
+                                    <Setter Property="Text" Value="Sincronización automática activada" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2"
+                           Text="&#xe5cc;"
+                           FontFamily="IconosMaterial"
+                           FontSize="23"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                </Grid>
+                <BoxView HeightRequest="1"
+                         Color="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}" />
+
                 <!-- TEMA DE LA APLICACIÓN -->
                 <Grid ColumnDefinitions="34,*,Auto,Auto"
                       ColumnSpacing="10"

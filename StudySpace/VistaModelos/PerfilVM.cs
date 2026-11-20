@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -21,6 +21,7 @@ public partial class PerfilVM : ObservableObject
     private readonly ServicioNotificaciones _notificaciones;
     private readonly HttpClient _clientePhp;
     private readonly RepositorioVinculosUsuario _vinculos;
+    private readonly ServicioIntegracionCalendario _integracionCalendario;
     private int _versionCargaPerfil;
 
     // Misma clave usada por InicioSesionVM.
@@ -65,18 +66,23 @@ public partial class PerfilVM : ObservableObject
     [ObservableProperty]
     private bool ocupado;
 
+    [ObservableProperty]
+    private bool calendarioExternoActivo;
+
     public PerfilVM(
         ServicioAutenticacion auth,
         ServicioTareas tareas,
         ServicioNotificaciones notificaciones,
         [FromKeyedServices("ApiPHP")] HttpClient clientePhp,
-        RepositorioVinculosUsuario vinculos)
+        RepositorioVinculosUsuario vinculos,
+        ServicioIntegracionCalendario integracionCalendario)
     {
         _auth = auth;
         _tareas = tareas;
         _notificaciones = notificaciones;
         _clientePhp = clientePhp;
         _vinculos = vinculos;
+        _integracionCalendario = integracionCalendario;
     }
 
     // CARGAR PERFIL
@@ -98,6 +104,7 @@ public partial class PerfilVM : ObservableObject
 
         ActualizarTextoTema();
         CargarPreferenciasNotificaciones();
+        CalendarioExternoActivo = _integracionCalendario.EstaActiva;
 
         // La pagina llama a Cargar() de forma sincronica.
         // Consultar el perfil remoto sin bloquear la pantalla.
@@ -215,6 +222,66 @@ public partial class PerfilVM : ObservableObject
             AppTheme.Dark => "Oscuro",
             _ => "Sistema"
         };
+    }
+
+    // HU15 - INTEGRACIÓN EXTERNA OPTATIVA.
+    // No se solicita permiso al abrir Perfil ni al guardar una tarea.
+    [RelayCommand]
+    private async Task ConfigurarCalendarioExterno()
+    {
+        if (Ocupado)
+            return;
+
+        if (CalendarioExternoActivo)
+        {
+            bool desactivar = await Shell.Current.DisplayAlert(
+                "Desactivar calendario externo",
+                "Las próximas tareas ya no se enviarán al calendario del teléfono. " +
+                "Los eventos que ya existen allí se conservarán. ¿Desactivar?",
+                "Desactivar", "Cancelar");
+            if (!desactivar)
+                return;
+
+            _integracionCalendario.Desactivar();
+            CalendarioExternoActivo = false;
+            await Shell.Current.DisplayAlert(
+                "Calendario desactivado",
+                "Study Space seguirá guardando las tareas en su propio calendario.",
+                "Aceptar");
+            return;
+        }
+
+        bool confirmar = await Shell.Current.DisplayAlert(
+            "Calendario del teléfono",
+            "Al activarlo, Study Space guardará automáticamente tus próximas tareas " +
+            "en el calendario Phone de Android. Pediremos permisos de lectura y escritura. " +
+            "No se conectará directamente a Google ni enviará tareas anteriores. " +
+            "Los eventos locales no necesariamente se sincronizan con la nube. ¿Activar?",
+            "Activar", "Cancelar");
+        if (!confirmar)
+            return;
+
+        Ocupado = true;
+        try
+        {
+            var resultado = await _integracionCalendario.ActivarAsync();
+            CalendarioExternoActivo = _integracionCalendario.EstaActiva;
+            await Shell.Current.DisplayAlert(
+                resultado.Exito ? "Calendario activado" : "No se pudo activar",
+                resultado.Mensaje, "Aceptar");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"HU15 - Perfil: {ex}");
+            CalendarioExternoActivo = _integracionCalendario.EstaActiva;
+            await Shell.Current.DisplayAlert(
+                "Calendario",
+                "No se pudo configurar el calendario del teléfono.", "Aceptar");
+        }
+        finally
+        {
+            Ocupado = false;
+        }
     }
 
     // HU11 - SINCRONIZAR RECORDATORIOS

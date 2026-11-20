@@ -110,6 +110,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<ServicioNotificaciones>();
         // HU15 - Calendar Provider de Android (sin OAuth)
         builder.Services.AddSingleton<ServicioCalendarioAndroid>();
+        // HU15: estado de integración por perfil local, desactivado por defecto.
+        builder.Services.AddSingleton<ServicioIntegracionCalendario>();
 
         // ============================================
         // API PHP DE WOPRES
