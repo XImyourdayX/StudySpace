@@ -46,5 +46,10 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(
             "reportes",
             typeof(PaginaReportes));
+
+        // HU16 - Crear y compartir copias cifradas.
+        Routing.RegisterRoute(
+            "copiasseguridad",
+            typeof(PaginaCopiasSeguridad));
     }
 }

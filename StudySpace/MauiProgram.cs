@@ -112,6 +112,10 @@ public static class MauiProgram
         builder.Services.AddSingleton<ServicioCalendarioAndroid>();
         // HU15: estado de integración por perfil local, desactivado por defecto.
         builder.Services.AddSingleton<ServicioIntegracionCalendario>();
+        // HU16: exportación cifrada de cursos y tareas; sin tocar la API.
+        builder.Services.AddSingleton<ServicioRespaldoCifrado>();
+        // HU16: lectura y restauración segura de respaldos cifrados v1.
+        builder.Services.AddSingleton<ServicioRestauracionCifrada>();
 
         // ============================================
         // API PHP DE WOPRES
@@ -190,6 +194,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PaginaPrincipal>();
         builder.Services.AddTransient<PaginaPerfil>();
         builder.Services.AddTransient<PaginaReportes>();
+        // HU16: página de copias cifradas (solo exportación en este paso).
+        builder.Services.AddTransient<PaginaCopiasSeguridad>();
 
         // HU12 - DETALLE DE TAREA
         builder.Services.AddTransient<PaginaDetalleTarea>();

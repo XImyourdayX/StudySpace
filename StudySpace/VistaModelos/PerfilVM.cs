@@ -224,6 +224,16 @@ public partial class PerfilVM : ObservableObject
         };
     }
 
+    // HU16 - Abrir pantalla de copias de seguridad cifradas.
+    // No procesa ni almacena la contraseña en el ViewModel del perfil.
+    [RelayCommand]
+    private async Task AbrirCopiasSeguridad()
+    {
+        if (Ocupado)
+            return;
+        await Shell.Current.GoToAsync("copiasseguridad");
+    }
+
     // HU15 - INTEGRACIÓN EXTERNA OPTATIVA.
     // No se solicita permiso al abrir Perfil ni al guardar una tarea.
     [RelayCommand]
