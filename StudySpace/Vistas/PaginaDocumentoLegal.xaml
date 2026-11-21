@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudySpace.Vistas.PaginaDocumentoLegal"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}">
+    <Grid RowDefinitions="Auto,*" Padding="20,18,20,14" RowSpacing="12"
+          MaximumWidthRequest="460">
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+            <Button Text="‹" FontSize="27" WidthRequest="44" HeightRequest="44"
+                    BackgroundColor="Transparent" TextColor="{StaticResource Violeta}"
+                    Clicked="OnVolverClicked"
+                    SemanticProperties.Description="Regresar a privacidad" />
+            <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                <Label x:Name="TituloDocumento" Text="Información legal"
+                       FontSize="22" FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                <Label Text="Study Space · Versión preliminar" FontSize="12"
+                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+            </VerticalStackLayout>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="14" Padding="0,0,0,28">
+                <Border StrokeThickness="0" Padding="15"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark={StaticResource LavandaOscuro}}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Borrador informativo" FontSize="15" FontAttributes="Bold"
+                               TextColor="{StaticResource Violeta}" />
+                        <Label Text="Este texto describe el funcionamiento observado en la versión actual. NO es la política o el contrato definitivo para publicar: faltan datos del responsable, contacto, plazos y revisión legal."
+                               FontSize="12" LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                    </VerticalStackLayout>
+                </Border>
+                <VerticalStackLayout x:Name="SeccionesDocumento" Spacing="12" />
+                <Label Text="Versión de trabajo · 20 de noviembre de 2026 · Requiere validación previa al piloto"
+                       FontSize="11" LineBreakMode="WordWrap"
+                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

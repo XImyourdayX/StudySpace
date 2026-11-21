@@ -234,6 +234,17 @@ public partial class PerfilVM : ObservableObject
         await Shell.Current.GoToAsync("copiasseguridad");
     }
 
+    // HU17: acceso a información sobre privacidad y datos personales.
+    // La eliminación remota de la cuenta todavía no está implementada.
+    [RelayCommand]
+    private async Task AbrirPrivacidadDatos()
+    {
+        if (Ocupado)
+            return;
+
+        await Shell.Current.GoToAsync("privacidad");
+    }
+
     // HU15 - INTEGRACIÓN EXTERNA OPTATIVA.
     // No se solicita permiso al abrir Perfil ni al guardar una tarea.
     [RelayCommand]

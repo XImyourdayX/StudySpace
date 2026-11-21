@@ -51,5 +51,15 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(
             "copiasseguridad",
             typeof(PaginaCopiasSeguridad));
+
+        // HU17: conservar la ruta ya existente de Privacidad y mis datos.
+        Routing.RegisterRoute(
+            "privacidad",
+            typeof(PaginaPrivacidadDatos));
+
+        // HU17: lectura de textos legales preliminares.
+        Routing.RegisterRoute(
+            "documentolegal",
+            typeof(PaginaDocumentoLegal));
     }
 }

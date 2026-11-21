@@ -116,6 +116,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<ServicioRespaldoCifrado>();
         // HU16: lectura y restauración segura de respaldos cifrados v1.
         builder.Services.AddSingleton<ServicioRestauracionCifrada>();
+        // HU17: resumen y borrado explícito de datos académicos del perfil local.
+        builder.Services.AddSingleton<ServicioGestionDatosLocales>();
 
         // ============================================
         // API PHP DE WOPRES
@@ -196,6 +198,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PaginaReportes>();
         // HU16: página de copias cifradas (solo exportación en este paso).
         builder.Services.AddTransient<PaginaCopiasSeguridad>();
+        // HU17: pantalla informativa sin operaciones destructivas.
+        builder.Services.AddTransient<PaginaPrivacidadDatos>();
 
         // HU12 - DETALLE DE TAREA
         builder.Services.AddTransient<PaginaDetalleTarea>();
