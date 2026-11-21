@@ -200,6 +200,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PaginaCopiasSeguridad>();
         // HU17: pantalla informativa sin operaciones destructivas.
         builder.Services.AddTransient<PaginaPrivacidadDatos>();
+        // HU17: Ayuda y soporte sin servicio remoto de tickets.
+        builder.Services.AddTransient<PaginaAyudaSoporte>();
 
         // HU12 - DETALLE DE TAREA
         builder.Services.AddTransient<PaginaDetalleTarea>();

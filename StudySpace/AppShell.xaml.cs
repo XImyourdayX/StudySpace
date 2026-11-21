@@ -61,5 +61,10 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(
             "documentolegal",
             typeof(PaginaDocumentoLegal));
+
+        // HU17 - Preguntas frecuentes y comentarios para pruebas de campo.
+        Routing.RegisterRoute(
+            "ayudasoporte",
+            typeof(PaginaAyudaSoporte));
     }
 }

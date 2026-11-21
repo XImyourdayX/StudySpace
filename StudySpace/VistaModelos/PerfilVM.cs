@@ -645,15 +645,14 @@ public partial class PerfilVM : ObservableObject
         ActualizarTextoTema();
     }
 
-    // AYUDA Y SOPORTE
+    // HU17: Acceso a preguntas frecuentes y comentarios.
     [RelayCommand]
     private async Task Ayuda()
     {
-        await Shell.Current.DisplayAlert(
-            "Ayuda y soporte",
-            "Study Space te ayuda a organizar tus cursos, " +
-            "tareas y fechas de entrega.",
-            "Entendido");
+        if (Ocupado)
+            return;
+
+        await Shell.Current.GoToAsync("ayudasoporte");
     }
 
     // =====================================================

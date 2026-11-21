@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="StudySpace.Vistas.PaginaAyudaSoporte"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}">
+
+    <Grid Padding="20,18,20,16"
+          RowDefinitions="Auto,*"
+          RowSpacing="14"
+          MaximumWidthRequest="460">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+            <Button Text="‹" FontSize="27"
+                    WidthRequest="44" HeightRequest="44"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource Violeta}"
+                    Clicked="OnVolverClicked"
+                    SemanticProperties.Description="Regresar al perfil" />
+            <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                <Label Text="Ayuda y soporte" FontSize="22" FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                <Label Text="Resuelve dudas y comparte tus comentarios"
+                       FontSize="12" LineBreakMode="WordWrap"
+                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="16" Padding="0,0,0,28">
+                <Border Padding="16" StrokeThickness="0"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark={StaticResource LavandaOscuro}}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="7">
+                        <Label Text="Estamos mejorando Study Space"
+                               FontSize="17" FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                        <Label Text="Si encuentras un problema o tienes una idea, prepara un correo dirigido al soporte de Study Space. Podrás revisarlo antes de enviarlo."
+                               FontSize="13" LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="Preguntas frecuentes" FontSize="17" FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+
+                <Border Padding="16" StrokeThickness="0"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="15" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="¿Dónde están mis cursos y tareas?"
+                               FontSize="14" FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                        <Label Text="Se guardan en este teléfono y están asociados a tu cuenta local. Iniciar sesión en otro dispositivo no las recupera automáticamente."
+                               FontSize="12" LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                        <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}" />
+                        <Label Text="¿Cómo recupero mis datos?"
+                               FontSize="14" FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                        <Label Text="Desde Perfil, abre Copias de seguridad y restaura un archivo .ssbackup con la contraseña que elegiste."
+                               FontSize="12" LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                        <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}" />
+                        <Label Text="¿Qué pasa si no recibo un recordatorio?"
+                               FontSize="14" FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                        <Label Text="Revisa los permisos de notificación, la anticipación y los horarios configurados. El ahorro de batería de Android también puede retrasar avisos."
+                               FontSize="12" LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                        <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}" />
+                        <Label Text="¿Mis entregas se sincronizan con Google Calendar?"
+                               FontSize="14" FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                        <Label Text="Study Space puede añadir eventos al calendario Phone de Android si activas esa opción en Perfil. Que aparezcan en Google depende de la configuración de sincronización del dispositivo."
+                               FontSize="12" LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="Reportar un problema o sugerencia" FontSize="17" FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+
+                <Border Padding="16" StrokeThickness="0"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="15" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Tipo de comentario" FontSize="13" FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                        <Picker x:Name="TipoPicker" Title="Selecciona una opción" SelectedIndex="0"
+                                TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}">
+                            <Picker.Items>
+                                <x:String>Reportar un problema</x:String>
+                                <x:String>Enviar una sugerencia</x:String>
+                                <x:String>Hacer una consulta</x:String>
+                            </Picker.Items>
+                        </Picker>
+                        <Label Text="Cuéntanos qué ocurrió o qué mejorarías"
+                               FontSize="13" FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                        <Border Padding="12" StrokeThickness="1"
+                                Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                            <Editor x:Name="DescripcionEditor" Placeholder="Describe los pasos, el resultado esperado y lo que sucedió..."
+                                    AutoSize="TextChanges" HeightRequest="128" MaxLength="1500"
+                                    TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                        </Border>
+                        <Label Text="No escribas contraseñas, códigos de verificación ni información privada. El reporte solo incluirá lo que tú redactes y la versión de la app."
+                               FontSize="12" LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                        <Label x:Name="EstadoLabel" IsVisible="False" FontSize="12" LineBreakMode="WordWrap"
+                               TextColor="{StaticResource Rojo}" />
+                        <Label Text="Correo de soporte: studyspace.soporte@wopres.com"
+                               FontSize="12" LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                        <Button x:Name="EnviarCorreoButton" Text="Enviar por correo"
+                                HeightRequest="52" CornerRadius="13" FontAttributes="Bold"
+                                BackgroundColor="{StaticResource Violeta}" TextColor="White"
+                                Clicked="OnEnviarCorreoClicked" />
+                        <Button Text="Copiar comentario" HeightRequest="46" CornerRadius="12"
+                                BackgroundColor="Transparent" BorderColor="{StaticResource Violeta}"
+                                BorderWidth="1" TextColor="{StaticResource Violeta}"
+                                Clicked="OnCopiarClicked" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="Al pulsar Enviar por correo se abrirá tu aplicación de correo. Revisa el destinatario y pulsa Enviar allí. Abrir el correo no confirma que el mensaje se haya enviado."
+                       FontSize="12" LineBreakMode="WordWrap"
+                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
