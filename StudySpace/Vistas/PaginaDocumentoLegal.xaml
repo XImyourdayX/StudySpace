@@ -3,39 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StudySpace.Vistas.PaginaDocumentoLegal"
              Shell.NavBarIsVisible="False"
-             BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}">
-    <Grid RowDefinitions="Auto,*" Padding="20,18,20,14" RowSpacing="12"
-          MaximumWidthRequest="460">
-        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-            <Button Text="‹" FontSize="27" WidthRequest="44" HeightRequest="44"
-                    BackgroundColor="Transparent" TextColor="{StaticResource Violeta}"
-                    Clicked="OnVolverClicked"
-                    SemanticProperties.Description="Regresar a privacidad" />
-            <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
-                <Label x:Name="TituloDocumento" Text="Información legal"
-                       FontSize="22" FontAttributes="Bold"
-                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                <Label Text="Study Space · Versión preliminar" FontSize="12"
-                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-            </VerticalStackLayout>
+             BackgroundColor="{AppThemeBinding Light=#F8F7FC, Dark=#101326}">
+    <Grid RowDefinitions="Auto,*" Padding="14,10,14,0" RowSpacing="10" MaximumWidthRequest="520" HorizontalOptions="Fill">
+        <Grid ColumnDefinitions="44,*" ColumnSpacing="10">
+            <Button Text="&#xe5c4;" FontFamily="IconosMaterial" FontSize="22" WidthRequest="44" HeightRequest="44" Padding="0" CornerRadius="14" VerticalOptions="Center"
+                    BackgroundColor="{AppThemeBinding Light=#EDE4FC, Dark=#32234F}" TextColor="{AppThemeBinding Light=#6335AD, Dark=#D7B8FF}" Clicked="OnVolverClicked" SemanticProperties.Description="Regresar a privacidad" />
+            <Label Grid.Column="1" Text="Study Space  /  Información legal" FontSize="12" FontAttributes="Bold" VerticalOptions="Center" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#655B7D, Dark=#C4B8DD}" />
         </Grid>
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Spacing="14" Padding="0,0,0,28">
-                <Border StrokeThickness="0" Padding="15"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark={StaticResource LavandaOscuro}}">
-                    <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
-                    <VerticalStackLayout Spacing="5">
-                        <Label Text="Borrador informativo" FontSize="15" FontAttributes="Bold"
-                               TextColor="{StaticResource Violeta}" />
-                        <Label Text="Este texto describe el funcionamiento observado en la versión actual. NO es la política o el contrato definitivo para publicar: faltan datos del responsable, contacto, plazos y revisión legal."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Default">
+            <VerticalStackLayout Spacing="14" Padding="0,0,0,22">
+                <Border StrokeThickness="1" Stroke="{AppThemeBinding Light=#D8C7F2, Dark=#65508E}" Padding="14" StrokeShape="RoundRectangle 18">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="{AppThemeBinding Light=#F0E8FF, Dark=#282044}" Offset="0" />
+                            <GradientStop Color="{AppThemeBinding Light=#FAF8FF, Dark=#171A31}" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="40,*" ColumnSpacing="10">
+                            <Border WidthRequest="40" HeightRequest="40" StrokeThickness="0" StrokeShape="RoundRectangle 12" BackgroundColor="{AppThemeBinding Light=#E3D2FC, Dark=#49316F}" VerticalOptions="Center">
+                                <Label x:Name="IconoDocumento" Text="&#xe897;" FontFamily="IconosMaterial" FontSize="23" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{AppThemeBinding Light=#6335AD, Dark=#E1C5FF}" />
+                            </Border>
+                            <Label Grid.Column="1" x:Name="TituloDocumento" Text="Información legal" FontSize="21" FontAttributes="Bold" LineBreakMode="WordWrap" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" />
+                        </Grid>
+                        <BoxView HeightRequest="1" BackgroundColor="{AppThemeBinding Light=#D8C7F2, Dark=#55446F}" />
+                        <Label Text="Study Space · Versión preliminar" FontSize="12" TextColor="{AppThemeBinding Light=#655B7D, Dark=#C4B8DD}" />
+                        <Label Text="20 de noviembre de 2026" FontSize="12" TextColor="{AppThemeBinding Light=#655B7D, Dark=#C4B8DD}" />
                     </VerticalStackLayout>
                 </Border>
-                <VerticalStackLayout x:Name="SeccionesDocumento" Spacing="12" />
-                <Label Text="Versión de trabajo · 20 de noviembre de 2026 · Requiere validación previa al piloto"
-                       FontSize="11" LineBreakMode="WordWrap"
-                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                <Border Padding="14,4" StrokeThickness="1" Stroke="{AppThemeBinding Light=#E0D9ED, Dark=#393450}" StrokeShape="RoundRectangle 16" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#171A30}">
+                    <VerticalStackLayout x:Name="SeccionesDocumento" Spacing="0" />
+                </Border>
+                <Label Text="Versión de trabajo · 20 de noviembre de 2026 · Requiere validación previa al piloto" FontSize="11" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#655B7D, Dark=#C4B8DD}" />
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

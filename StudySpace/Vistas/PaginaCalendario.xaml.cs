@@ -1,4 +1,4 @@
-﻿using Aplicacion.DTOs;
+using Aplicacion.DTOs;
 using StudySpace.VistaModelos;
 
 namespace StudySpace.Vistas;
@@ -25,13 +25,18 @@ public partial class PaginaCalendario : ContentPage
         }
     }
 
-    private void OnTareaTapped(object sender, TappedEventArgs e)
+    private async void OnTareaSeleccionada(object sender, SelectionChangedEventArgs e)
     {
-        if (e.Parameter is TareaDTO tarea &&
-            _vm.AbrirTareaCommand.CanExecute(tarea))
-        {
-            _vm.AbrirTareaCommand.Execute(tarea);
-        }
+        if (sender is not CollectionView lista ||
+            e.CurrentSelection.FirstOrDefault() is not TareaDTO tarea)
+            return;
+
+        // Permite volver a abrir la misma tarea al regresar.
+        lista.SelectedItem = null;
+        if (!_vm.AbrirTareaCommand.CanExecute(tarea))
+            return;
+
+        await _vm.AbrirTareaCommand.ExecuteAsync(tarea);
     }
 
     protected override async void OnAppearing()

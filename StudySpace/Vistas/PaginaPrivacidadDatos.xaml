@@ -1,214 +1,104 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="StudySpace.Vistas.PaginaPrivacidadDatos"
-    Shell.NavBarIsVisible="False"
-    BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}">
+<?xml version='1.0' encoding='utf-8'?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="StudySpace.Vistas.PaginaPrivacidadDatos" Shell.NavBarIsVisible="False" BackgroundColor="{AppThemeBinding Light=#F8F6FD, Dark=#101326}">
 
-    <Grid RowDefinitions="Auto,*"
-          RowSpacing="12"
-          Padding="20,18,20,14"
-          MaximumWidthRequest="460">
+    <Grid RowDefinitions="Auto,*" RowSpacing="10" Padding="13,10,13,12" MaximumWidthRequest="460" HorizontalOptions="Fill">
 
-        <!-- Cabecera fija; contenido desplazable para pantallas pequeñas. -->
-        <Grid Grid.Row="0" ColumnDefinitions="Auto,*" ColumnSpacing="10">
-            <Button Text="‹" FontSize="27" WidthRequest="44" HeightRequest="44"
-                    BackgroundColor="Transparent" TextColor="{StaticResource Violeta}"
-                    Clicked="OnVolverClicked"
-                    SemanticProperties.Description="Regresar a Perfil" />
+        
+        <Grid Grid.Row="0" ColumnDefinitions="44,*" ColumnSpacing="10" MinimumHeightRequest="56">
+            <Button Text="" FontSize="22" WidthRequest="44" HeightRequest="44" BackgroundColor="{AppThemeBinding Light=#ECDDFA, Dark=#422866}" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" Clicked="OnVolverClicked" SemanticProperties.Description="Regresar a Perfil" FontFamily="IconosMaterial" Padding="0" CornerRadius="12" VerticalOptions="Center"/>
             <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
-                <Label Text="Privacidad y mis datos" FontSize="22" FontAttributes="Bold"
-                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                <Label Text="Conoce y administra tu información académica"
-                       FontSize="12" LineBreakMode="WordWrap"
-                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                <Label Text="Privacidad y mis datos" FontSize="19" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                <Label Text="Conoce y administra tu información académica" FontSize="11" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
             </VerticalStackLayout>
         </Grid>
 
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Spacing="16" Padding="0,0,0,26">
+            <VerticalStackLayout Spacing="10" Padding="0,0,0,18">
 
-                <!-- Resumen: ocupa menos espacio que el formulario destructivo anterior. -->
-                <Border StrokeThickness="0" Padding="17"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark={StaticResource LavandaOscuro}}">
-                    <Border.StrokeShape><RoundRectangle CornerRadius="17" /></Border.StrokeShape>
-                    <VerticalStackLayout Spacing="11">
-                        <Label Text="Mi información académica" FontAttributes="Bold" FontSize="17"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                            <Border Grid.Column="0" Padding="13"
-                                    BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}"
-                                    StrokeThickness="0">
-                                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                
+                <Border Padding="12" StrokeThickness="1" Stroke="{AppThemeBinding Light=#C8A9E9, Dark=#9460CA}"><Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape><Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="{AppThemeBinding Light=#F7EDFF, Dark=#25203E}" Offset="0"/><GradientStop Color="{AppThemeBinding Light=#E9D5FC, Dark=#47236D}" Offset="1"/></LinearGradientBrush></Border.Background><VerticalStackLayout Spacing="7"><Grid ColumnDefinitions="32,*" ColumnSpacing="9"><Border WidthRequest="32" HeightRequest="32" Padding="0" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#ECDDFA, Dark=#48306C}" VerticalOptions="Center"><Border.StrokeShape><RoundRectangle CornerRadius="10"/></Border.StrokeShape><Label Text="" FontFamily="IconosMaterial" FontSize="19" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/></Border><Label Text="Tu privacidad es importante" FontSize="16" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" LineBreakMode="WordWrap" FontAttributes="Bold" Grid.Column="1" VerticalOptions="Center"/></Grid><Label Text="Conoce cómo se utiliza tu información y administra tus datos académicos." FontSize="12" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}" LineBreakMode="WordWrap"/></VerticalStackLayout></Border><Border StrokeThickness="1" Padding="12" BackgroundColor="{AppThemeBinding Light=#F0E7FC, Dark=#28223F}" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="17"/></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="32,*" ColumnSpacing="9"><Border WidthRequest="32" HeightRequest="32" Padding="0" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#ECDDFA, Dark=#48306C}" VerticalOptions="Center"><Border.StrokeShape><RoundRectangle CornerRadius="10"/></Border.StrokeShape><Label Text="" FontFamily="IconosMaterial" FontSize="19" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/></Border><Label Text="Mi información académica" FontAttributes="Bold" FontSize="17" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" Grid.Column="1" VerticalOptions="Center"/>
+                        </Grid><Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                            <Border Grid.Column="0" Padding="12" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191B32}" StrokeThickness="1" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}">
+                                <Border.StrokeShape><RoundRectangle CornerRadius="12"/></Border.StrokeShape>
                                 <VerticalStackLayout Spacing="2">
-                                    <Label x:Name="CantidadCursosLabel" Text="—" FontSize="25"
-                                           FontAttributes="Bold" TextColor="{StaticResource Violeta}" />
-                                    <Label Text="Cursos" FontSize="12"
-                                           TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                                    <Label x:Name="CantidadCursosLabel" Text="—" FontSize="25" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}"/>
+                                    <Label Text="Cursos" FontSize="12" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
                                 </VerticalStackLayout>
                             </Border>
-                            <Border Grid.Column="1" Padding="13"
-                                    BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}"
-                                    StrokeThickness="0">
-                                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                            <Border Grid.Column="1" Padding="12" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191B32}" StrokeThickness="1" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}">
+                                <Border.StrokeShape><RoundRectangle CornerRadius="12"/></Border.StrokeShape>
                                 <VerticalStackLayout Spacing="2">
-                                    <Label x:Name="CantidadTareasLabel" Text="—" FontSize="25"
-                                           FontAttributes="Bold" TextColor="{StaticResource Violeta}" />
-                                    <Label Text="Tareas" FontSize="12"
-                                           TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                                    <Label x:Name="CantidadTareasLabel" Text="—" FontSize="25" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}"/>
+                                    <Label Text="Tareas" FontSize="12" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
                                 </VerticalStackLayout>
                             </Border>
                         </Grid>
-                        <Label x:Name="EstadoDatosLabel"
-                               Text="Consultando información de la cuenta activa..."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                        <Label x:Name="EstadoDatosLabel" Text="Consultando información de la cuenta activa..." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Acceso principal: funcionalidad HU16 existente. -->
-                <Border StrokeThickness="0" Padding="16"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
-                    <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Protección de mis datos" FontSize="16" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="Copias de seguridad" FontAttributes="Bold" FontSize="14"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="Guarda o recupera tus cursos y tareas mediante un archivo cifrado que tú controlas."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                        <Button Text="Abrir copias de seguridad"
-                                Clicked="OnCopiasSeguridadClicked"
-                                BackgroundColor="{StaticResource Violeta}" TextColor="White"
-                                CornerRadius="12" HeightRequest="46" />
+                
+                <Border StrokeThickness="1" Padding="12" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191B32}" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="32,*" ColumnSpacing="9"><Border WidthRequest="32" HeightRequest="32" Padding="0" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#ECDDFA, Dark=#48306C}" VerticalOptions="Center"><Border.StrokeShape><RoundRectangle CornerRadius="10"/></Border.StrokeShape><Label Text="" FontFamily="IconosMaterial" FontSize="19" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/></Border><Label Text="Protección de mis datos" FontSize="16" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" Grid.Column="1" VerticalOptions="Center"/>
+                        </Grid><Label Text="Copias de seguridad" FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                        <Label Text="Guarda o recupera tus cursos y tareas mediante un archivo cifrado que tú controlas." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                        <Button Text="Abrir copias de seguridad" Clicked="OnCopiasSeguridadClicked" TextColor="White" CornerRadius="12" HeightRequest="48" FontSize="13" Padding="8,5"><Button.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#A34DE5" Offset="0"/><GradientStop Color="#7130D9" Offset="1"/></LinearGradientBrush></Button.Background></Button>
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Información cierta de la versión actual; no afirmar sincronización inexistente. -->
-                <Border StrokeThickness="0" Padding="16"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
-                    <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
-                    <VerticalStackLayout Spacing="11">
-                        <Label Text="¿Cómo se usa mi información?" FontSize="16" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="Cuenta e inicio de sesión" FontSize="14" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="Tu cuenta se valida mediante la API de Study Space y una base de datos remota."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                        <BoxView HeightRequest="1"
-                                 Color="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}" />
-                        <Label Text="Cursos y tareas" FontSize="14" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="Se almacenan en este teléfono. No se sincronizan automáticamente entre dispositivos."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                        <BoxView HeightRequest="1"
-                                 Color="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}" />
-                        <Label Text="Calendario de Android" FontSize="14" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="La integración es opcional y se configura desde Perfil. Que los eventos lleguen a Google depende de la configuración del teléfono."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                
+                <Border StrokeThickness="1" Padding="12" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191B32}" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="32,*" ColumnSpacing="9"><Border WidthRequest="32" HeightRequest="32" Padding="0" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#ECDDFA, Dark=#48306C}" VerticalOptions="Center"><Border.StrokeShape><RoundRectangle CornerRadius="10"/></Border.StrokeShape><Label Text="" FontFamily="IconosMaterial" FontSize="19" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/></Border><Label Text="¿Cómo se usa mi información?" FontSize="16" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" Grid.Column="1" VerticalOptions="Center"/>
+                        </Grid><Label Text="Cuenta e inicio de sesión" FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                        <Label Text="Tu cuenta se valida mediante la API de Study Space y una base de datos remota." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                        <BoxView HeightRequest="1" Color="{AppThemeBinding Light=#D9CBEA, Dark=#514268}"/>
+                        <Label Text="Cursos y tareas" FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                        <Label Text="Se almacenan en este teléfono. No se sincronizan automáticamente entre dispositivos." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                        <BoxView HeightRequest="1" Color="{AppThemeBinding Light=#D9CBEA, Dark=#514268}"/>
+                        <Label Text="Calendario de Android" FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                        <Label Text="La integración es opcional y se configura desde Perfil. Que los eventos lleguen a Google depende de la configuración del teléfono." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- HU17: lectura de documentos informativos. Borradores, no publicación legal definitiva. -->
-                <Border StrokeThickness="0" Padding="16"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
-                    <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Información legal" FontSize="16" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Button Text="Política de privacidad  ›"
-                                Clicked="OnPoliticaPrivacidadClicked"
-                                BackgroundColor="Transparent"
-                                BorderColor="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}"
-                                BorderWidth="1" CornerRadius="12" HeightRequest="48"
-                                HorizontalOptions="Fill"
-                                TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Button Text="Términos y condiciones  ›"
-                                Clicked="OnTerminosCondicionesClicked"
-                                BackgroundColor="Transparent"
-                                BorderColor="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}"
-                                BorderWidth="1" CornerRadius="12" HeightRequest="48"
-                                HorizontalOptions="Fill"
-                                TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="Documentos preliminares para revisión del equipo. Antes del piloto se deben completar los datos del responsable, los canales de atención y la revisión legal."
-                               FontSize="11" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                
+                <Border StrokeThickness="1" Padding="12" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191B32}" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="32,*" ColumnSpacing="9"><Border WidthRequest="32" HeightRequest="32" Padding="0" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#ECDDFA, Dark=#48306C}" VerticalOptions="Center"><Border.StrokeShape><RoundRectangle CornerRadius="10"/></Border.StrokeShape><Label Text="" FontFamily="IconosMaterial" FontSize="19" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/></Border><Label Text="Información legal" FontSize="16" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" Grid.Column="1" VerticalOptions="Center"/>
+                        </Grid><Button Text="Política de privacidad  ›" Clicked="OnPoliticaPrivacidadClicked" BackgroundColor="Transparent" BorderColor="{AppThemeBinding Light=#D9CBEA, Dark=#514268}" BorderWidth="1" CornerRadius="12" HeightRequest="48" HorizontalOptions="Fill" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" FontSize="13" Padding="8,5"/>
+                        <Button Text="Términos y condiciones  ›" Clicked="OnTerminosCondicionesClicked" BackgroundColor="Transparent" BorderColor="{AppThemeBinding Light=#D9CBEA, Dark=#514268}" BorderWidth="1" CornerRadius="12" HeightRequest="48" HorizontalOptions="Fill" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" FontSize="13" Padding="8,5"/>
+                        <Label Text="Documentos preliminares para revisión del equipo. Antes del piloto se deben completar los datos del responsable, los canales de atención y la revisión legal." FontSize="11" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Borrado fuera de la pantalla principal y con confirmación doble. -->
-                <Button x:Name="OpcionesAvanzadasButton"
-                        Text="Opciones avanzadas de datos  ›"
-                        BackgroundColor="Transparent"
-                        TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}"
-                        HorizontalOptions="Start"
-                        FontSize="13"
-                        Clicked="OnOpcionesAvanzadasClicked" />
+                
+                <Button x:Name="OpcionesAvanzadasButton" Text="Opciones avanzadas de datos  ›" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HorizontalOptions="Fill" FontSize="13" Clicked="OnOpcionesAvanzadasClicked" CornerRadius="12" Padding="8,5" BorderWidth="1" BorderColor="{AppThemeBinding Light=#D9CBEA, Dark=#514268}"/>
 
-                <Border x:Name="PanelAvanzado" IsVisible="False" Padding="16"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}"
-                        StrokeThickness="1"
-                        Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}">
-                    <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
-                    <VerticalStackLayout Spacing="11">
-                        <Label Text="Eliminar datos académicos" FontSize="15" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="Elimina únicamente tus cursos y tareas de este dispositivo. No elimina tu cuenta, las copias guardadas en Drive ni los eventos que ya se enviaron al calendario externo."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                        <Label Text="Recomendación: guarda una copia de seguridad antes de continuar. La eliminación local no puede deshacerse sin una copia válida."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                        <Button x:Name="BorrarDatosButton"
-                                Text="Eliminar datos académicos"
-                                Clicked="OnBorrarDatosClicked"
-                                IsEnabled="False"
-                                BackgroundColor="Transparent"
-                                BorderColor="#D45C62" BorderWidth="1"
-                                TextColor="#D45C62" CornerRadius="12" HeightRequest="46" />
-                        <ActivityIndicator x:Name="IndicadorEliminacion"
-                                           IsVisible="False" IsRunning="False"
-                                           Color="{StaticResource Violeta}" />
-                        <BoxView HeightRequest="1"
-                                 Color="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}" />
-                        <Label Text="Eliminar mi cuenta de Study Space" FontSize="15" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="Elimina definitivamente tu cuenta y tus sesiones del servidor. Después se borran los cursos, tareas y el perfil local de esta cuenta en este teléfono."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                        <Label Text="Los archivos .ssbackup y los eventos externos NO se eliminan. IMPORTANTE: los respaldos actuales pertenecen a esta cuenta y no se pueden restaurar en una cuenta nueva. Los datos de otros teléfonos tampoco se borran automáticamente."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                        <Button x:Name="MostrarEliminarCuentaButton"
-                                Text="Eliminar mi cuenta  ›"
-                                Clicked="OnMostrarEliminarCuentaClicked"
-                                BackgroundColor="Transparent" BorderColor="#D45C62" BorderWidth="1"
-                                TextColor="#D45C62" CornerRadius="12" HeightRequest="46" />
-                        <VerticalStackLayout x:Name="PanelEliminarCuenta" IsVisible="False" Spacing="11">
-                            <Label Text="Para confirmar tu identidad, escribe la contraseña actual de tu cuenta."
-                                   FontSize="12" LineBreakMode="WordWrap"
-                                   TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                            <Entry x:Name="ContrasenaEliminarCuentaEntry"
-                                   Placeholder="Contraseña de la cuenta"
-                                   IsPassword="True"
-                                   ClearButtonVisibility="WhileEditing"
-                                   MaxLength="256"
-                                   BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}"
-                                   TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                            <Button x:Name="ConfirmarEliminarCuentaButton"
-                                    Text="Continuar con la eliminación"
-                                    Clicked="OnConfirmarEliminarCuentaClicked"
-                                    BackgroundColor="#A83C47" TextColor="White"
-                                    CornerRadius="12" HeightRequest="46" />
-                            <Label Text="Esta acción exige dos confirmaciones adicionales. Requiere conexión a internet."
-                                   FontSize="11" LineBreakMode="WordWrap"
-                                   TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                <Border x:Name="PanelAvanzado" IsVisible="False" Padding="12" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191B32}" StrokeThickness="1" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Eliminar datos académicos" FontSize="15" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                        <Label Text="Elimina únicamente tus cursos y tareas de este dispositivo. No elimina tu cuenta, las copias guardadas en Drive ni los eventos que ya se enviaron al calendario externo." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                        <Label Text="Recomendación: guarda una copia de seguridad antes de continuar. La eliminación local no puede deshacerse sin una copia válida." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                        <Button x:Name="BorrarDatosButton" Text="Eliminar datos académicos" Clicked="OnBorrarDatosClicked" IsEnabled="False" BackgroundColor="Transparent" BorderColor="#D45C62" BorderWidth="1" TextColor="#D45C62" CornerRadius="12" HeightRequest="46" FontSize="13" Padding="8,5"/>
+                        <ActivityIndicator x:Name="IndicadorEliminacion" IsVisible="False" IsRunning="False" Color="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}"/>
+                        <BoxView HeightRequest="1" Color="{AppThemeBinding Light=#D9CBEA, Dark=#514268}"/>
+                        <Label Text="Eliminar mi cuenta de Study Space" FontSize="15" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                        <Label Text="Elimina definitivamente tu cuenta y tus sesiones del servidor. Después se borran los cursos, tareas y el perfil local de esta cuenta en este teléfono." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                        <Label Text="Los archivos .ssbackup y los eventos externos NO se eliminan. IMPORTANTE: los respaldos actuales pertenecen a esta cuenta y no se pueden restaurar en una cuenta nueva. Los datos de otros teléfonos tampoco se borran automáticamente." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                        <Button x:Name="MostrarEliminarCuentaButton" Text="Eliminar mi cuenta  ›" Clicked="OnMostrarEliminarCuentaClicked" BackgroundColor="Transparent" BorderColor="#D45C62" BorderWidth="1" TextColor="#D45C62" CornerRadius="12" HeightRequest="46" FontSize="13" Padding="8,5"/>
+                        <VerticalStackLayout x:Name="PanelEliminarCuenta" IsVisible="False" Spacing="8">
+                            <Label Text="Para confirmar tu identidad, escribe la contraseña actual de tu cuenta." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                            <Entry x:Name="ContrasenaEliminarCuentaEntry" Placeholder="Contraseña de la cuenta" IsPassword="True" ClearButtonVisibility="WhileEditing" MaxLength="256" BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" FontSize="13" PlaceholderColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                            <Button x:Name="ConfirmarEliminarCuentaButton" Text="Continuar con la eliminación" Clicked="OnConfirmarEliminarCuentaClicked" BackgroundColor="#A83C47" TextColor="White" CornerRadius="12" HeightRequest="46" FontSize="13" Padding="8,5"/>
+                            <Label Text="Esta acción exige dos confirmaciones adicionales. Requiere conexión a internet." FontSize="11" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>

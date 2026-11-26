@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections.ObjectModel;
 using System.Globalization;
 using Aplicacion.CasosDeUso;
@@ -13,8 +13,10 @@ public partial class CalendarioVM : ObservableObject
     private readonly ServicioTareas _tareas;
     private List<TareaDTO> _todasLasTareas = new();
 
-    public ObservableCollection<DiaCalendario> Dias { get; } = new();
-    public ObservableCollection<TareaDTO> TareasDelDia { get; } = new();
+    [ObservableProperty]
+    private ObservableCollection<DiaCalendario> dias = new();
+    [ObservableProperty]
+    private ObservableCollection<TareaDTO> tareasDelDia = new();
 
     private readonly CultureInfo _cultura =
         new("es-PE");
@@ -53,7 +55,7 @@ public partial class CalendarioVM : ObservableObject
     // GENERAR DÍAS DEL MES
     private void GenerarCalendario()
     {
-        Dias.Clear();
+        var nuevosDias = new List<DiaCalendario>(42);
 
         TituloMes = _cultura.TextInfo.ToTitleCase(
             MesActual.ToString("MMMM yyyy", _cultura));
@@ -73,7 +75,7 @@ public partial class CalendarioVM : ObservableObject
         // ESPACIOS ANTES DEL PRIMER DÍA
         for (int i = 0; i < desplazamiento; i++)
         {
-            Dias.Add(new DiaCalendario
+            nuevosDias.Add(new DiaCalendario
             {
                 EsVisible = false
             });
@@ -91,7 +93,7 @@ public partial class CalendarioVM : ObservableObject
                 .Where(t => t.FechaLimite.Date == fecha)
                 .ToList();
 
-            Dias.Add(new DiaCalendario
+            nuevosDias.Add(new DiaCalendario
             {
                 Fecha = fecha,
                 Numero = dia.ToString(),
@@ -108,6 +110,7 @@ public partial class CalendarioVM : ObservableObject
             });
         }
 
+        Dias = new ObservableCollection<DiaCalendario>(nuevosDias);
         CargarTareasDelDia();
     }
 
@@ -118,16 +121,13 @@ public partial class CalendarioVM : ObservableObject
             FechaSeleccionada.ToString(
                 "dddd, d 'de' MMMM", _cultura));
 
-        TareasDelDia.Clear();
-
         var lista = _todasLasTareas
             .Where(t => t.FechaLimite.Date ==
                         FechaSeleccionada.Date)
             .OrderBy(t => t.Completada)
             .ThenBy(t => t.FechaLimite);
 
-        foreach (var tarea in lista)
-            TareasDelDia.Add(tarea);
+        TareasDelDia = new ObservableCollection<TareaDTO>(lista);
 
         SinTareas = TareasDelDia.Count == 0;
     }

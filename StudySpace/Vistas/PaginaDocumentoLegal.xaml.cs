@@ -22,47 +22,32 @@ public partial class PaginaDocumentoLegal : ContentPage, IQueryAttributable
 
         bool esPrivacidad = !string.Equals(tipo, "terminos", StringComparison.OrdinalIgnoreCase);
         TituloDocumento.Text = esPrivacidad ? "Política de privacidad" : "Términos y condiciones";
+        IconoDocumento.Text = esPrivacidad ? "\ue897" : "\ue873";
         SeccionesDocumento.Children.Clear();
-
         var secciones = esPrivacidad ? SeccionesPrivacidad : SeccionesTerminos;
-        bool oscuro = Application.Current?.RequestedTheme == AppTheme.Dark;
-        Color fondo = Color.FromArgb(oscuro ? "#222139" : "#FFFFFF");
-        Color texto = Color.FromArgb(oscuro ? "#F4F2FA" : "#202033");
-        Color secundario = Color.FromArgb(oscuro ? "#CBC7DA" : "#57546B");
-
-        foreach (var seccion in secciones)
+        for (int i = 0; i < secciones.Length; i++)
         {
-            var tarjeta = new Border
+            var seccion = secciones[i];
+            var numero = new Label { Text = (i + 1).ToString("00"), FontSize = 12, FontAttributes = FontAttributes.Bold, VerticalOptions = LayoutOptions.Center };
+            numero.SetAppThemeColor(Label.TextColorProperty, Color.FromArgb("#6335AD"), Color.FromArgb("#D7B8FF"));
+            var titulo = new Label { Text = seccion.Titulo.Substring(seccion.Titulo.IndexOf(". ") + 2), FontSize = 16, FontAttributes = FontAttributes.Bold, LineBreakMode = LineBreakMode.WordWrap, VerticalOptions = LayoutOptions.Center };
+            titulo.SetAppThemeColor(Label.TextColorProperty, Color.FromArgb("#211A35"), Color.FromArgb("#F5F1FF"));
+            var cabecera = new Grid { ColumnDefinitions = new ColumnDefinitionCollection { new ColumnDefinition { Width = 28 }, new ColumnDefinition { Width = GridLength.Star } }, ColumnSpacing = 6 };
+            cabecera.Children.Add(numero);
+            Grid.SetColumn(titulo, 1);
+            cabecera.Children.Add(titulo);
+            var cuerpo = new Label { Text = seccion.Contenido, FontSize = 14, LineHeight = 1.3, LineBreakMode = LineBreakMode.WordWrap };
+            cuerpo.SetAppThemeColor(Label.TextColorProperty, Color.FromArgb("#403850"), Color.FromArgb("#D5CFE5"));
+            var bloque = new VerticalStackLayout { Padding = new Thickness(0, 14), Spacing = 8 };
+            bloque.Children.Add(cabecera);
+            bloque.Children.Add(cuerpo);
+            SeccionesDocumento.Children.Add(bloque);
+            if (i < secciones.Length - 1)
             {
-                StrokeThickness = 0,
-                Padding = new Thickness(15),
-                BackgroundColor = fondo,
-                StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(14) },
-                Content = new VerticalStackLayout
-                {
-                    Spacing = 7,
-                    Children =
-                    {
-                        new Label
-                        {
-                            Text = seccion.Titulo,
-                            FontSize = 16,
-                            FontAttributes = FontAttributes.Bold,
-                            TextColor = texto,
-                            LineBreakMode = LineBreakMode.WordWrap
-                        },
-                        new Label
-                        {
-                            Text = seccion.Contenido,
-                            FontSize = 13,
-                            LineHeight = 1.25,
-                            TextColor = secundario,
-                            LineBreakMode = LineBreakMode.WordWrap
-                        }
-                    }
-                }
-            };
-            SeccionesDocumento.Children.Add(tarjeta);
+                var linea = new BoxView { HeightRequest = 1 };
+                linea.SetAppThemeColor(BoxView.ColorProperty, Color.FromArgb("#E0D9ED"), Color.FromArgb("#393450"));
+                SeccionesDocumento.Children.Add(linea);
+            }
         }
     }
 

@@ -21,7 +21,10 @@ public partial class PaginaInicioSesion : ContentPage
             FontFamily = "IconosMaterial",
             Glyph = glyph,
             Size = 20,
-            Color = (Color)Application.Current.Resources["TextoSecundarioClaro"]
+            Color = (Color)Application.Current.Resources[
+                Application.Current.RequestedTheme == AppTheme.Dark
+                    ? "TextoSecundarioOscuro"
+                    : "TextoSecundarioClaro"]
         };
     }
 }

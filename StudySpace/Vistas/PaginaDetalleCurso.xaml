@@ -275,38 +275,7 @@
             <VerticalStackLayout Spacing="13" Padding="0,5,0,18">
                 <Label Text="Información del curso" FontSize="21" FontAttributes="Bold"
                        TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                <Label Text="Resumen de tus tareas y progreso." FontSize="12"
-                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
-                    <Border Grid.Column="0" Padding="10,15" StrokeThickness="0"
-                            BackgroundColor="{AppThemeBinding Light=#E6EEFF, Dark=#1C3453}">
-                        <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="{Binding TotalTareas}" FontSize="26" FontAttributes="Bold"
-                                   TextColor="{AppThemeBinding Light=#3974C8, Dark=#9CCBFF}" />
-                            <Label Text="Total" FontSize="11" TextColor="{AppThemeBinding Light=#3974C8, Dark=#9CCBFF}" />
-                        </VerticalStackLayout>
-                    </Border>
-                    <Border Grid.Column="1" Padding="10,15" StrokeThickness="0"
-                            BackgroundColor="{AppThemeBinding Light=#FFF2DC, Dark=#473722}">
-                        <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="{Binding TareasPendientes}" FontSize="26" FontAttributes="Bold"
-                                   TextColor="{AppThemeBinding Light=#BC7E16, Dark=#FFD087}" />
-                            <Label Text="Pendientes" FontSize="11" TextColor="{AppThemeBinding Light=#BC7E16, Dark=#FFD087}" />
-                        </VerticalStackLayout>
-                    </Border>
-                    <Border Grid.Column="2" Padding="10,15" StrokeThickness="0"
-                            BackgroundColor="{AppThemeBinding Light=#E3F6E9, Dark=#1C4037}">
-                        <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="{Binding TareasCompletadas}" FontSize="26" FontAttributes="Bold"
-                                   TextColor="{AppThemeBinding Light=#228E5D, Dark=#91E7BB}" />
-                            <Label Text="Completadas" FontSize="11" TextColor="{AppThemeBinding Light=#228E5D, Dark=#91E7BB}" />
-                        </VerticalStackLayout>
-                    </Border>
-                </Grid>
-                <Border Margin="0,12,0,0" Padding="15" StrokeThickness="1"
+                <Border Margin="0,0,0,0" Padding="15" StrokeThickness="1"
                         Stroke="{AppThemeBinding Light=#F2C7D0, Dark=#744353}"
                         BackgroundColor="{AppThemeBinding Light=#FFF5F6, Dark=#362633}">
                     <Border.StrokeShape><RoundRectangle CornerRadius="18" /></Border.StrokeShape>

@@ -1,221 +1,90 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="StudySpace.Vistas.PaginaCopiasSeguridad"
-    Shell.NavBarIsVisible="False"
-    BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}">
+<?xml version='1.0' encoding='utf-8'?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="StudySpace.Vistas.PaginaCopiasSeguridad" Shell.NavBarIsVisible="False" BackgroundColor="{AppThemeBinding Light=#F8F6FD, Dark=#101326}">
 
-    <Grid Padding="20,24,20,20"
-          MaximumWidthRequest="460"
-          RowDefinitions="Auto,*"
-          RowSpacing="16">
-        <Grid Grid.Row="0" ColumnDefinitions="Auto,*" ColumnSpacing="10">
-            <Button Text="‹" FontSize="26"
-                    WidthRequest="44" HeightRequest="44"
-                    BackgroundColor="Transparent"
-                    TextColor="{StaticResource Violeta}"
-                    Clicked="OnVolverClicked" />
+    <Grid Padding="13,10,13,12" MaximumWidthRequest="460" RowDefinitions="Auto,*" RowSpacing="10" HorizontalOptions="Fill">
+        <Grid Grid.Row="0" ColumnDefinitions="44,*" ColumnSpacing="10" MinimumHeightRequest="56">
+            <Button Text="" FontSize="22" WidthRequest="44" HeightRequest="44" BackgroundColor="{AppThemeBinding Light=#ECDDFA, Dark=#422866}" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" Clicked="OnVolverClicked" FontFamily="IconosMaterial" Padding="0" CornerRadius="12" VerticalOptions="Center"/>
             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                <Label Text="Copias de seguridad"
-                       FontSize="22" FontAttributes="Bold"
-                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                <Label Text="Respalda tus datos académicos"
-                       FontSize="12"
-                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                <Label Text="Copias de seguridad" FontSize="19" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                <Label Text="Respalda tus datos académicos" FontSize="11" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
             </VerticalStackLayout>
         </Grid>
 
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Spacing="17" Padding="0,0,0,28">
-                <Border BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark={StaticResource LavandaOscuro}}"
-                        StrokeThickness="0" Padding="16">
-                    <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
-                    <VerticalStackLayout Spacing="9">
-                        <Label Text="Crea un respaldo cifrado"
-                               FontSize="17" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="Guarda una copia de tus cursos y tareas en archivos, Drive u otro destino que elijas. La copia se protege con una contraseña distinta de la de inicio de sesión."
-                               FontSize="13" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+            <VerticalStackLayout Spacing="10" Padding="0,0,0,18">
+                <Border StrokeThickness="1" Padding="12" Stroke="{AppThemeBinding Light=#C8A9E9, Dark=#9460CA}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                    <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="{AppThemeBinding Light=#F7EDFF, Dark=#25203E}" Offset="0"/><GradientStop Color="{AppThemeBinding Light=#E9D5FC, Dark=#47236D}" Offset="1"/></LinearGradientBrush></Border.Background><VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="32,*" ColumnSpacing="9"><Border WidthRequest="32" HeightRequest="32" Padding="0" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#ECDDFA, Dark=#48306C}" VerticalOptions="Center"><Border.StrokeShape><RoundRectangle CornerRadius="10"/></Border.StrokeShape><Label Text="" FontFamily="IconosMaterial" FontSize="19" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/></Border><Label Text="Crea un respaldo cifrado" FontSize="17" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" Grid.Column="1" VerticalOptions="Center"/>
+                        </Grid><Label Text="Guarda una copia de tus cursos y tareas en archivos, Drive u otro destino que elijas. La copia se protege con una contraseña distinta de la de inicio de sesión." FontSize="13" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
                     </VerticalStackLayout>
                 </Border>
 
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Contraseña para esta copia"
-                           FontSize="14" FontAttributes="Bold"
-                           TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                    <Border StrokeThickness="1"
-                            Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}"
-                            BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}"
-                            Padding="12,3">
-                        <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                <Border Padding="12" StrokeThickness="1" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191B32}"><Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape><VerticalStackLayout Spacing="8"><Label Text="Crear una copia de seguridad" FontSize="16" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" LineBreakMode="WordWrap" FontAttributes="Bold"/><VerticalStackLayout Spacing="8">
+                    <Label Text="Contraseña para esta copia" FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                    <Border StrokeThickness="1" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}" BackgroundColor="{AppThemeBinding Light=#F3EFF9, Dark=#25243E}" Padding="8,0">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="12"/></Border.StrokeShape>
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">
-                            <Entry x:Name="ContrasenaEntry"
-                                   Grid.Column="0"
-                                   IsPassword="True"
-                                   MaxLength="256"
-                                   Placeholder="Mínimo 12 caracteres"
-                                   ReturnType="Next"
-                                   Completed="OnContrasenaCompleted"
-                                   TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                            <Button x:Name="MostrarContrasenaButton"
-                                    Grid.Column="1"
-                                    Text="Mostrar"
-                                    FontSize="12"
-                                    FontAttributes="Bold"
-                                    BackgroundColor="Transparent"
-                                    TextColor="{StaticResource Violeta}"
-                                    HeightRequest="44"
-                                    MinimumWidthRequest="72"
-                                    Padding="6,0"
-                                    Clicked="OnMostrarContrasenaClicked"
-                                    SemanticProperties.Description="Mostrar u ocultar contraseña del respaldo" />
+                            <Entry x:Name="ContrasenaEntry" Grid.Column="0" IsPassword="True" MaxLength="256" Placeholder="Mínimo 12 caracteres" ReturnType="Next" Completed="OnContrasenaCompleted" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" FontSize="13" PlaceholderColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                            <Button x:Name="MostrarContrasenaButton" Grid.Column="1" Text="Mostrar" FontSize="13" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HeightRequest="44" MinimumWidthRequest="60" Padding="4,0" Clicked="OnMostrarContrasenaClicked" SemanticProperties.Description="Mostrar u ocultar contraseña del respaldo" CornerRadius="12"/>
                         </Grid>
                     </Border>
-                    <Label Text="Guarda esta contraseña en un lugar seguro. No podremos recuperar una copia sin ella."
-                           FontSize="12" LineBreakMode="WordWrap"
-                           TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                    <Label Text="Guarda esta contraseña en un lugar seguro. No podremos recuperar una copia sin ella." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Confirmar contraseña"
-                           FontSize="14" FontAttributes="Bold"
-                           TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                    <Border StrokeThickness="1"
-                            Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}"
-                            BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}"
-                            Padding="12,3">
-                        <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                    <Label Text="Confirmar contraseña" FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                    <Border StrokeThickness="1" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}" BackgroundColor="{AppThemeBinding Light=#F3EFF9, Dark=#25243E}" Padding="8,0">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="12"/></Border.StrokeShape>
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">
-                            <Entry x:Name="ConfirmacionEntry"
-                                   Grid.Column="0"
-                                   IsPassword="True"
-                                   MaxLength="256"
-                                   Placeholder="Escríbela otra vez"
-                                   ReturnType="Done"
-                                   TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                            <Button x:Name="MostrarConfirmacionButton"
-                                    Grid.Column="1"
-                                    Text="Mostrar"
-                                    FontSize="12"
-                                    FontAttributes="Bold"
-                                    BackgroundColor="Transparent"
-                                    TextColor="{StaticResource Violeta}"
-                                    HeightRequest="44"
-                                    MinimumWidthRequest="72"
-                                    Padding="6,0"
-                                    Clicked="OnMostrarConfirmacionClicked"
-                                    SemanticProperties.Description="Mostrar u ocultar confirmación de contraseña" />
+                            <Entry x:Name="ConfirmacionEntry" Grid.Column="0" IsPassword="True" MaxLength="256" Placeholder="Escríbela otra vez" ReturnType="Done" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" FontSize="13" PlaceholderColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                            <Button x:Name="MostrarConfirmacionButton" Grid.Column="1" Text="Mostrar" FontSize="13" FontAttributes="Bold" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HeightRequest="44" MinimumWidthRequest="60" Padding="4,0" Clicked="OnMostrarConfirmacionClicked" SemanticProperties.Description="Mostrar u ocultar confirmación de contraseña" CornerRadius="12"/>
                         </Grid>
                     </Border>
                 </VerticalStackLayout>
 
-                <Label x:Name="MensajeLabel"
-                       FontSize="12"
-                       IsVisible="False"
-                       LineBreakMode="WordWrap"
-                       TextColor="{StaticResource Rojo}" />
+                <Label x:Name="MensajeLabel" FontSize="12" IsVisible="False" LineBreakMode="WordWrap" TextColor="{StaticResource Rojo}"/>
 
-                <Button x:Name="CrearCopiaButton"
-                        Text="Crear y compartir copia cifrada"
-                        CornerRadius="13"
-                        HeightRequest="54"
-                        FontAttributes="Bold"
-                        BackgroundColor="{StaticResource Violeta}"
-                        TextColor="White"
-                        Clicked="OnCrearCopiaClicked" />
-                <ActivityIndicator x:Name="IndicadorActividad"
-                                   IsRunning="False"
-                                   IsVisible="False"
-                                   Color="{StaticResource Violeta}" />
+                <Button x:Name="CrearCopiaButton" Text="Crear y compartir copia cifrada" CornerRadius="12" HeightRequest="48" FontAttributes="Bold" TextColor="White" Clicked="OnCrearCopiaClicked" FontSize="13" Padding="8,5"><Button.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#A34DE5" Offset="0"/><GradientStop Color="#7130D9" Offset="1"/></LinearGradientBrush></Button.Background></Button>
+                <ActivityIndicator x:Name="IndicadorActividad" IsRunning="False" IsVisible="False" Color="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}"/>
 
 
-                <!-- HU16: Restauración protegida. No altera datos hasta confirmar. -->
-                <Border StrokeThickness="1"
-                        Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}"
-                        Padding="15">
-                    <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
-                    <VerticalStackLayout Spacing="12">
-                        <Label Text="Restaurar una copia"
-                               FontSize="17" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="Elige tu archivo .ssbackup de Drive o Archivos. Solo se añadirán cursos y tareas faltantes de esta misma cuenta. Nunca se borrarán tus datos actuales."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                        <Label Text="Contraseña de la copia que vas a restaurar"
-                               FontSize="13" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Border StrokeThickness="1"
-                                Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}"
-                                BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}"
-                                Padding="10,2">
-                            <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                
+                </VerticalStackLayout></Border><Border StrokeThickness="1" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191B32}" Padding="12">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="16"/></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="32,*" ColumnSpacing="9"><Border WidthRequest="32" HeightRequest="32" Padding="0" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=#ECDDFA, Dark=#48306C}" VerticalOptions="Center"><Border.StrokeShape><RoundRectangle CornerRadius="10"/></Border.StrokeShape><Label Text="" FontFamily="IconosMaterial" FontSize="19" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/></Border><Label Text="Restaurar una copia" FontSize="17" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" Grid.Column="1" VerticalOptions="Center"/>
+                        </Grid><Label Text="Elige tu archivo .ssbackup de Drive o Archivos. Solo se añadirán cursos y tareas faltantes de esta misma cuenta. Nunca se borrarán tus datos actuales." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                        <Label Text="Contraseña de la copia que vas a restaurar" FontSize="13" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                        <Border StrokeThickness="1" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}" BackgroundColor="{AppThemeBinding Light=#F3EFF9, Dark=#25243E}" Padding="8,0">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="12"/></Border.StrokeShape>
                             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">
-                                <Entry x:Name="ClaveRestauracionEntry"
-                                       IsPassword="True" MaxLength="256"
-                                       Placeholder="Contraseña utilizada al respaldar"
-                                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                                <Button x:Name="MostrarClaveRestauracionButton"
-                                        Grid.Column="1" Text="Mostrar" FontSize="12"
-                                        BackgroundColor="Transparent"
-                                        TextColor="{StaticResource Violeta}"
-                                        HeightRequest="44" MinimumWidthRequest="72"
-                                        Padding="6,0" Clicked="OnMostrarClaveRestauracionClicked" />
+                                <Entry x:Name="ClaveRestauracionEntry" IsPassword="True" MaxLength="256" Placeholder="Contraseña utilizada al respaldar" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}" FontSize="13" PlaceholderColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                                <Button x:Name="MostrarClaveRestauracionButton" Grid.Column="1" Text="Mostrar" FontSize="13" BackgroundColor="Transparent" TextColor="{AppThemeBinding Light=#6930AA, Dark=#D6A8FF}" HeightRequest="44" MinimumWidthRequest="60" Padding="4,0" Clicked="OnMostrarClaveRestauracionClicked" CornerRadius="12"/>
                             </Grid>
                         </Border>
-                        <Button x:Name="SeleccionarCopiaButton"
-                                Text="Elegir archivo y ver contenido"
-                                HeightRequest="50" CornerRadius="13"
-                                BackgroundColor="{StaticResource Violeta}"
-                                TextColor="White" FontAttributes="Bold"
-                                Clicked="OnSeleccionarCopiaClicked" />
+                        <Button x:Name="SeleccionarCopiaButton" Text="Elegir archivo y ver contenido" HeightRequest="48" CornerRadius="12" TextColor="White" FontAttributes="Bold" Clicked="OnSeleccionarCopiaClicked" FontSize="13" Padding="8,5"><Button.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#A34DE5" Offset="0"/><GradientStop Color="#7130D9" Offset="1"/></LinearGradientBrush></Button.Background></Button>
 
-                        <Border x:Name="VistaPreviaBorder"
-                                IsVisible="False" StrokeThickness="0"
-                                BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark={StaticResource LavandaOscuro}}"
-                                Padding="13">
-                            <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                        <Border x:Name="VistaPreviaBorder" IsVisible="False" StrokeThickness="1" BackgroundColor="{AppThemeBinding Light=#F0E7FC, Dark=#28223F}" Padding="12" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="12"/></Border.StrokeShape>
                             <VerticalStackLayout Spacing="8">
-                                <Label Text="Vista previa del respaldo"
-                                       FontSize="15" FontAttributes="Bold"
-                                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                                <Label x:Name="ResumenVistaPreviaLabel" FontSize="13"
-                                       LineBreakMode="WordWrap"
-                                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                                <Label Text="No se reemplazarán tareas existentes ni se importarán contraseñas o eventos del calendario."
-                                       FontSize="12" LineBreakMode="WordWrap"
-                                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                                <Button x:Name="ConfirmarRestauracionButton"
-                                        Text="Restaurar datos faltantes"
-                                        CornerRadius="12" HeightRequest="50"
-                                        BackgroundColor="{StaticResource Violeta}"
-                                        TextColor="White" FontAttributes="Bold"
-                                        Clicked="OnConfirmarRestauracionClicked" />
+                                <Label Text="Vista previa del respaldo" FontSize="15" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                                <Label x:Name="ResumenVistaPreviaLabel" FontSize="13" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                                <Label Text="No se reemplazarán tareas existentes ni se importarán contraseñas o eventos del calendario." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                                <Button x:Name="ConfirmarRestauracionButton" Text="Restaurar datos faltantes" CornerRadius="12" HeightRequest="48" TextColor="White" FontAttributes="Bold" Clicked="OnConfirmarRestauracionClicked" FontSize="13" Padding="8,5"><Button.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#A34DE5" Offset="0"/><GradientStop Color="#7130D9" Offset="1"/></LinearGradientBrush></Button.Background></Button>
                             </VerticalStackLayout>
                         </Border>
-                        <Label x:Name="MensajeRestauracionLabel"
-                               IsVisible="False" FontSize="12"
-                               LineBreakMode="WordWrap" TextColor="{StaticResource Rojo}" />
+                        <Label x:Name="MensajeRestauracionLabel" IsVisible="False" FontSize="12" LineBreakMode="WordWrap" TextColor="{StaticResource Rojo}"/>
                     </VerticalStackLayout>
                 </Border>
 
-                <Border BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}"
-                        StrokeThickness="0" Padding="15">
-                    <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191B32}" StrokeThickness="1" Padding="12" Stroke="{AppThemeBinding Light=#D9CBEA, Dark=#514268}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="14"/></Border.StrokeShape>
                     <VerticalStackLayout Spacing="8">
-                        <Label Text="Antes de terminar" FontSize="14" FontAttributes="Bold"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                        <Label Text="• Elige un destino fuera de Study Space (por ejemplo, Drive o una carpeta de archivos)."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                        <Label Text="• Verifica que el archivo .ssbackup realmente se haya guardado en ese destino."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
-                        <Label Text="• Para recuperar datos, utiliza Restaurar una copia. Conserva siempre tu archivo original."
-                               FontSize="12" LineBreakMode="WordWrap"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                        <Label Text="Antes de terminar" FontSize="14" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#211A35, Dark=#F5F1FF}"/>
+                        <Label Text="• Elige un destino fuera de Study Space (por ejemplo, Drive o una carpeta de archivos)." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                        <Label Text="• Verifica que el archivo .ssbackup realmente se haya guardado en ese destino." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
+                        <Label Text="• Para recuperar datos, utiliza Restaurar una copia. Conserva siempre tu archivo original." FontSize="12" LineBreakMode="WordWrap" TextColor="{AppThemeBinding Light=#625B78, Dark=#C4BEDA}"/>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>
