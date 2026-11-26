@@ -74,6 +74,44 @@
                     </VerticalStackLayout>
                 </Grid>
 
+                <!-- Premium: acceso visual a funciones previstas, sin compras activas -->
+                <Border Padding="17,15"
+                        Margin="0,0,0,18"
+                        StrokeThickness="0"
+                        AutomationId="AbrirPremiumBanner"
+                        SemanticProperties.Description="Conoce Study Space Premium y sus beneficios. Disponible próximamente.">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#4733A8" Offset="0.0" />
+                            <GradientStop Color="#7654D8" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AbrirPremiumCommand}" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                        <Border WidthRequest="44" HeightRequest="44" StrokeThickness="0"
+                                BackgroundColor="#5544B9" VerticalOptions="Center">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15" />
+                            </Border.StrokeShape>
+                            <Label Text="♛" TextColor="#F7D997" FontSize="27"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                            <Label Text="Descubre Study Space Premium" FontSize="15"
+                                   FontAttributes="Bold" TextColor="White" LineBreakMode="WordWrap" />
+                            <Label Text="7 beneficios · S/ 10 al mes · Próximamente"
+                                   FontSize="11" TextColor="#ECE4FF" LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Text="&#xe5cc;" FontFamily="IconosMaterial"
+                               FontSize="22" TextColor="White" VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+
                 <!-- SEPARACIÓN DEL PERFIL -->
                 <BoxView HeightRequest="1"
                          Margin="0,0,0,18"

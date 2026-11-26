@@ -204,6 +204,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PaginaPrivacidadDatos>();
         // HU17: Ayuda y soporte sin servicio remoto de tickets.
         builder.Services.AddTransient<PaginaAyudaSoporte>();
+        // Presentación de la propuesta Premium (sin pagos ni APIs de terceros).
+        builder.Services.AddTransient<PaginaPremium>();
 
         // HU12 - DETALLE DE TAREA
         builder.Services.AddTransient<PaginaDetalleTarea>();

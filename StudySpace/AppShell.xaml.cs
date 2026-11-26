@@ -66,5 +66,10 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(
             "ayudasoporte",
             typeof(PaginaAyudaSoporte));
+
+        // Premium: pantalla informativa, sin suscripciones ni cobros activos.
+        Routing.RegisterRoute(
+            "premium",
+            typeof(PaginaPremium));
     }
 }

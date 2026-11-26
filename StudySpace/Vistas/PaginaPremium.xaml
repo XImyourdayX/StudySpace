@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="StudySpace.Vistas.PaginaPremium"
+    Shell.NavBarIsVisible="False"
+    Title="Study Space Premium"
+    BackgroundColor="{AppThemeBinding Light=#F9F5FF, Dark=#0F1426}">
+
+    <Grid RowDefinitions="Auto,*" RowSpacing="0" MaximumWidthRequest="470"
+          HorizontalOptions="Fill">
+        <!-- Cabecera fija; todos los beneficios se desplazan sin cortar el contenido. -->
+        <Grid Padding="18,14,18,8" ColumnDefinitions="48,*,48" ColumnSpacing="8">
+            <Button Text="‹" FontSize="29" BackgroundColor="{AppThemeBinding Light=#EEE5FF, Dark=#272447}"
+                    TextColor="{AppThemeBinding Light=#4B278D, Dark=#DCC7FF}"
+                    CornerRadius="14" HeightRequest="42" WidthRequest="42"
+                    Clicked="OnVolverClicked" SemanticProperties.Description="Volver al perfil" />
+            <Label Grid.Column="1" Text="Premium" FontSize="16" FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                   TextColor="{AppThemeBinding Light=#291047, Dark=#F4EFFF}" />
+        </Grid>
+
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Default">
+            <VerticalStackLayout Padding="17,6,17,30" Spacing="15">
+
+                <!-- Encabezado ilustrado, inspirado en el modelo visual aprobado. -->
+                <Border Padding="17,13,17,21" StrokeThickness="1"
+                        Stroke="{AppThemeBinding Light=#E6D5FA, Dark=#463568}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="26" /></Border.StrokeShape>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="{AppThemeBinding Light=#F1E7FF, Dark=#2D2754}" Offset="0" />
+                            <GradientStop Color="{AppThemeBinding Light=#FDF9FF, Dark=#1E1B3F}" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <VerticalStackLayout Spacing="7" HorizontalOptions="Fill">
+                        <Image Source="premium_ilustracion.png" HeightRequest="123"
+                               Aspect="AspectFit" HorizontalOptions="Fill"
+                               SemanticProperties.Description="Ilustración de libros, una corona dorada y una computadora" />
+                        <Label Text="Study Space" FontSize="27" FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{AppThemeBinding Light=#2C1050, Dark=#F7EFFF}" />
+                        <Label Text="Premium" FontSize="34" FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" Margin="0,-9,0,0"
+                               TextColor="{AppThemeBinding Light=#7644D1, Dark=#C4A4FF}" />
+                        <Label Text="Lleva tu organización académica al siguiente nivel"
+                               FontSize="14" HorizontalTextAlignment="Center"
+                               TextColor="{AppThemeBinding Light=#493568, Dark=#E3D5FF}"
+                               Margin="8,1,8,5" LineBreakMode="WordWrap" />
+                        <Border Padding="12,14" StrokeThickness="0" Margin="5,0">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="23" /></Border.StrokeShape>
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#A476EB" Offset="0" />
+                                    <GradientStop Color="#6429B8" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <HorizontalStackLayout Spacing="7" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label Text="S/ 10.00" FontSize="31" FontAttributes="Bold"
+                                       TextColor="White" VerticalTextAlignment="Center" />
+                                <Label Text="/ mes" FontSize="15" TextColor="White"
+                                       VerticalTextAlignment="End" Margin="0,0,0,6" />
+                            </HorizontalStackLayout>
+                        </Border>
+                        <Label Text="Automatización, integraciones y más control de tu progreso"
+                               FontSize="12" LineBreakMode="WordWrap" HorizontalTextAlignment="Center"
+                               Margin="10,5,10,0"
+                               TextColor="{AppThemeBinding Light=#635078, Dark=#D6C7F1}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Funciones Premium: son beneficios previstos, no activos. -->
+                <HorizontalStackLayout Spacing="9" Margin="3,5,0,-2">
+                    <Label Text="✦" FontSize="23" TextColor="#8A52D9" VerticalTextAlignment="Center" />
+                    <Label Text="Beneficios incluidos" FontSize="20" FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#281344, Dark=#F7EFFF}"
+                           VerticalTextAlignment="Center" />
+                </HorizontalStackLayout>
+
+                <Border Padding="14,13" StrokeThickness="1" Stroke="{AppThemeBinding Light=#EADDF8, Dark=#3E355B}"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#211F3E}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="19" /></Border.StrokeShape>
+                    <Grid ColumnDefinitions="46,*" ColumnSpacing="13">
+                        <Border BackgroundColor="{AppThemeBinding Light=#EEE4FF, Dark=#3A2E62}" WidthRequest="46" HeightRequest="46" StrokeThickness="0">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                            <Label Text="&#xe1b1;" FontFamily="IconosMaterial" FontSize="25" TextColor="#9460E2" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                            <Label Text="Sincronización entre dispositivos" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2C174A, Dark=#F7EFFF}" LineBreakMode="WordWrap" />
+                            <Label Text="Tus cursos y tareas actualizados en distintos equipos"
+                                   FontSize="11" LineBreakMode="WordWrap"
+                                   TextColor="{AppThemeBinding Light=#6F5C85, Dark=#CBB8E6}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Border Padding="14,13" StrokeThickness="1" Stroke="{AppThemeBinding Light=#EADDF8, Dark=#3E355B}"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#211F3E}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="19" /></Border.StrokeShape>
+                    <Grid ColumnDefinitions="46,*" ColumnSpacing="13">
+                        <Border BackgroundColor="{AppThemeBinding Light=#E7F0FF, Dark=#253D67}" WidthRequest="46" HeightRequest="46" StrokeThickness="0">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                            <Label Text="&#xe935;" FontFamily="IconosMaterial" FontSize="24" TextColor="#4285F4" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                            <Label Text="Google Calendar" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2C174A, Dark=#F7EFFF}" />
+                            <Label Text="Conecta tu cuenta y sincroniza fechas académicas"
+                                   FontSize="11" LineBreakMode="WordWrap"
+                                   TextColor="{AppThemeBinding Light=#6F5C85, Dark=#CBB8E6}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Border Padding="14,13" StrokeThickness="1" Stroke="{AppThemeBinding Light=#EADDF8, Dark=#3E355B}"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#211F3E}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="19" /></Border.StrokeShape>
+                    <Grid ColumnDefinitions="46,*" ColumnSpacing="13">
+                        <Border BackgroundColor="{AppThemeBinding Light=#EDE6FF, Dark=#3A2E62}" WidthRequest="46" HeightRequest="46" StrokeThickness="0">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                            <Label Text="&#xe2c3;" FontFamily="IconosMaterial" FontSize="25" TextColor="#8151D4" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                            <Label Text="Respaldos automáticos" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2C174A, Dark=#F7EFFF}" />
+                            <Label Text="Copias cifradas en la nube sin hacerlo manualmente"
+                                   FontSize="11" LineBreakMode="WordWrap"
+                                   TextColor="{AppThemeBinding Light=#6F5C85, Dark=#CBB8E6}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Border Padding="14,13" StrokeThickness="1" Stroke="{AppThemeBinding Light=#EADDF8, Dark=#3E355B}"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#211F3E}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="19" /></Border.StrokeShape>
+                    <Grid ColumnDefinitions="46,*" ColumnSpacing="13">
+                        <Border BackgroundColor="{AppThemeBinding Light=#EEE4FF, Dark=#3A2E62}" WidthRequest="46" HeightRequest="46" StrokeThickness="0">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                            <Label Text="&#xe24b;" FontFamily="IconosMaterial" FontSize="25" TextColor="#9364DD" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                            <Label Text="Estadísticas avanzadas" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2C174A, Dark=#F7EFFF}" />
+                            <Label Text="Tendencias, cumplimiento y comparaciones por período"
+                                   FontSize="11" LineBreakMode="WordWrap"
+                                   TextColor="{AppThemeBinding Light=#6F5C85, Dark=#CBB8E6}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Border Padding="14,13" StrokeThickness="1" Stroke="{AppThemeBinding Light=#EADDF8, Dark=#3E355B}"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#211F3E}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="19" /></Border.StrokeShape>
+                    <Grid ColumnDefinitions="46,*" ColumnSpacing="13">
+                        <Border BackgroundColor="{AppThemeBinding Light=#FFF3DC, Dark=#57402C}" WidthRequest="46" HeightRequest="46" StrokeThickness="0">
+                            <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                            <Label Text="&#xe65f;" FontFamily="IconosMaterial" FontSize="25" TextColor="#D79722" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                            <Label Text="Prioridades inteligentes" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2C174A, Dark=#F7EFFF}" />
+                            <Label Text="Recomendaciones para organizar tus entregas"
+                                   FontSize="11" LineBreakMode="WordWrap"
+                                   TextColor="{AppThemeBinding Light=#6F5C85, Dark=#CBB8E6}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- Integraciones separadas del calendario Android que ya funciona gratis. -->
+                <HorizontalStackLayout Spacing="9" Margin="3,9,0,-3">
+                    <Label Text="✣" FontSize="24" TextColor="#8A52D9" VerticalTextAlignment="Center" />
+                    <Label Text="Integraciones académicas" FontSize="19" FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#281344, Dark=#F7EFFF}"
+                           VerticalTextAlignment="Center" />
+                </HorizontalStackLayout>
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="11">
+                    <Border Grid.Column="0" Padding="12,16" StrokeThickness="1" Stroke="{AppThemeBinding Light=#EADDF8, Dark=#443B68}"
+                            BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#211F3E}">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="18" /></Border.StrokeShape>
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Border BackgroundColor="#FFF8EF" WidthRequest="74" HeightRequest="74"
+                                    Padding="5" StrokeThickness="0" HorizontalOptions="Center">
+                                <Border.StrokeShape><RoundRectangle CornerRadius="17" /></Border.StrokeShape>
+                                <Image Source="premium_moodle_logo.png" WidthRequest="64" HeightRequest="64"
+                                       Aspect="AspectFit" HorizontalOptions="Center"
+                                       SemanticProperties.Description="Emblema de Moodle" />
+                            </Border>
+                            <Label Text="Moodle" FontSize="15" FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{AppThemeBinding Light=#321650, Dark=#F8EEFF}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="1" Padding="12,16" StrokeThickness="1" Stroke="{AppThemeBinding Light=#EADDF8, Dark=#443B68}"
+                            BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#211F3E}">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="18" /></Border.StrokeShape>
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Border BackgroundColor="#FFFCF1" WidthRequest="74" HeightRequest="74"
+                                    Padding="5" StrokeThickness="0" HorizontalOptions="Center">
+                                <Border.StrokeShape><RoundRectangle CornerRadius="17" /></Border.StrokeShape>
+                                <Image Source="premium_google_classroom_logo.png" WidthRequest="64" HeightRequest="64"
+                                       Aspect="AspectFit" HorizontalOptions="Center"
+                                       SemanticProperties.Description="Emblema de Google Classroom" />
+                            </Border>
+                            <Label Text="Google Classroom" FontSize="14" FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center" LineBreakMode="WordWrap"
+                                   TextColor="{AppThemeBinding Light=#321650, Dark=#F8EEFF}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Aclarar que todas las funciones actuales del MVP siguen siendo gratuitas. -->
+                <Border Padding="14,16" Margin="0,5,0,1" StrokeThickness="0"
+                        BackgroundColor="{AppThemeBinding Light=#EEE4FF, Dark=#282448}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="20" /></Border.StrokeShape>
+                    <Grid ColumnDefinitions="48,*" ColumnSpacing="13">
+                        <Label Text="&#xe80c;" FontFamily="IconosMaterial" FontSize="38"
+                               TextColor="{AppThemeBinding Light=#6D39C4, Dark=#BC9CFF}"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="7">
+                            <Label Text="Tu versión gratuita incluye" FontSize="16" FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2F1551, Dark=#F9F1FF}" />
+                            <Label Text="Cursos, tareas, recordatorios, calendario Android, reportes básicos y respaldos manuales cifrados."
+                                   FontSize="12" LineBreakMode="WordWrap"
+                                   TextColor="{AppThemeBinding Light=#48365F, Dark=#DED0EE}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- No hay compras reales: el botón abre exclusivamente un aviso. -->
+                <Button Text="♛  Obtener Premium" FontSize="19" FontAttributes="Bold"
+                        TextColor="White" HeightRequest="61" CornerRadius="20"
+                        Clicked="OnObtenerPremiumClicked"
+                        SemanticProperties.Description="Conocer la disponibilidad futura de Study Space Premium">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#B27CF0" Offset="0" />
+                            <GradientStop Color="#6930C1" Offset="1" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Label Text="✧ Próximamente disponible en Study Space"
+                       FontSize="12" FontAttributes="Italic"
+                       HorizontalTextAlignment="Center" Margin="0,-5,0,0"
+                       TextColor="{AppThemeBinding Light=#5A407B, Dark=#CBB7EA}" />
+                <Label Text="Vista informativa de futuras funciones. No hay planes activos, integraciones conectadas ni cobros habilitados."
+                       FontSize="10" LineBreakMode="WordWrap" HorizontalTextAlignment="Center"
+                       TextColor="{AppThemeBinding Light=#78688E, Dark=#BEB3D8}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

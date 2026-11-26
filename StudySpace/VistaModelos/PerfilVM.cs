@@ -224,6 +224,16 @@ public partial class PerfilVM : ObservableObject
         };
     }
 
+    // Abrir la propuesta Premium sin modificar datos ni realizar pagos.
+    [RelayCommand]
+    private async Task AbrirPremium()
+    {
+        if (Ocupado)
+            return;
+
+        await Shell.Current.GoToAsync("premium");
+    }
+
     // HU16 - Abrir pantalla de copias de seguridad cifradas.
     // No procesa ni almacena la contraseña en el ViewModel del perfil.
     [RelayCommand]
