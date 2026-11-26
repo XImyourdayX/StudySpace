@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections.ObjectModel;
 using Aplicacion.CasosDeUso;
 using Aplicacion.DTOs;
@@ -19,6 +19,10 @@ public partial class CursosVM : ObservableObject
 
     [ObservableProperty]
     private bool estaVacio = true;
+
+    // Cantidad real, independiente de los filtros.
+    [ObservableProperty]
+    private int totalCursos;
 
     [ObservableProperty]
     private string filtroSeleccionado = "Actuales";
@@ -44,6 +48,17 @@ public partial class CursosVM : ObservableObject
     {
         _todosLosCursos = await _cursos.ObtenerCursos();
         _todasLasTareas = await _tareas.ObtenerTareas();
+
+        // Datos de presentación calculados de las tareas ya cargadas.
+        // No hay cambios en la base de datos ni consultas adicionales.
+        TotalCursos = _todosLosCursos.Count;
+        foreach (var curso in _todosLosCursos)
+        {
+            var tareasDelCurso = _todasLasTareas
+                .Where(t => t.CursoId == curso.Id).ToList();
+            curso.TotalTareas = tareasDelCurso.Count;
+            curso.TareasCompletadas = tareasDelCurso.Count(t => t.Completada);
+        }
 
         AplicarFiltro();
     }
