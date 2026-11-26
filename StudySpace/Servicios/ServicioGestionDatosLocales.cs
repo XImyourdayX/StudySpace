@@ -1,6 +1,7 @@
 using Aplicacion.CasosDeUso;
 using Dominio.Entidades;
 using Infraestructura.DBContext;
+using Microsoft.Maui.Storage;
 
 namespace StudySpace.Servicios;
 
@@ -29,6 +30,8 @@ public sealed class ServicioGestionDatosLocales
         _restauracion = restauracion;
     }
 
+    private const string ClaveLimpiezaPendiente = "HU17_UsuarioLocalBorradoRemotoPendiente";
+
     public sealed record Resumen(int Cursos, int Tareas);
     public sealed record Resultado(int CursosEliminados, int TareasEliminadas, int AvisosConError);
 
@@ -44,6 +47,66 @@ public sealed class ServicioGestionDatosLocales
         int tareas = await db.Table<Tarea>()
             .Where(t => t.UsuarioId == usuarioId).CountAsync();
         return new Resumen(cursos, tareas);
+    }
+
+    /// <summary>
+    /// Usar SOLO cuando cuenta-eliminar.php respondió cuenta_eliminada.
+    /// Permite continuar la limpieza si Android cierra la app a mitad de camino.
+    /// </summary>
+    public void MarcarLimpiezaPendiente(int usuarioLocalId)
+    {
+        if (usuarioLocalId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(usuarioLocalId));
+        Preferences.Default.Set(ClaveLimpiezaPendiente, usuarioLocalId);
+    }
+
+    /// <summary>
+    /// La eliminación local es idempotente y está limitada al ID registrado
+    /// después de confirmar la eliminación remota. No requiere sesión activa:
+    /// el servidor ya revocó esa cuenta y el token puede estar vencido.
+    /// </summary>
+    public async Task<bool> CompletarLimpiezaPendienteAsync()
+    {
+        await _semaforo.WaitAsync();
+        try
+        {
+            int id = Preferences.Default.Get(ClaveLimpiezaPendiente, 0);
+            if (id <= 0) return false;
+
+            var db = await _contexto.ObtenerDb();
+            var idsNotificaciones = new List<int>();
+
+            await db.RunInTransactionAsync(tx =>
+            {
+                idsNotificaciones = tx.Query<Tarea>(
+                    "SELECT * FROM Tarea WHERE UsuarioId = ?", id)
+                    .Select(t => t.Id).ToList();
+
+                tx.Execute("DELETE FROM VinculoEventoCalendario WHERE UsuarioId = ?", id);
+                tx.Execute("DELETE FROM Tarea WHERE UsuarioId = ?", id);
+                tx.Execute("DELETE FROM Curso WHERE UsuarioId = ?", id);
+                tx.Execute("DELETE FROM VinculoUsuarioRemoto WHERE UsuarioLocalId = ?", id);
+                tx.Execute("DELETE FROM Usuario WHERE Id = ?", id);
+            });
+
+            _restauracion.DescartarVistaPrevia();
+            Preferences.Default.Remove(ClaveLimpiezaPendiente);
+
+            // Las notificaciones no son parte de la transacción SQLite.
+            foreach (int tareaId in idsNotificaciones)
+            {
+                try { _notificaciones.CancelarRecordatorio(tareaId); }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"HU17 - Aviso antiguo: {ex.GetType().Name}");
+                }
+            }
+            return true;
+        }
+        finally
+        {
+            _semaforo.Release();
+        }
     }
 
     public async Task<Resultado> EliminarDatosAcademicosAsync()

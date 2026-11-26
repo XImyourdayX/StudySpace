@@ -17,6 +17,7 @@ public class ServicioSesionRemota
     private readonly HttpClient _clientePhp;
     private readonly ServicioAutenticacion _auth;
     private readonly RepositorioVinculosUsuario _vinculos;
+    private readonly ServicioGestionDatosLocales _gestionDatos;
 
     // MISMA CLAVE QUE UTILIZA InicioSesionVM
     private const string ClaveToken =
@@ -25,11 +26,13 @@ public class ServicioSesionRemota
     public ServicioSesionRemota(
         [FromKeyedServices("ApiPHP")] HttpClient clientePhp,
         ServicioAutenticacion auth,
-        RepositorioVinculosUsuario vinculos)
+        RepositorioVinculosUsuario vinculos,
+        ServicioGestionDatosLocales gestionDatos)
     {
         _clientePhp = clientePhp;
         _auth = auth;
         _vinculos = vinculos;
+        _gestionDatos = gestionDatos;
     }
 
     // =====================================================
@@ -46,6 +49,20 @@ public class ServicioSesionRemota
     public async Task<(bool Restaurada, string Mensaje)>
         RestaurarAsync()
     {
+        // Si el servidor ya confirmó la eliminación de otra cuenta, terminar
+        // su limpieza SQLite antes de permitir una nueva sesión local.
+        try
+        {
+            await _gestionDatos.CompletarLimpiezaPendienteAsync();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"HU17 - Limpieza pendiente: {ex.GetType().Name}");
+            // No borrar ni modificar datos de otros perfiles si falla.
+            // El marcador se conserva para reintentar en el próximo inicio.
+        }
+
         // IMPEDIR QUE UNA SESION LOCAL ANTIGUA
         // SE CONSIDERE AUTENTICADA.
         _auth.CerrarSesion();

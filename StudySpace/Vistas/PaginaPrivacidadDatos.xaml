@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -157,7 +157,7 @@
                         Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}">
                     <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
                     <VerticalStackLayout Spacing="11">
-                        <Label Text="Eliminar información local" FontSize="15" FontAttributes="Bold"
+                        <Label Text="Eliminar datos académicos" FontSize="15" FontAttributes="Bold"
                                TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
                         <Label Text="Elimina únicamente tus cursos y tareas de este dispositivo. No elimina tu cuenta, las copias guardadas en Drive ni los eventos que ya se enviaron al calendario externo."
                                FontSize="12" LineBreakMode="WordWrap"
@@ -166,7 +166,7 @@
                                FontSize="12" LineBreakMode="WordWrap"
                                TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
                         <Button x:Name="BorrarDatosButton"
-                                Text="Eliminar cursos y tareas locales"
+                                Text="Eliminar datos académicos"
                                 Clicked="OnBorrarDatosClicked"
                                 IsEnabled="False"
                                 BackgroundColor="Transparent"
@@ -175,9 +175,41 @@
                         <ActivityIndicator x:Name="IndicadorEliminacion"
                                            IsVisible="False" IsRunning="False"
                                            Color="{StaticResource Violeta}" />
-                        <Label Text="La eliminación de la cuenta remota todavía no está disponible."
-                               FontSize="11" LineBreakMode="WordWrap"
+                        <BoxView HeightRequest="1"
+                                 Color="{AppThemeBinding Light={StaticResource BordeClaro}, Dark={StaticResource BordeOscuro}}" />
+                        <Label Text="Eliminar mi cuenta de Study Space" FontSize="15" FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                        <Label Text="Elimina definitivamente tu cuenta y tus sesiones del servidor. Después se borran los cursos, tareas y el perfil local de esta cuenta en este teléfono."
+                               FontSize="12" LineBreakMode="WordWrap"
                                TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                        <Label Text="Los archivos .ssbackup y los eventos externos NO se eliminan. IMPORTANTE: los respaldos actuales pertenecen a esta cuenta y no se pueden restaurar en una cuenta nueva. Los datos de otros teléfonos tampoco se borran automáticamente."
+                               FontSize="12" LineBreakMode="WordWrap"
+                               TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                        <Button x:Name="MostrarEliminarCuentaButton"
+                                Text="Eliminar mi cuenta  ›"
+                                Clicked="OnMostrarEliminarCuentaClicked"
+                                BackgroundColor="Transparent" BorderColor="#D45C62" BorderWidth="1"
+                                TextColor="#D45C62" CornerRadius="12" HeightRequest="46" />
+                        <VerticalStackLayout x:Name="PanelEliminarCuenta" IsVisible="False" Spacing="11">
+                            <Label Text="Para confirmar tu identidad, escribe la contraseña actual de tu cuenta."
+                                   FontSize="12" LineBreakMode="WordWrap"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                            <Entry x:Name="ContrasenaEliminarCuentaEntry"
+                                   Placeholder="Contraseña de la cuenta"
+                                   IsPassword="True"
+                                   ClearButtonVisibility="WhileEditing"
+                                   MaxLength="256"
+                                   BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
+                            <Button x:Name="ConfirmarEliminarCuentaButton"
+                                    Text="Continuar con la eliminación"
+                                    Clicked="OnConfirmarEliminarCuentaClicked"
+                                    BackgroundColor="#A83C47" TextColor="White"
+                                    CornerRadius="12" HeightRequest="46" />
+                            <Label Text="Esta acción exige dos confirmaciones adicionales. Requiere conexión a internet."
+                                   FontSize="11" LineBreakMode="WordWrap"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>

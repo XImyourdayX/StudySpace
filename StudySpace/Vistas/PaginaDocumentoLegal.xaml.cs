@@ -80,7 +80,7 @@ public partial class PaginaDocumentoLegal : ContentPage, IQueryAttributable
         new("1. ¿Qué es Study Space?",
             "Study Space es una aplicación de organización de cursos, tareas, fechas de entrega y recordatorios para estudiantes. Esta versión se encuentra en etapa de desarrollo y pruebas académicas."),
         new("2. Responsable y contacto — por completar",
-            "Antes de ofrecer la aplicación a participantes externos, el equipo debe identificar formalmente a quien responde por el tratamiento de datos y publicar un canal válido para consultas y solicitudes. Estos datos todavía no están definidos en este borrador."),
+            "El correo de atención técnica es studyspace.soporte@wopres.com. Antes de ofrecer la aplicación a participantes externos, el equipo debe identificar formalmente al responsable del tratamiento de datos, definir el procedimiento de atención de derechos y revisar esta política. Este documento sigue siendo un borrador."),
         new("3. Información de la cuenta",
             "Para registrar y autenticar una cuenta se utilizan datos como nombre, correo electrónico y credenciales de acceso. El inicio de sesión, la verificación y la recuperación se gestionan mediante una API PHP con almacenamiento remoto. La aplicación guarda el token de sesión en el almacenamiento seguro del dispositivo."),
         new("4. Cursos, tareas y progreso",
@@ -92,7 +92,7 @@ public partial class PaginaDocumentoLegal : ContentPage, IQueryAttributable
         new("7. Uso y conservación de los datos",
             "Los datos académicos locales permanecen en el dispositivo hasta que los modifiques, los elimines o se borren los datos de la aplicación. La información de la cuenta remota tiene un ciclo de vida separado. Antes de publicar la política definitiva, se deben precisar los plazos de conservación de datos remotos y registros técnicos, así como los proveedores involucrados."),
         new("8. Opciones de control",
-            "Desde la aplicación puedes revisar la cantidad de cursos y tareas locales, crear o restaurar respaldos y eliminar tus datos académicos locales con confirmación. Esa eliminación no borra la cuenta remota ni las copias almacenadas en otros servicios. La eliminación de la cuenta remota todavía no está implementada."),
+            "Desde la aplicación puedes consultar los datos locales, hacer respaldos y borrar cursos y tareas de este teléfono. En Opciones avanzadas también puedes solicitar la eliminación de tu cuenta MySQL, con contraseña y confirmaciones: una vez que el servidor la confirme, la app borra el perfil y los datos locales de esa cuenta en este teléfono. Los archivos externos y datos de otros dispositivos no se borran automáticamente. Los respaldos actuales solo se pueden restaurar para su cuenta original, por lo que no podrán importarse en otra cuenta tras eliminarla."),
         new("9. Protección y limitaciones",
             "Se aplican mecanismos técnicos como el uso de HTTPS para la API, almacenamiento seguro del token y cifrado AES-256-GCM para los respaldos. Ninguna medida elimina totalmente los riesgos: protege tu dispositivo y conserva la contraseña de respaldo de forma segura. Los mecanismos deberán pasar pruebas de seguridad antes de un lanzamiento público."),
         new("10. Solicitudes y cambios de esta política",
@@ -118,7 +118,7 @@ public partial class PaginaDocumentoLegal : ContentPage, IQueryAttributable
         new("8. Uso adecuado",
             "El usuario debe utilizar la aplicación de manera lícita, respetar la privacidad de otras personas y no intentar acceder a cuentas o información ajena. La aplicación no debe usarse para actividades que vulneren sistemas de terceros."),
         new("9. Gestión de cuenta",
-            "La app permite eliminar los cursos y tareas locales de la cuenta activa con confirmaciones. Esto no elimina automáticamente la cuenta remota ni los archivos externos. El procedimiento completo de eliminación de cuenta se definirá y habilitará antes del lanzamiento según las obligaciones aplicables."),
+            "La app permite eliminar cursos y tareas locales sin cerrar la cuenta. También ofrece eliminación de la cuenta MySQL con contraseña y confirmaciones; al confirmarse en el servidor, se limpia el perfil de esa cuenta en este teléfono. Esto no elimina respaldos de Drive, eventos de calendarios externos ni los datos conservados en otros teléfonos. El procedimiento debe validarse con una cuenta de prueba antes de habilitarse para participantes externos."),
         new("10. Titularidad, contacto y aceptación — pendiente",
             "Antes de utilizar estos términos como contrato deberán identificarse el titular del servicio, el contacto de atención, las reglas finales aplicables y un mecanismo claro de aceptación cuando sea necesario. Este borrador no registra consentimiento ni crea por sí mismo una relación contractual definitiva.")
     };

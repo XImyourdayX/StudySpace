@@ -1,4 +1,4 @@
-using Aplicacion.CasosDeUso;
+﻿using Aplicacion.CasosDeUso;
 using Aplicacion.Interfaces;
 using Infraestructura.DBContext;
 using Infraestructura.Repositorios;
@@ -152,6 +152,8 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<ServicioVerificacionCorreo>();
         builder.Services.AddSingleton<ServicioSesionRemota>();
+        // HU17 - Verificación y borrado autenticado de la cuenta remota.
+        builder.Services.AddSingleton<ServicioEliminacionCuentaRemota>();
         builder.Services.AddSingleton<ServicioRecuperacionContrasena>();
 
         // REGISTRO PENDIENTE DE VERIFICACION
