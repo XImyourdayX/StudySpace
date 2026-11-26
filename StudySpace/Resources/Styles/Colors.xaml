@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
@@ -50,18 +50,25 @@
     <Color x:Key="Rojo">#EF4444</Color>
 
     <!-- Tema claro -->
-    <Color x:Key="FondoClaro">#F8F9FF</Color>
+    <Color x:Key="FondoClaro">#F6F7FB</Color>
     <Color x:Key="TarjetaClaro">#FFFFFF</Color>
-    <Color x:Key="LavandaClaro">#EEEBFF</Color>
-    <Color x:Key="TextoClaro">#141B35</Color>
-    <Color x:Key="TextoSecundarioClaro">#6B7194</Color>
-    <Color x:Key="BordeClaro">#E3E6F5</Color>
+    <Color x:Key="LavandaClaro">#EDE8F7</Color>
+    <Color x:Key="TextoClaro">#192136</Color>
+    <Color x:Key="TextoSecundarioClaro">#626B80</Color>
+    <Color x:Key="BordeClaro">#DCE0E9</Color>
 
     <!-- Tema oscuro -->
-    <Color x:Key="FondoOscuro">#0F1426</Color>
-    <Color x:Key="TarjetaOscuro">#1A2140</Color>
-    <Color x:Key="LavandaOscuro">#232A55</Color>
-    <Color x:Key="TextoOscuro">#F1F3FF</Color>
-    <Color x:Key="TextoSecundarioOscuro">#A3A9CC</Color>
-    <Color x:Key="BordeOscuro">#2A3158</Color>
+    <Color x:Key="FondoOscuro">#111427</Color>
+    <Color x:Key="TarjetaOscuro">#1C2038</Color>
+    <Color x:Key="LavandaOscuro">#382951</Color>
+    <Color x:Key="TextoOscuro">#F5F3FF</Color>
+    <Color x:Key="TextoSecundarioOscuro">#ADB2C8</Color>
+    <Color x:Key="BordeOscuro">#51436E</Color>
+    <!-- Recursos semánticos para ambos temas -->
+    <Color x:Key="AcentoClaro">#6743C1</Color>
+    <Color x:Key="AcentoOscuro">#C6A0FF</Color>
+    <Color x:Key="AccionClaro">#6743C1</Color>
+    <Color x:Key="AccionOscuro">#813DE0</Color>
+    <Color x:Key="CampoClaro">#F0F2F7</Color>
+    <Color x:Key="CampoOscuro">#252941</Color>
 </ResourceDictionary>

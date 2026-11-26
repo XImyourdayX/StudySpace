@@ -6,8 +6,8 @@
     xmlns:vistas="clr-namespace:StudySpace.Vistas"
     FlyoutBehavior="Disabled"
     Shell.TabBarBackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource TarjetaOscuro}}"
-    Shell.TabBarForegroundColor="{AppThemeBinding Light={StaticResource Violeta}, Dark=#C3ADFF}"
-    Shell.TabBarTitleColor="{AppThemeBinding Light={StaticResource Violeta}, Dark=#C3ADFF}"
+    Shell.TabBarForegroundColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark={StaticResource AcentoOscuro}}"
+    Shell.TabBarTitleColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark={StaticResource AcentoOscuro}}"
     Shell.TabBarUnselectedColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}">
 
     <!-- PANTALLA DE BIENVENIDA -->
