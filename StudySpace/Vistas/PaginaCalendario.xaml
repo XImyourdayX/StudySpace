@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:StudySpace.VistaModelos" xmlns:dto="clr-namespace:Aplicacion.DTOs;assembly=Aplicacion" x:Class="StudySpace.Vistas.PaginaCalendario" x:DataType="vm:CalendarioVM" Shell.NavBarIsVisible="False" BackgroundColor="{AppThemeBinding Light=#F5F2FC, Dark=#101326}">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:StudySpace.VistaModelos" xmlns:dto="clr-namespace:Aplicacion.DTOs;assembly=Aplicacion" x:Class="StudySpace.Vistas.PaginaCalendario" x:DataType="vm:CalendarioVM" Shell.NavBarIsVisible="False" BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark=#101326}">
     <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="9" Padding="12,10,12,10" MaximumWidthRequest="420" HorizontalOptions="Fill">
         <Border Grid.Row="0" StrokeThickness="0" Padding="0">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="{AppThemeBinding Light=#F5EEFF, Dark=#101326}" Offset="0"/>
-                    <GradientStop Color="{AppThemeBinding Light=#E6D5FC, Dark=#27184D}" Offset="1"/>
+                    <GradientStop Color="{AppThemeBinding Light={StaticResource DecoracionClara}, Dark=#101326}" Offset="0"/>
+                    <GradientStop Color="{AppThemeBinding Light={StaticResource DecoracionClara}, Dark=#27184D}" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
             <Border.StrokeShape>
@@ -15,8 +15,8 @@
                 <Path Data="M 0,65 C 85,65 145,63 192,37 C 235,9 265,0 320,15 L 320,72 L 0,72 Z" Aspect="Fill" Opacity="0.8" InputTransparent="True">
                     <Path.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="{AppThemeBinding Light=#F5EEFF, Dark=#17152C}" Offset="0"/>
-                            <GradientStop Color="{AppThemeBinding Light=#C9A3F4, Dark=#7831CF}" Offset="1"/>
+                            <GradientStop Color="{AppThemeBinding Light={StaticResource DecoracionTransparenteClara}, Dark=#17152C}" Offset="0"/>
+                            <GradientStop Color="{AppThemeBinding Light={StaticResource DecoracionClara}, Dark=#7831CF}" Offset="1"/>
                         </LinearGradientBrush>
                     </Path.Fill>
                 </Path>
@@ -24,8 +24,8 @@
                     <Border StrokeThickness="0" HeightRequest="48" WidthRequest="48">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#A85AF4" Offset="0"/>
-                                <GradientStop Color="#6530BA" Offset="1"/>
+                                <GradientStop Color="{AppThemeBinding Light={StaticResource AccionClaro}, Dark=#A85AF4}" Offset="0"/>
+                                <GradientStop Color="{AppThemeBinding Light={StaticResource AccionFinalClaro}, Dark=#6530BA}" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
                         <Border.StrokeShape>
@@ -35,16 +35,16 @@
                     </Border>
                     <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                         <Label Text="Calendario" FontSize="24" FontAttributes="Bold" VerticalOptions="Center" TextColor="{AppThemeBinding                        Light={StaticResource TextoClaro},                        Dark={StaticResource TextoOscuro}}"/>
-                        <Label Text="Organiza tu tiempo académico" FontSize="12" TextColor="{AppThemeBinding Light=#625477, Dark=#D0C5E8}"/>
+                        <Label Text="Organiza tu tiempo académico" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#D0C5E8}"/>
                     </VerticalStackLayout>
                 </Grid>
             </Grid>
         </Border>
-        <Border Grid.Row="1" Padding="10,8" Stroke="{AppThemeBinding Light=#BDA3E8, Dark=#B66AF3}" StrokeThickness="1.3">
+        <Border Grid.Row="1" Padding="10,8" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#B66AF3}" StrokeThickness="1.3">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="{AppThemeBinding Light=#FFFFFF, Dark=#252044}" Offset="0"/>
-                    <GradientStop Color="{AppThemeBinding Light=#F3EEFC, Dark=#15182E}" Offset="1"/>
+                    <GradientStop Color="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark=#252044}" Offset="0"/>
+                    <GradientStop Color="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark=#15182E}" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
             <Border.StrokeShape>
@@ -52,9 +52,9 @@
             </Border.StrokeShape>
             <Grid RowDefinitions="Auto,Auto,Auto,1,Auto" RowSpacing="6">
                 <Grid Grid.Row="0" ColumnDefinitions="44,*,44" HeightRequest="38">
-                    <Button Grid.Column="0" Text="" FontFamily="IconosMaterial" FontSize="24" BackgroundColor="{AppThemeBinding Light=#E9DDFB, Dark=#3B2C65}" TextColor="{AppThemeBinding Light=#6931B5, Dark=#E2CAFF}" Command="{Binding MesAnteriorCommand}" CornerRadius="12" Padding="0"/>
+                    <Button Grid.Column="0" Text="" FontFamily="IconosMaterial" FontSize="24" BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#3B2C65}" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#E2CAFF}" Command="{Binding MesAnteriorCommand}" CornerRadius="12" Padding="0"/>
                     <Label Grid.Column="1" Text="{Binding TituloMes}" FontSize="17" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{AppThemeBinding                        Light={StaticResource TextoClaro},                        Dark={StaticResource TextoOscuro}}"/>
-                    <Button Grid.Column="2" Text="" FontFamily="IconosMaterial" FontSize="24" BackgroundColor="{AppThemeBinding Light=#E9DDFB, Dark=#3B2C65}" TextColor="{AppThemeBinding Light=#6931B5, Dark=#E2CAFF}" Command="{Binding MesSiguienteCommand}" CornerRadius="12" Padding="0"/>
+                    <Button Grid.Column="2" Text="" FontFamily="IconosMaterial" FontSize="24" BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#3B2C65}" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#E2CAFF}" Command="{Binding MesSiguienteCommand}" CornerRadius="12" Padding="0"/>
                 </Grid>
                 <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="0">
                     <Label Grid.Column="0" Text="Lun" HorizontalTextAlignment="Center" Style="{StaticResource Subtitulo}"/>
@@ -82,11 +82,11 @@
                                         </Border.StrokeShape>
                                         <Border.Triggers>
                                             <DataTrigger TargetType="Border" Binding="{Binding EsHoy}" Value="True">
-                                                <Setter Property="Stroke" Value="#BE8AF8"/>
+                                                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource BordeAcentoClaro}, Dark=#BE8AF8}"/>
                                                 <Setter Property="StrokeThickness" Value="1"/>
                                             </DataTrigger>
                                             <DataTrigger TargetType="Border" Binding="{Binding EstaSeleccionado}" Value="True">
-                                                <Setter Property="BackgroundColor" Value="#923EF5"/>
+                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource AccionClaro}, Dark=#923EF5}"/>
                                             </DataTrigger>
                                         </Border.Triggers>
                                         <Label Text="{Binding Numero}" FontSize="13" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{AppThemeBinding                                            Light={StaticResource TextoClaro},                                            Dark={StaticResource TextoOscuro}}">
@@ -108,7 +108,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <BoxView Grid.Row="3" HeightRequest="1" Color="{AppThemeBinding Light=#E1D5F1, Dark=#4B386C}" Margin="8,0"/>
+                <BoxView Grid.Row="3" HeightRequest="1" Color="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#4B386C}" Margin="8,0"/>
                 <HorizontalStackLayout Grid.Row="4" Spacing="10" HorizontalOptions="Center">
                     <HorizontalStackLayout Spacing="4">
                         <Border WidthRequest="8" HeightRequest="8" StrokeThickness="0" BackgroundColor="#5544E9" VerticalOptions="Center" Padding="0">
@@ -116,7 +116,7 @@
                                 <RoundRectangle CornerRadius="4"/>
                             </Border.StrokeShape>
                         </Border>
-                        <Label Text="Pendiente" FontSize="10" TextColor="{AppThemeBinding Light=#625477, Dark=#D0C5E8}" VerticalOptions="Center"/>
+                        <Label Text="Pendiente" FontSize="10" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#D0C5E8}" VerticalOptions="Center"/>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="4">
                         <Border WidthRequest="8" HeightRequest="8" StrokeThickness="0" BackgroundColor="#EF4444" VerticalOptions="Center" Padding="0">
@@ -124,7 +124,7 @@
                                 <RoundRectangle CornerRadius="4"/>
                             </Border.StrokeShape>
                         </Border>
-                        <Label Text="Vencida" FontSize="10" TextColor="{AppThemeBinding Light=#625477, Dark=#D0C5E8}" VerticalOptions="Center"/>
+                        <Label Text="Vencida" FontSize="10" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#D0C5E8}" VerticalOptions="Center"/>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="4">
                         <Border WidthRequest="8" HeightRequest="8" StrokeThickness="0" BackgroundColor="#22B981" VerticalOptions="Center" Padding="0">
@@ -132,7 +132,7 @@
                                 <RoundRectangle CornerRadius="4"/>
                             </Border.StrokeShape>
                         </Border>
-                        <Label Text="Completada" FontSize="10" TextColor="{AppThemeBinding Light=#625477, Dark=#D0C5E8}" VerticalOptions="Center"/>
+                        <Label Text="Completada" FontSize="10" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#D0C5E8}" VerticalOptions="Center"/>
                     </HorizontalStackLayout>
                 </HorizontalStackLayout>
             </Grid>
@@ -140,14 +140,14 @@
         <Grid Grid.Row="2" RowDefinitions="Auto,*" RowSpacing="8">
             <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
                 <VerticalStackLayout Spacing="2">
-                    <Label Text="Agenda del día" FontSize="20" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#22163A, Dark=#F5F1FF}"/>
-                    <Label Text="{Binding TituloFecha}" FontSize="12" FontAttributes="None" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#625477, Dark=#D0C5E8}"/>
+                    <Label Text="Agenda del día" FontSize="20" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}"/>
+                    <Label Text="{Binding TituloFecha}" FontSize="12" FontAttributes="None" VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#D0C5E8}"/>
                 </VerticalStackLayout>
-                <Button Grid.Column="1" Text="Hoy" FontSize="12" Padding="0" TextColor="{AppThemeBinding                             Light={StaticResource Violeta},                             Dark=#C5B9FF}" Command="{Binding IrAHoyCommand}" CornerRadius="16" BorderWidth="1" BorderColor="#B66AF3" HeightRequest="34" MinimumHeightRequest="0" WidthRequest="58" VerticalOptions="Center" FontAttributes="Bold">
+                <Button Grid.Column="1" Text="Hoy" FontSize="12" Padding="0" TextColor="{AppThemeBinding                             Light={StaticResource Violeta},                             Dark=#C5B9FF}" Command="{Binding IrAHoyCommand}" CornerRadius="16" BorderWidth="1" BorderColor="{AppThemeBinding Light={StaticResource BordeAcentoClaro}, Dark=#B66AF3}" HeightRequest="34" MinimumHeightRequest="0" WidthRequest="58" VerticalOptions="Center" FontAttributes="Bold">
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="{AppThemeBinding Light=#F1E6FF, Dark=#493269}" Offset="0"/>
-                            <GradientStop Color="{AppThemeBinding Light=#E0CDF8, Dark=#30234F}" Offset="1"/>
+                            <GradientStop Color="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#493269}" Offset="0"/>
+                            <GradientStop Color="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#30234F}" Offset="1"/>
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
@@ -159,17 +159,17 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="dto:TareaDTO">
-                            <Border Padding="10" StrokeThickness="1" BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E203B}" Stroke="{AppThemeBinding Light=#D3C2EC, Dark=#79639E}">
+                            <Border Padding="10" StrokeThickness="1" BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark=#1E203B}" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#79639E}">
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="16"/>
                                 </Border.StrokeShape>
                                 <Grid ColumnDefinitions="4,32,*,Auto,12" ColumnSpacing="7">
                                     <BoxView Color="{Binding PrioridadColor}" CornerRadius="2"/>
-                                    <Border Grid.Column="1" StrokeThickness="0" WidthRequest="32" HeightRequest="36" VerticalOptions="Center" BackgroundColor="{AppThemeBinding Light=#E9DDFB, Dark=#392853}">
+                                    <Border Grid.Column="1" StrokeThickness="0" WidthRequest="32" HeightRequest="36" VerticalOptions="Center" BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#392853}">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="18"/>
                                         </Border.StrokeShape>
-                                        <Label Text="" FontFamily="IconosMaterial" FontSize="21" TextColor="{AppThemeBinding Light=#6931B5, Dark=#D5ADFF}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Label Text="" FontFamily="IconosMaterial" FontSize="21" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#D5ADFF}" HorizontalOptions="Center" VerticalOptions="Center"/>
                                     </Border>
                                     <VerticalStackLayout Grid.Column="2" Spacing="3">
                                         <Label Text="{Binding Titulo}" FontSize="13" FontAttributes="Bold" LineBreakMode="TailTruncation" TextColor="{AppThemeBinding                                                    Light={StaticResource TextoClaro},                                                    Dark={StaticResource TextoOscuro}}"/>
@@ -180,9 +180,9 @@
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="12"/>
                                         </Border.StrokeShape>
-                                        <Label Text="{Binding Prioridad}" FontSize="10" FontAttributes="Bold" TextColor="White"/>
+                                        <Label Text="{Binding Prioridad}" FontSize="10" FontAttributes="Bold" TextColor="#111427"/>
                                     </Border>
-                                    <Label Grid.Column="4" Text="" FontFamily="IconosMaterial" FontSize="18" VerticalOptions="Center" TextColor="{AppThemeBinding Light=#625477, Dark=#D0C5E8}"/>
+                                    <Label Grid.Column="4" Text="" FontFamily="IconosMaterial" FontSize="18" VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#D0C5E8}"/>
                                 </Grid>
                             </Border>
                         </DataTemplate>
@@ -192,25 +192,25 @@
                     <Border WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" StrokeThickness="0" Padding="0">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="{AppThemeBinding Light=#F1E5FF, Dark=#3E285C}" Offset="0"/>
-                                <GradientStop Color="{AppThemeBinding Light=#E3D0FA, Dark=#241D40}" Offset="1"/>
+                                <GradientStop Color="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#3E285C}" Offset="0"/>
+                                <GradientStop Color="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#241D40}" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="20"/>
                         </Border.StrokeShape>
-                        <Label Text="" FontFamily="IconosMaterial" FontSize="32" TextColor="{AppThemeBinding Light=#7938C9, Dark=#C592F5}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Text="" FontFamily="IconosMaterial" FontSize="32" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C592F5}" HorizontalOptions="Center" VerticalOptions="Center"/>
                     </Border>
-                    <Label Text="No tienes tareas para este día." FontSize="14" HorizontalTextAlignment="Center" VerticalOptions="Start" TextColor="{AppThemeBinding Light=#302044, Dark=#F5F1FF}" FontAttributes="Bold"/>
-                    <Label Text="Disfruta tu tiempo o crea una nueva tarea." FontSize="11" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light=#625477, Dark=#D0C5E8}"/>
+                    <Label Text="No tienes tareas para este día." FontSize="14" HorizontalTextAlignment="Center" VerticalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" FontAttributes="Bold"/>
+                    <Label Text="Disfruta tu tiempo o crea una nueva tarea." FontSize="11" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#D0C5E8}"/>
                 </VerticalStackLayout>
             </Grid>
         </Grid>
-        <Button Grid.Row="3" Text="+ Nueva tarea" Style="{StaticResource BotonPrincipal}" HeightRequest="48" Command="{Binding NuevaTareaCommand}" CornerRadius="22" TextColor="White" FontSize="16" FontAttributes="Bold" BorderWidth="1" BorderColor="#BF83F9">
+        <Button Grid.Row="3" Text="+ Nueva tarea" Style="{StaticResource BotonPrincipal}" HeightRequest="48" Command="{Binding NuevaTareaCommand}" CornerRadius="22" TextColor="White" FontSize="16" FontAttributes="Bold" BorderWidth="1" BorderColor="{AppThemeBinding Light={StaticResource BordeAcentoClaro}, Dark=#BF83F9}">
             <Button.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#AC65F6" Offset="0"/>
-                    <GradientStop Color="#7835ED" Offset="1"/>
+                    <GradientStop Color="{AppThemeBinding Light={StaticResource AccionClaro}, Dark=#AC65F6}" Offset="0"/>
+                    <GradientStop Color="{AppThemeBinding Light={StaticResource AccionFinalClaro}, Dark=#7835ED}" Offset="1"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>

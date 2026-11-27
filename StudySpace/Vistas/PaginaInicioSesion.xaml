@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:StudySpace.VistaModelos" x:Class="StudySpace.Vistas.PaginaInicioSesion" x:DataType="vm:InicioSesionVM" Shell.NavBarIsVisible="False" BackgroundColor="{AppThemeBinding Light=#F8F7FC, Dark=#111427}">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:StudySpace.VistaModelos" x:Class="StudySpace.Vistas.PaginaInicioSesion" x:DataType="vm:InicioSesionVM" Shell.NavBarIsVisible="False" BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark=#111427}">
 
     <ScrollView>
         <VerticalStackLayout Padding="18,16,18,24" Spacing="10" MaximumWidthRequest="420" HorizontalOptions="Fill">
 
             <!-- VOLVER -->
-            <Label FontFamily="IconosMaterial" Text="" FontSize="28" TextColor="{AppThemeBinding Light=#6530B7, Dark=#C6A0FF}" HorizontalOptions="Start" WidthRequest="44" HeightRequest="44" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+            <Label FontFamily="IconosMaterial" Text="" FontSize="28" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C6A0FF}" HorizontalOptions="Start" WidthRequest="44" HeightRequest="44" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
 
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding VolverCommand}"/>
@@ -18,26 +18,26 @@
             <!-- TÍTULOS -->
             <Label Text="¡Bienvenida de nuevo!" Style="{StaticResource Titulo}" HorizontalOptions="Center" Margin="0,4,0,0" FontSize="24" HorizontalTextAlignment="Center"/>
 
-            <Label Text="Ingresa a tu cuenta para continuar" Style="{StaticResource Subtitulo}" HorizontalOptions="Center" Margin="0,0,0,8" TextColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}" HorizontalTextAlignment="Center"/>
+            <Label Text="Ingresa a tu cuenta para continuar" Style="{StaticResource Subtitulo}" HorizontalOptions="Center" Margin="0,0,0,8" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}" HorizontalTextAlignment="Center"/>
 
             <!-- CORREO -->
-            <Border Style="{StaticResource CampoBorde}" Margin="0,6,0,0" BackgroundColor="{AppThemeBinding Light=#F2EFFA, Dark=#22253F}" Stroke="{AppThemeBinding Light=#D9D0ED, Dark=#514568}" Padding="12,0" HeightRequest="50">
+            <Border Style="{StaticResource CampoBorde}" Margin="0,6,0,0" BackgroundColor="{AppThemeBinding Light={StaticResource CampoClaro}, Dark=#22253F}" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#514568}" Padding="12,0" HeightRequest="50">
 
-                <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Correo electrónico" Keyboard="Email" Text="{Binding Correo}" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+                <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Correo electrónico" Keyboard="Email" Text="{Binding Correo}" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
             </Border>
 
             <!-- CONTRASEÑA -->
-            <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light=#F2EFFA, Dark=#22253F}" Stroke="{AppThemeBinding Light=#D9D0ED, Dark=#514568}" Padding="12,0" HeightRequest="50">
+            <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light={StaticResource CampoClaro}, Dark=#22253F}" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#514568}" Padding="12,0" HeightRequest="50">
 
                 <Grid ColumnDefinitions="*,Auto">
 
-                    <Entry x:Name="PasswordEntry" Style="{StaticResource EntradaLimpia}" Placeholder="Contraseña" IsPassword="True" Text="{Binding Password}" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+                    <Entry x:Name="PasswordEntry" Style="{StaticResource EntradaLimpia}" Placeholder="Contraseña" IsPassword="True" Text="{Binding Password}" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
                     <!-- MOSTRAR / OCULTAR CONTRASEÑA -->
                     <ImageButton x:Name="TogglePasswordButton" Grid.Column="1" Clicked="OnTogglePasswordClicked" BackgroundColor="Transparent" Margin="8,0,0,0" Padding="6" WidthRequest="36" HeightRequest="36" HorizontalOptions="End" VerticalOptions="Center">
 
                         <ImageButton.Source>
-                            <FontImageSource FontFamily="IconosMaterial" Glyph="" Size="20" Color="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+                            <FontImageSource FontFamily="IconosMaterial" Glyph="" Size="20" Color="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
                         </ImageButton.Source>
                     </ImageButton>
 
@@ -45,7 +45,7 @@
             </Border>
 
             <!-- RECUPERACIÓN DE CONTRASEÑA -->
-            <Label Text="¿Olvidaste tu contraseña?" FontSize="13" FontAttributes="Bold" HorizontalOptions="End" HorizontalTextAlignment="End" Margin="0,0,0,2" TextColor="{AppThemeBinding Light=#6530B7, Dark=#C6A0FF}">
+            <Label Text="¿Olvidaste tu contraseña?" FontSize="13" FontAttributes="Bold" HorizontalOptions="End" HorizontalTextAlignment="End" Margin="0,0,0,2" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C6A0FF}">
 
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding RecuperarPasswordCommand}"/>
@@ -53,24 +53,24 @@
             </Label>
 
             <!-- MENSAJE DE ERROR -->
-            <Label Text="{Binding MensajeError}" IsVisible="{Binding TieneError}" TextColor="{StaticResource Rojo}" FontSize="13"/>
+            <Label Text="{Binding MensajeError}" IsVisible="{Binding TieneError}" TextColor="{AppThemeBinding Light={StaticResource ErrorTextoClaro}, Dark={StaticResource Rojo}}" FontSize="13"/>
 
             <!-- INICIAR SESIÓN -->
             <Frame HasShadow="False" CornerRadius="16" Padding="0" HorizontalOptions="Fill" HeightRequest="50" Margin="0,6,0,0">
 
-                <Frame.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#A34DEB" Offset="0"/><GradientStop Color="#7132D9" Offset="1"/></LinearGradientBrush></Frame.Background><Button Text="Iniciar sesión" BackgroundColor="Transparent" TextColor="White" FontFamily="OpenSansSemibold" FontSize="16" Command="{Binding IniciarSesionCommand}"/>
+                <Frame.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="{AppThemeBinding Light={StaticResource AccionClaro}, Dark=#A34DEB}" Offset="0"/><GradientStop Color="{AppThemeBinding Light={StaticResource AccionFinalClaro}, Dark=#7132D9}" Offset="1"/></LinearGradientBrush></Frame.Background><Button Text="Iniciar sesión" BackgroundColor="Transparent" TextColor="White" FontFamily="OpenSansSemibold" FontSize="16" Command="{Binding IniciarSesionCommand}"/>
             </Frame>
 
             <!-- CARGANDO -->
-            <ActivityIndicator IsRunning="{Binding Ocupado}" Color="{AppThemeBinding Light=#6530B7, Dark=#C6A0FF}" IsVisible="{Binding Ocupado}"/>
+            <ActivityIndicator IsRunning="{Binding Ocupado}" Color="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C6A0FF}" IsVisible="{Binding Ocupado}"/>
 
             <!-- IR A REGISTRO -->
-            <Label Style="{StaticResource Subtitulo}" HorizontalOptions="Center" Margin="0,0,0,8" TextColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}" HorizontalTextAlignment="Center">
+            <Label Style="{StaticResource Subtitulo}" HorizontalOptions="Center" Margin="0,0,0,8" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}" HorizontalTextAlignment="Center">
 
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="¿No tienes cuenta? "/>
-                        <Span Text="Regístrate" TextColor="{AppThemeBinding Light=#6530B7, Dark=#C6A0FF}" FontAttributes="Bold"/>
+                        <Span Text="Regístrate" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C6A0FF}" FontAttributes="Bold"/>
                     </FormattedString>
                 </Label.FormattedText>
 

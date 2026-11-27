@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary 
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<?xml version='1.0' encoding='UTF-8'?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
@@ -71,4 +69,20 @@
     <Color x:Key="AccionOscuro">#813DE0</Color>
     <Color x:Key="CampoClaro">#F0F2F7</Color>
     <Color x:Key="CampoOscuro">#252941</Color>
+<Color x:Key="AccionFinalClaro">#5935B0</Color>
+    <Color x:Key="DecoracionClara">#F1EEF8</Color>
+    <Color x:Key="DecoracionTransparenteClara">#00EDE8F7</Color>
+    <Color x:Key="BordeAcentoClaro">#D4C8EC</Color>
+    <Color x:Key="ExitoTextoClaro">#146C4B</Color>
+    <Color x:Key="AvisoTextoClaro">#89530A</Color>
+    <Color x:Key="ErrorTextoClaro">#A82845</Color>
+    <Color x:Key="ExitoFondoClaro">#E7F5EE</Color>
+    <Color x:Key="AvisoFondoClaro">#FFF3DE</Color>
+    <Color x:Key="ErrorFondoClaro">#FCECEF</Color>
+    <Color x:Key="ExitoBordeClaro">#B8DCCB</Color>
+    <Color x:Key="AvisoBordeClaro">#E4C994</Color>
+    <Color x:Key="ErrorBordeClaro">#EBC2CD</Color>
+    <Color x:Key="PremiumFondoClaro">#FFF9ED</Color>
+    <Color x:Key="PremiumBordeClaro">#E5D2A5</Color>
+    <Color x:Key="PremiumTextoClaro">#79510C</Color>
 </ResourceDictionary>

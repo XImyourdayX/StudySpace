@@ -29,15 +29,15 @@ public partial class PaginaDocumentoLegal : ContentPage, IQueryAttributable
         {
             var seccion = secciones[i];
             var numero = new Label { Text = (i + 1).ToString("00"), FontSize = 12, FontAttributes = FontAttributes.Bold, VerticalOptions = LayoutOptions.Center };
-            numero.SetAppThemeColor(Label.TextColorProperty, Color.FromArgb("#6335AD"), Color.FromArgb("#D7B8FF"));
+            numero.SetAppThemeColor(Label.TextColorProperty, Color.FromArgb("#6743C1"), Color.FromArgb("#D7B8FF"));
             var titulo = new Label { Text = seccion.Titulo.Substring(seccion.Titulo.IndexOf(". ") + 2), FontSize = 16, FontAttributes = FontAttributes.Bold, LineBreakMode = LineBreakMode.WordWrap, VerticalOptions = LayoutOptions.Center };
-            titulo.SetAppThemeColor(Label.TextColorProperty, Color.FromArgb("#211A35"), Color.FromArgb("#F5F1FF"));
+            titulo.SetAppThemeColor(Label.TextColorProperty, Color.FromArgb("#192136"), Color.FromArgb("#F5F1FF"));
             var cabecera = new Grid { ColumnDefinitions = new ColumnDefinitionCollection { new ColumnDefinition { Width = 28 }, new ColumnDefinition { Width = GridLength.Star } }, ColumnSpacing = 6 };
             cabecera.Children.Add(numero);
             Grid.SetColumn(titulo, 1);
             cabecera.Children.Add(titulo);
             var cuerpo = new Label { Text = seccion.Contenido, FontSize = 14, LineHeight = 1.3, LineBreakMode = LineBreakMode.WordWrap };
-            cuerpo.SetAppThemeColor(Label.TextColorProperty, Color.FromArgb("#403850"), Color.FromArgb("#D5CFE5"));
+            cuerpo.SetAppThemeColor(Label.TextColorProperty, Color.FromArgb("#343D50"), Color.FromArgb("#D5CFE5"));
             var bloque = new VerticalStackLayout { Padding = new Thickness(0, 14), Spacing = 8 };
             bloque.Children.Add(cabecera);
             bloque.Children.Add(cuerpo);
@@ -45,7 +45,7 @@ public partial class PaginaDocumentoLegal : ContentPage, IQueryAttributable
             if (i < secciones.Length - 1)
             {
                 var linea = new BoxView { HeightRequest = 1 };
-                linea.SetAppThemeColor(BoxView.ColorProperty, Color.FromArgb("#E0D9ED"), Color.FromArgb("#393450"));
+                linea.SetAppThemeColor(BoxView.ColorProperty, Color.FromArgb("#DCE0E9"), Color.FromArgb("#393450"));
                 SeccionesDocumento.Children.Add(linea);
             }
         }

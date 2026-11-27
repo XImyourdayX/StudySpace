@@ -1,221 +1,131 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:vm="clr-namespace:StudySpace.VistaModelos"
-    xmlns:dto="clr-namespace:Aplicacion.DTOs;assembly=Aplicacion"
-    x:Class="StudySpace.Vistas.PaginaCursos"
-    x:DataType="vm:CursosVM"
-    BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}"
-    Shell.NavBarIsVisible="False">
+<?xml version='1.0' encoding='UTF-8'?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:StudySpace.VistaModelos" xmlns:dto="clr-namespace:Aplicacion.DTOs;assembly=Aplicacion" x:Class="StudySpace.Vistas.PaginaCursos" x:DataType="vm:CursosVM" BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark={StaticResource FondoOscuro}}" Shell.NavBarIsVisible="False">
 
     <!-- Solo presentación: se conservan los comandos y la navegación del proyecto. -->
-    <Grid RowDefinitions="*,Auto"
-          RowSpacing="10"
-          Padding="16,8,16,12"
-          MaximumWidthRequest="480"
-          HorizontalOptions="Fill">
+    <Grid RowDefinitions="*,Auto" RowSpacing="10" Padding="16,8,16,12" MaximumWidthRequest="480" HorizontalOptions="Fill">
 
         <!-- La cabecera se mueve con la lista para aprovechar el alto del teléfono. -->
-        <CollectionView Grid.Row="0"
-                        ItemsSource="{Binding Cursos}"
-                        SelectionMode="None"
-                        VerticalScrollBarVisibility="Default">
+        <CollectionView Grid.Row="0" ItemsSource="{Binding Cursos}" SelectionMode="None" VerticalScrollBarVisibility="Default">
 
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="11" />
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="11"/>
             </CollectionView.ItemsLayout>
 
             <CollectionView.Header>
-                <VerticalStackLayout x:DataType="vm:CursosVM"
-                                     Padding="0,8,0,16"
-                                     Spacing="15">
+                <VerticalStackLayout x:DataType="vm:CursosVM" Padding="0,8,0,16" Spacing="15">
 
                     <!-- Identidad de la app -->
                     <HorizontalStackLayout Spacing="9" VerticalOptions="Center">
-                        <Label Text="&#xe80c;"
-                               FontFamily="IconosMaterial"
-                               FontSize="25"
-                               TextColor="{AppThemeBinding Light=#7046D4, Dark=#BA99FF}"
-                               VerticalTextAlignment="Center" />
-                        <Label Text="Study Space"
-                               FontAttributes="Bold"
-                               FontSize="19"
-                               TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}"
-                               VerticalTextAlignment="Center" />
+                        <Label Text="" FontFamily="IconosMaterial" FontSize="25" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#BA99FF}" VerticalTextAlignment="Center"/>
+                        <Label Text="Study Space" FontAttributes="Bold" FontSize="19" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" VerticalTextAlignment="Center"/>
                     </HorizontalStackLayout>
 
                     <!-- Título y acción para agregar un curso -->
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
                         <VerticalStackLayout Spacing="3" VerticalOptions="Center">
-                            <Label Text="Mis cursos"
-                                   FontSize="29"
-                                   FontAttributes="Bold"
-                                   TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                            <Label Text="Organiza tu ciclo académico."
-                                   FontSize="13"
-                                   TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                            <Label Text="Mis cursos" FontSize="29" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}"/>
+                            <Label Text="Organiza tu ciclo académico." FontSize="13" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}"/>
                         </VerticalStackLayout>
 
-                        <Border Grid.Column="1"
-                                WidthRequest="49"
-                                HeightRequest="49"
-                                StrokeThickness="1"
-                                Stroke="{AppThemeBinding Light=#A88BF2, Dark=#AD7BFF}"
-                                BackgroundColor="{StaticResource Violeta}"
-                                VerticalOptions="Start">
+                        <Border Grid.Column="1" WidthRequest="49" HeightRequest="49" StrokeThickness="1" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#AD7BFF}" BackgroundColor="{AppThemeBinding Light={StaticResource AccionClaro}, Dark={StaticResource Violeta}}" VerticalOptions="Start">
                             <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="16" />
+                                <RoundRectangle CornerRadius="16"/>
                             </Border.StrokeShape>
-                            <Label Text="&#xe145;"
-                                   FontFamily="IconosMaterial"
-                                   FontSize="28"
-                                   TextColor="White"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
+                            <Label Text="" FontFamily="IconosMaterial" FontSize="28" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                             <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding AgregarCommand}" />
+                                <TapGestureRecognizer Command="{Binding AgregarCommand}"/>
                             </Border.GestureRecognizers>
                         </Border>
                     </Grid>
 
                     <!-- Total real de cursos, no del filtro seleccionado. -->
-                    <Border Padding="17,16"
-                            StrokeThickness="1"
-                            Stroke="{AppThemeBinding Light=#CEB6FF, Dark=#7353AB}"
-                            BackgroundColor="{AppThemeBinding Light=#EDE3FF, Dark=#31204F}">
+                    <Border Padding="17,16" StrokeThickness="1" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#7353AB}" BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#31204F}">
                         <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="21" />
+                            <RoundRectangle CornerRadius="21"/>
                         </Border.StrokeShape>
                         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
-                            <Border WidthRequest="54"
-                                    HeightRequest="54"
-                                    StrokeThickness="0"
-                                    VerticalOptions="Center"
-                                    BackgroundColor="{AppThemeBinding Light=#D9C5FF, Dark=#613998}">
+                            <Border WidthRequest="54" HeightRequest="54" StrokeThickness="0" VerticalOptions="Center" BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#613998}">
                                 <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="15" />
+                                    <RoundRectangle CornerRadius="15"/>
                                 </Border.StrokeShape>
-                                <Label Text="&#xea19;"
-                                       FontFamily="IconosMaterial"
-                                       FontSize="28"
-                                       TextColor="{AppThemeBinding Light=#6A3EC1, Dark=White}"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="Center" />
+                                <Label Text="" FontFamily="IconosMaterial" FontSize="28" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=White}" HorizontalOptions="Center" VerticalOptions="Center"/>
                             </Border>
-                            <VerticalStackLayout Grid.Column="1"
-                                                 VerticalOptions="Center"
-                                                 Spacing="4">
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
                                 <HorizontalStackLayout Spacing="5">
-                                    <Label Text="{Binding TotalCursos}"
-                                           FontSize="25"
-                                           FontAttributes="Bold"
-                                           TextColor="{AppThemeBinding Light=#47217B, Dark=White}" />
-                                    <Label Text="cursos"
-                                           FontSize="23"
-                                           FontAttributes="Bold"
-                                           VerticalTextAlignment="Center"
-                                           TextColor="{AppThemeBinding Light=#47217B, Dark=White}" />
+                                    <Label Text="{Binding TotalCursos}" FontSize="25" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=White}"/>
+                                    <Label Text="cursos" FontSize="23" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=White}"/>
                                 </HorizontalStackLayout>
-                                <Label Text="Tu espacio de aprendizaje"
-                                       FontSize="12"
-                                       TextColor="{AppThemeBinding Light=#7758A1, Dark=#D9C5F8}" />
+                                <Label Text="Tu espacio de aprendizaje" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#D9C5F8}"/>
                             </VerticalStackLayout>
-                            <Label Grid.Column="2"
-                                   Text="&#xe86c;"
-                                   FontFamily="IconosMaterial"
-                                   FontSize="26"
-                                   VerticalOptions="Center"
-                                   TextColor="{AppThemeBinding Light=#A47DDC, Dark=#C2A1F3}" />
+                            <Label Grid.Column="2" Text="" FontFamily="IconosMaterial" FontSize="26" VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C2A1F3}"/>
                         </Grid>
                     </Border>
 
                     <!-- Filtros preexistentes: conservan sus tres comandos y estados. -->
                     <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
-                        <Border Grid.Column="0"
-                                Padding="4,11"
-                                StrokeThickness="1"
-                                Stroke="{AppThemeBinding Light=#DBD1F4, Dark=#625689}"
-                                BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
+                        <Border Grid.Column="0" Padding="4,11" StrokeThickness="1" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#625689}" BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
                             <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="22" />
+                                <RoundRectangle CornerRadius="22"/>
                             </Border.StrokeShape>
                             <Border.Triggers>
                                 <DataTrigger TargetType="Border" Binding="{Binding FiltroTodosActivo}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Violeta}" />
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource AccionClaro}, Dark={StaticResource Violeta}}"/>
                                 </DataTrigger>
                             </Border.Triggers>
-                            <Label Text="Todos"
-                                   FontSize="12"
-                                   HorizontalTextAlignment="Center"
-                                   TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoOscuro}}">
+                            <Label Text="Todos" FontSize="12" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoOscuro}}">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" Binding="{Binding FiltroTodosActivo}" Value="True">
-                                        <Setter Property="TextColor" Value="White" />
-                                        <Setter Property="FontAttributes" Value="Bold" />
+                                        <Setter Property="TextColor" Value="White"/>
+                                        <Setter Property="FontAttributes" Value="Bold"/>
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
                             <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding MostrarTodosCommand}" />
+                                <TapGestureRecognizer Command="{Binding MostrarTodosCommand}"/>
                             </Border.GestureRecognizers>
                         </Border>
 
-                        <Border Grid.Column="1"
-                                Padding="4,11"
-                                StrokeThickness="1"
-                                Stroke="{AppThemeBinding Light=#DBD1F4, Dark=#625689}"
-                                BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
+                        <Border Grid.Column="1" Padding="4,11" StrokeThickness="1" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#625689}" BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
                             <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="22" />
+                                <RoundRectangle CornerRadius="22"/>
                             </Border.StrokeShape>
                             <Border.Triggers>
                                 <DataTrigger TargetType="Border" Binding="{Binding FiltroActualesActivo}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Violeta}" />
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource AccionClaro}, Dark={StaticResource Violeta}}"/>
                                 </DataTrigger>
                             </Border.Triggers>
-                            <Label Text="Actuales"
-                                   FontSize="12"
-                                   HorizontalTextAlignment="Center"
-                                   TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoOscuro}}">
+                            <Label Text="Actuales" FontSize="12" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoOscuro}}">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" Binding="{Binding FiltroActualesActivo}" Value="True">
-                                        <Setter Property="TextColor" Value="White" />
-                                        <Setter Property="FontAttributes" Value="Bold" />
+                                        <Setter Property="TextColor" Value="White"/>
+                                        <Setter Property="FontAttributes" Value="Bold"/>
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
                             <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding MostrarActualesCommand}" />
+                                <TapGestureRecognizer Command="{Binding MostrarActualesCommand}"/>
                             </Border.GestureRecognizers>
                         </Border>
 
-                        <Border Grid.Column="2"
-                                Padding="4,11"
-                                StrokeThickness="1"
-                                Stroke="{AppThemeBinding Light=#DBD1F4, Dark=#625689}"
-                                BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
+                        <Border Grid.Column="2" Padding="4,11" StrokeThickness="1" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#625689}" BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
                             <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="22" />
+                                <RoundRectangle CornerRadius="22"/>
                             </Border.StrokeShape>
                             <Border.Triggers>
                                 <DataTrigger TargetType="Border" Binding="{Binding FiltroFinalizadosActivo}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Violeta}" />
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource AccionClaro}, Dark={StaticResource Violeta}}"/>
                                 </DataTrigger>
                             </Border.Triggers>
-                            <Label Text="Finalizados"
-                                   FontSize="12"
-                                   HorizontalTextAlignment="Center"
-                                   TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoOscuro}}">
+                            <Label Text="Finalizados" FontSize="12" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoOscuro}}">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" Binding="{Binding FiltroFinalizadosActivo}" Value="True">
-                                        <Setter Property="TextColor" Value="White" />
-                                        <Setter Property="FontAttributes" Value="Bold" />
+                                        <Setter Property="TextColor" Value="White"/>
+                                        <Setter Property="FontAttributes" Value="Bold"/>
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
                             <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding MostrarFinalizadosCommand}" />
+                                <TapGestureRecognizer Command="{Binding MostrarFinalizadosCommand}"/>
                             </Border.GestureRecognizers>
                         </Border>
                     </Grid>
@@ -224,76 +134,36 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="dto:CursoDTO">
-                    <Border StrokeThickness="1"
-                            Stroke="{AppThemeBinding Light=#E0D5F6, Dark=#4B3E72}"
-                            BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
+                    <Border StrokeThickness="1" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#4B3E72}" BackgroundColor="{AppThemeBinding Light={StaticResource TarjetaClaro}, Dark={StaticResource TarjetaOscuro}}">
                         <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="19" />
+                            <RoundRectangle CornerRadius="19"/>
                         </Border.StrokeShape>
 
                         <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnCursoTapped" />
+                            <TapGestureRecognizer Tapped="OnCursoTapped"/>
                         </Border.GestureRecognizers>
 
                         <!-- Franja e icono del color real asignado al curso. -->
-                        <Grid ColumnDefinitions="5,Auto,*,Auto"
-                              ColumnSpacing="12"
-                              MinimumHeightRequest="103">
-                            <BoxView Grid.Column="0"
-                                     BackgroundColor="{Binding Color}"
-                                     WidthRequest="5"
-                                     VerticalOptions="Fill" />
+                        <Grid ColumnDefinitions="5,Auto,*,Auto" ColumnSpacing="12" MinimumHeightRequest="103">
+                            <BoxView Grid.Column="0" BackgroundColor="{Binding Color}" WidthRequest="5" VerticalOptions="Fill"/>
 
-                            <Border Grid.Column="1"
-                                    WidthRequest="54"
-                                    HeightRequest="54"
-                                    VerticalOptions="Center"
-                                    StrokeThickness="0"
-                                    BackgroundColor="{Binding Color}">
+                            <Border Grid.Column="1" WidthRequest="54" HeightRequest="54" VerticalOptions="Center" StrokeThickness="0" BackgroundColor="{Binding Color}">
                                 <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="15" />
+                                    <RoundRectangle CornerRadius="15"/>
                                 </Border.StrokeShape>
-                                <Label Text="&#xea19;"
-                                       FontFamily="IconosMaterial"
-                                       FontSize="27"
-                                       TextColor="White"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="Center" />
+                                <Label Text="" FontFamily="IconosMaterial" FontSize="27" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                             </Border>
 
-                            <VerticalStackLayout Grid.Column="2"
-                                                 Spacing="5"
-                                                 Padding="0,11,0,11"
-                                                 VerticalOptions="Center">
-                                <Label Text="{Binding Nombre}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       MaxLines="2"
-                                       LineBreakMode="TailTruncation"
-                                       TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                                <Label Text="{Binding TextoPendientes}"
-                                       FontSize="12"
-                                       TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                            <VerticalStackLayout Grid.Column="2" Spacing="5" Padding="0,11,0,11" VerticalOptions="Center">
+                                <Label Text="{Binding Nombre}" FontSize="16" FontAttributes="Bold" MaxLines="2" LineBreakMode="TailTruncation" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}"/>
+                                <Label Text="{Binding TextoPendientes}" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}"/>
                                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
-                                    <ProgressBar Progress="{Binding Progreso}"
-                                                 ProgressColor="{Binding Color}"
-                                                 HeightRequest="7"
-                                                 VerticalOptions="Center"
-                                                 BackgroundColor="{AppThemeBinding Light=#E8E5F1, Dark=#42435C}" />
-                                    <Label Grid.Column="1"
-                                           Text="{Binding TextoAvance}"
-                                           FontSize="10"
-                                           TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                                    <ProgressBar Progress="{Binding Progreso}" ProgressColor="{Binding Color}" HeightRequest="7" VerticalOptions="Center" BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#42435C}"/>
+                                    <Label Grid.Column="1" Text="{Binding TextoAvance}" FontSize="10" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}"/>
                                 </Grid>
                             </VerticalStackLayout>
 
-                            <Label Grid.Column="3"
-                                   Text="&#xe5cc;"
-                                   FontFamily="IconosMaterial"
-                                   FontSize="23"
-                                   Margin="0,0,8,0"
-                                   VerticalOptions="Center"
-                                   TextColor="{AppThemeBinding Light=#6D6094, Dark=#C4B8E9}" />
+                            <Label Grid.Column="3" Text="" FontFamily="IconosMaterial" FontSize="23" Margin="0,0,8,0" VerticalOptions="Center" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#C4B8E9}"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
@@ -301,47 +171,20 @@
 
             <!-- Cuando el filtro no tiene cursos, no queda un hueco vacío. -->
             <CollectionView.EmptyView>
-                <VerticalStackLayout Padding="20,35,20,25"
-                                     Spacing="11"
-                                     HorizontalOptions="Center">
-                    <Border BackgroundColor="{AppThemeBinding Light=#EDE4FF, Dark=#302B53}"
-                            StrokeThickness="0"
-                            WidthRequest="66"
-                            HeightRequest="66"
-                            HorizontalOptions="Center">
+                <VerticalStackLayout Padding="20,35,20,25" Spacing="11" HorizontalOptions="Center">
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#302B53}" StrokeThickness="0" WidthRequest="66" HeightRequest="66" HorizontalOptions="Center">
                         <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="20" />
+                            <RoundRectangle CornerRadius="20"/>
                         </Border.StrokeShape>
-                        <Label Text="&#xea19;"
-                               FontFamily="IconosMaterial"
-                               FontSize="31"
-                               TextColor="{AppThemeBinding Light=#7B55D9, Dark=#C7ABFF}"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
+                        <Label Text="" FontFamily="IconosMaterial" FontSize="31" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C7ABFF}" HorizontalOptions="Center" VerticalOptions="Center"/>
                     </Border>
-                    <Label Text="Aún no hay cursos aquí"
-                           HorizontalTextAlignment="Center"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}" />
-                    <Label Text="Agrega un curso o prueba otro filtro."
-                           HorizontalTextAlignment="Center"
-                           FontSize="12"
-                           TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}" />
+                    <Label Text="Aún no hay cursos aquí" HorizontalTextAlignment="Center" FontSize="16" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark={StaticResource TextoOscuro}}"/>
+                    <Label Text="Agrega un curso o prueba otro filtro." HorizontalTextAlignment="Center" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark={StaticResource TextoSecundarioOscuro}}"/>
                 </VerticalStackLayout>
             </CollectionView.EmptyView>
         </CollectionView>
 
         <!-- La acción para crear tarea conserva su comando original. -->
-        <Button Grid.Row="1"
-                Text="+ Nueva tarea"
-                FontSize="16"
-                FontAttributes="Bold"
-                HeightRequest="54"
-                Margin="0,5,0,0"
-                CornerRadius="17"
-                TextColor="White"
-                BackgroundColor="{StaticResource Violeta}"
-                Command="{Binding NuevaTareaCommand}" />
+        <Button Grid.Row="1" Text="+ Nueva tarea" FontSize="16" FontAttributes="Bold" HeightRequest="54" Margin="0,5,0,0" CornerRadius="17" TextColor="White" BackgroundColor="{AppThemeBinding Light={StaticResource AccionClaro}, Dark={StaticResource Violeta}}" Command="{Binding NuevaTareaCommand}"/>
     </Grid>
 </ContentPage>

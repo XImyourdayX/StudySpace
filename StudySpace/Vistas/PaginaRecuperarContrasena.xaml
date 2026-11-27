@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:StudySpace.VistaModelos" x:Class="StudySpace.Vistas.PaginaRecuperarContrasena" x:DataType="vm:RecuperarContrasenaVM" Shell.NavBarIsVisible="False" BackgroundColor="{AppThemeBinding Light=#F8F7FC, Dark=#111427}">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:StudySpace.VistaModelos" x:Class="StudySpace.Vistas.PaginaRecuperarContrasena" x:DataType="vm:RecuperarContrasenaVM" Shell.NavBarIsVisible="False" BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark=#111427}">
 
     <ScrollView>
 
         <VerticalStackLayout Padding="18,16,18,24" Spacing="10" MaximumWidthRequest="420" HorizontalOptions="Fill">
 
             <!-- VOLVER -->
-            <Label FontFamily="IconosMaterial" Text="" FontSize="28" TextColor="{AppThemeBinding Light=#6530B7, Dark=#C6A0FF}" HorizontalOptions="Start" WidthRequest="44" HeightRequest="44" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+            <Label FontFamily="IconosMaterial" Text="" FontSize="28" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C6A0FF}" HorizontalOptions="Start" WidthRequest="44" HeightRequest="44" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
 
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding VolverCommand}"/>
@@ -21,71 +21,71 @@
             <Label Text="Recuperar contraseña" Style="{StaticResource Titulo}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,4,0,0" FontSize="24"/>
 
             <!-- DESCRIPCION BREVE -->
-            <Label Text="Restablece tu contraseña de forma segura." Style="{StaticResource Subtitulo}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,8" TextColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+            <Label Text="Restablece tu contraseña de forma segura." Style="{StaticResource Subtitulo}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,8" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
             <!-- CORREO -->
-            <Label Text="Correo electrónico" FontFamily="OpenSansSemibold" FontSize="14" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}"/>
+            <Label Text="Correo electrónico" FontFamily="OpenSansSemibold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}"/>
 
-            <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light=#F2EFFA, Dark=#22253F}" Stroke="{AppThemeBinding Light=#D9D0ED, Dark=#514568}" Padding="12,0" HeightRequest="50">
+            <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light={StaticResource CampoClaro}, Dark=#22253F}" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#514568}" Padding="12,0" HeightRequest="50">
 
-                <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Ingresa tu correo" Keyboard="Email" Text="{Binding Correo}" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+                <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Ingresa tu correo" Keyboard="Email" Text="{Binding Correo}" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
             </Border>
 
             <!-- ENVIAR CODIGO -->
             <Frame HasShadow="False" CornerRadius="16" Padding="0" HorizontalOptions="Fill" HeightRequest="50" Margin="0,6,0,0">
 
-                <Frame.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#A34DEB" Offset="0"/><GradientStop Color="#7132D9" Offset="1"/></LinearGradientBrush></Frame.Background><Button Text="Enviar código" BackgroundColor="Transparent" TextColor="White" FontFamily="OpenSansSemibold" FontSize="16" Command="{Binding SolicitarCodigoCommand}"/>
+                <Frame.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="{AppThemeBinding Light={StaticResource AccionClaro}, Dark=#A34DEB}" Offset="0"/><GradientStop Color="{AppThemeBinding Light={StaticResource AccionFinalClaro}, Dark=#7132D9}" Offset="1"/></LinearGradientBrush></Frame.Background><Button Text="Enviar código" BackgroundColor="Transparent" TextColor="White" FontFamily="OpenSansSemibold" FontSize="16" Command="{Binding SolicitarCodigoCommand}"/>
 
             </Frame>
 
             <!-- MENSAJE INFORMATIVO UNICO -->
-            <Label Text="{Binding MensajeInfo}" IsVisible="{Binding TieneMensajeInfo}" TextColor="{AppThemeBinding Light=#6530B7, Dark=#C6A0FF}" FontSize="13" HorizontalTextAlignment="Center" Margin="0,4,0,0"/>
+            <Label Text="{Binding MensajeInfo}" IsVisible="{Binding TieneMensajeInfo}" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C6A0FF}" FontSize="13" HorizontalTextAlignment="Center" Margin="0,4,0,0"/>
 
             <!-- SEGUNDA ETAPA -->
             <VerticalStackLayout IsVisible="{Binding CodigoSolicitado}" Spacing="16" Margin="0,18,0,0">
 
                 <!-- CODIGO -->
-                <Label Text="Código de recuperación" FontFamily="OpenSansSemibold" FontSize="14" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}"/>
+                <Label Text="Código de recuperación" FontFamily="OpenSansSemibold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}"/>
 
-                <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light=#F2EFFA, Dark=#22253F}" Stroke="{AppThemeBinding Light=#D9D0ED, Dark=#514568}" Padding="12,0" HeightRequest="50">
+                <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light={StaticResource CampoClaro}, Dark=#22253F}" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#514568}" Padding="12,0" HeightRequest="50">
 
-                    <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Código de 6 dígitos" Keyboard="Numeric" MaxLength="6" Text="{Binding Codigo}" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+                    <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Código de 6 dígitos" Keyboard="Numeric" MaxLength="6" Text="{Binding Codigo}" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
                 </Border>
 
                 <!-- NUEVA CONTRASENA -->
-                <Label Text="Nueva contraseña" FontFamily="OpenSansSemibold" FontSize="14" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}" Margin="0,4,0,0"/>
+                <Label Text="Nueva contraseña" FontFamily="OpenSansSemibold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" Margin="0,4,0,0"/>
 
-                <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light=#F2EFFA, Dark=#22253F}" Stroke="{AppThemeBinding Light=#D9D0ED, Dark=#514568}" Padding="12,0" HeightRequest="50">
+                <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light={StaticResource CampoClaro}, Dark=#22253F}" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#514568}" Padding="12,0" HeightRequest="50">
 
-                    <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Mínimo 8 caracteres" IsPassword="True" Text="{Binding NuevaContrasena}" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+                    <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Mínimo 8 caracteres" IsPassword="True" Text="{Binding NuevaContrasena}" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
                 </Border>
 
                 <!-- CONFIRMAR CONTRASENA -->
-                <Label Text="Confirmar contraseña" FontFamily="OpenSansSemibold" FontSize="14" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}" Margin="0,4,0,0"/>
+                <Label Text="Confirmar contraseña" FontFamily="OpenSansSemibold" FontSize="14" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" Margin="0,4,0,0"/>
 
-                <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light=#F2EFFA, Dark=#22253F}" Stroke="{AppThemeBinding Light=#D9D0ED, Dark=#514568}" Padding="12,0" HeightRequest="50">
+                <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light={StaticResource CampoClaro}, Dark=#22253F}" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#514568}" Padding="12,0" HeightRequest="50">
 
-                    <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Repite tu nueva contraseña" IsPassword="True" Text="{Binding ConfirmarContrasena}" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+                    <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Repite tu nueva contraseña" IsPassword="True" Text="{Binding ConfirmarContrasena}" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
                 </Border>
 
                 <!-- CAMBIAR CONTRASENA -->
                 <Frame HasShadow="False" CornerRadius="16" Padding="0" HorizontalOptions="Fill" HeightRequest="50" Margin="0,6,0,0">
 
-                    <Frame.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#A34DEB" Offset="0"/><GradientStop Color="#7132D9" Offset="1"/></LinearGradientBrush></Frame.Background><Button Text="Cambiar contraseña" BackgroundColor="Transparent" TextColor="White" FontFamily="OpenSansSemibold" FontSize="16" Command="{Binding RestablecerCommand}"/>
+                    <Frame.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="{AppThemeBinding Light={StaticResource AccionClaro}, Dark=#A34DEB}" Offset="0"/><GradientStop Color="{AppThemeBinding Light={StaticResource AccionFinalClaro}, Dark=#7132D9}" Offset="1"/></LinearGradientBrush></Frame.Background><Button Text="Cambiar contraseña" BackgroundColor="Transparent" TextColor="White" FontFamily="OpenSansSemibold" FontSize="16" Command="{Binding RestablecerCommand}"/>
 
                 </Frame>
 
             </VerticalStackLayout>
 
             <!-- ERROR -->
-            <Label Text="{Binding MensajeError}" IsVisible="{Binding TieneError}" TextColor="{StaticResource Rojo}" FontSize="13" HorizontalTextAlignment="Center"/>
+            <Label Text="{Binding MensajeError}" IsVisible="{Binding TieneError}" TextColor="{AppThemeBinding Light={StaticResource ErrorTextoClaro}, Dark={StaticResource Rojo}}" FontSize="13" HorizontalTextAlignment="Center"/>
 
             <!-- INDICADOR DE CARGA -->
-            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" Color="{AppThemeBinding Light=#6530B7, Dark=#C6A0FF}" HorizontalOptions="Center"/>
+            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" Color="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C6A0FF}" HorizontalOptions="Center"/>
 
         </VerticalStackLayout>
 

@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:StudySpace.VistaModelos" x:Class="StudySpace.Vistas.PaginaVerificarCorreo" x:DataType="vm:VerificarCorreoVM" Shell.NavBarIsVisible="False" BackgroundColor="{AppThemeBinding Light=#F8F7FC, Dark=#111427}">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:StudySpace.VistaModelos" x:Class="StudySpace.Vistas.PaginaVerificarCorreo" x:DataType="vm:VerificarCorreoVM" Shell.NavBarIsVisible="False" BackgroundColor="{AppThemeBinding Light={StaticResource FondoClaro}, Dark=#111427}">
 
     <ScrollView>
 
         <VerticalStackLayout Padding="18,16,18,24" Spacing="10" MaximumWidthRequest="420" HorizontalOptions="Fill">
 
             <!-- VOLVER AL REGISTRO -->
-            <Label Text="" FontFamily="IconosMaterial" FontSize="28" HorizontalOptions="Start" TextColor="{AppThemeBinding Light=#6530B7, Dark=#C6A0FF}" WidthRequest="44" HeightRequest="44" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+            <Label Text="" FontFamily="IconosMaterial" FontSize="28" HorizontalOptions="Start" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C6A0FF}" WidthRequest="44" HeightRequest="44" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
 
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding VolverCommand}"/>
@@ -20,40 +20,40 @@
             <!-- TÍTULO -->
             <Label Text="Verifica tu correo" Style="{StaticResource Titulo}" HorizontalTextAlignment="Center" FontSize="24" Margin="0,4,0,0"/>
 
-            <Label Text="Ingresa el código de 6 dígitos que enviamos a tu correo electrónico." Style="{StaticResource Subtitulo}" HorizontalTextAlignment="Center" Margin="0,0,0,8" TextColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+            <Label Text="Ingresa el código de 6 dígitos que enviamos a tu correo electrónico." Style="{StaticResource Subtitulo}" HorizontalTextAlignment="Center" Margin="0,0,0,8" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
             <!-- CORREO DEL REGISTRO -->
-            <Label Text="Correo electrónico registrado" FontFamily="OpenSansSemibold" FontSize="13" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}"/>
+            <Label Text="Correo electrónico registrado" FontFamily="OpenSansSemibold" FontSize="13" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}"/>
 
-            <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light=#F2EFFA, Dark=#22253F}" Stroke="{AppThemeBinding Light=#D9D0ED, Dark=#514568}" Padding="12,0" HeightRequest="50">
+            <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light={StaticResource CampoClaro}, Dark=#22253F}" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#514568}" Padding="12,0" HeightRequest="50">
 
-                <Entry Style="{StaticResource EntradaLimpia}" Text="{Binding Correo, Mode=OneWay}" IsReadOnly="True" Keyboard="Email" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+                <Entry Style="{StaticResource EntradaLimpia}" Text="{Binding Correo, Mode=OneWay}" IsReadOnly="True" Keyboard="Email" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
             </Border>
 
-            <Label Text="Este es el correo que ingresaste al crear tu cuenta." Style="{StaticResource Subtitulo}" FontSize="12" TextColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}" HorizontalTextAlignment="Center"/>
+            <Label Text="Este es el correo que ingresaste al crear tu cuenta." Style="{StaticResource Subtitulo}" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}" HorizontalTextAlignment="Center"/>
 
             <!-- CÓDIGO DE VERIFICACIÓN -->
-            <Label Text="Código de verificación" FontFamily="OpenSansSemibold" FontSize="13" Margin="0,12,0,0" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}"/>
+            <Label Text="Código de verificación" FontFamily="OpenSansSemibold" FontSize="13" Margin="0,12,0,0" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}"/>
 
-            <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light=#F2EFFA, Dark=#22253F}" Stroke="{AppThemeBinding Light=#D9D0ED, Dark=#514568}" Padding="12,0" HeightRequest="50">
+            <Border Style="{StaticResource CampoBorde}" BackgroundColor="{AppThemeBinding Light={StaticResource CampoClaro}, Dark=#22253F}" Stroke="{AppThemeBinding Light={StaticResource BordeClaro}, Dark=#514568}" Padding="12,0" HeightRequest="50">
 
-                <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Ingresa los 6 dígitos" Keyboard="Numeric" MaxLength="6" Text="{Binding Codigo}" HorizontalTextAlignment="Center" FontSize="20" CharacterSpacing="4" TextColor="{AppThemeBinding Light=#201B36, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+                <Entry Style="{StaticResource EntradaLimpia}" Placeholder="Ingresa los 6 dígitos" Keyboard="Numeric" MaxLength="6" Text="{Binding Codigo}" HorizontalTextAlignment="Center" FontSize="20" CharacterSpacing="4" TextColor="{AppThemeBinding Light={StaticResource TextoClaro}, Dark=#F5F1FF}" PlaceholderColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
             </Border>
 
-            <Label Text="El código tiene una validez de 10 minutos." Style="{StaticResource Subtitulo}" FontSize="12" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+            <Label Text="El código tiene una validez de 10 minutos." Style="{StaticResource Subtitulo}" FontSize="12" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
             <!-- MENSAJES DE ERROR -->
-            <Label Text="{Binding MensajeError}" IsVisible="{Binding TieneError}" TextColor="{StaticResource Rojo}" FontSize="13" HorizontalTextAlignment="Center"/>
+            <Label Text="{Binding MensajeError}" IsVisible="{Binding TieneError}" TextColor="{AppThemeBinding Light={StaticResource ErrorTextoClaro}, Dark={StaticResource Rojo}}" FontSize="13" HorizontalTextAlignment="Center"/>
 
             <!-- MENSAJES INFORMATIVOS -->
-            <Label Text="{Binding MensajeInfo}" IsVisible="{Binding TieneMensajeInfo}" FontSize="13" HorizontalTextAlignment="Center" TextColor="{StaticResource Verde}"/>
+            <Label Text="{Binding MensajeInfo}" IsVisible="{Binding TieneMensajeInfo}" FontSize="13" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light={StaticResource ExitoTextoClaro}, Dark={StaticResource Verde}}"/>
 
             <!-- BOTÓN PRINCIPAL -->
             <Border StrokeThickness="0" HeightRequest="50" Margin="0,12,0,0">
 
-                <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#A34DEB" Offset="0"/><GradientStop Color="#7132D9" Offset="1"/></LinearGradientBrush></Border.Background><Border.StrokeShape>
+                <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="{AppThemeBinding Light={StaticResource AccionClaro}, Dark=#A34DEB}" Offset="0"/><GradientStop Color="{AppThemeBinding Light={StaticResource AccionFinalClaro}, Dark=#7132D9}" Offset="1"/></LinearGradientBrush></Border.Background><Border.StrokeShape>
                     <RoundRectangle CornerRadius="16"/>
                 </Border.StrokeShape>
 
@@ -62,13 +62,13 @@
             </Border>
 
             <!-- REENVIAR CÓDIGO -->
-            <Button Text="¿No recibiste el código? Reenviar" Command="{Binding EnviarCodigoCommand}" BackgroundColor="{AppThemeBinding Light=#EDE4FB, Dark=#2B2345}" TextColor="{AppThemeBinding Light=#6530B7, Dark=#C6A0FF}" FontFamily="OpenSansSemibold" FontSize="14" CornerRadius="18" HeightRequest="50"/>
+            <Button Text="¿No recibiste el código? Reenviar" Command="{Binding EnviarCodigoCommand}" BackgroundColor="{AppThemeBinding Light={StaticResource LavandaClaro}, Dark=#2B2345}" TextColor="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C6A0FF}" FontFamily="OpenSansSemibold" FontSize="14" CornerRadius="18" HeightRequest="50"/>
 
             <!-- CARGA -->
-            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" Color="{AppThemeBinding Light=#6530B7, Dark=#C6A0FF}" HorizontalOptions="Center"/>
+            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" Color="{AppThemeBinding Light={StaticResource AcentoClaro}, Dark=#C6A0FF}" HorizontalOptions="Center"/>
 
             <!-- AYUDA -->
-            <Label Text="Si no encuentras el mensaje, revisa la carpeta de spam o correo no deseado." Style="{StaticResource Subtitulo}" FontSize="12" HorizontalTextAlignment="Center" Margin="0,8,0,0" TextColor="{AppThemeBinding Light=#625C78, Dark=#B9B6D0}"/>
+            <Label Text="Si no encuentras el mensaje, revisa la carpeta de spam o correo no deseado." Style="{StaticResource Subtitulo}" FontSize="12" HorizontalTextAlignment="Center" Margin="0,8,0,0" TextColor="{AppThemeBinding Light={StaticResource TextoSecundarioClaro}, Dark=#B9B6D0}"/>
 
         </VerticalStackLayout>
 

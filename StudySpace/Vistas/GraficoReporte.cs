@@ -16,6 +16,8 @@ public sealed class GraficoReporte : GraphicsView, IDrawable
     public int Pendientes { get => (int)GetValue(PendientesProperty); set => SetValue(PendientesProperty, value); }
     public int Vencidas { get => (int)GetValue(VencidasProperty); set => SetValue(VencidasProperty, value); }
     public double Fraccion { get => (double)GetValue(FraccionProperty); set => SetValue(FraccionProperty, value); }
+    public static readonly BindableProperty TemaClaroProperty = BindableProperty.Create(nameof(TemaClaro), typeof(bool), typeof(GraficoReporte), false, propertyChanged: Redibujar);
+    public bool TemaClaro { get => (bool)GetValue(TemaClaroProperty); set => SetValue(TemaClaroProperty, value); }
     public GraficoReporte() { Drawable = this; InputTransparent = true; }
     private static void Redibujar(BindableObject b, object oldValue, object newValue) => ((GraficoReporte)b).Invalidate();
     private static readonly Color Violeta = Color.FromArgb("#AB65F5");
@@ -26,10 +28,13 @@ public sealed class GraficoReporte : GraphicsView, IDrawable
     {
         float w = rect.Width, h = rect.Height;
         if (w <= 0 || h <= 0) return;
-        var fondo = Color.FromArgb("#776A91").WithAlpha(0.38f);
+        var fondo = TemaClaro ? Color.FromArgb("#E2E5EE") : Color.FromArgb("#776A91").WithAlpha(0.38f);
+        var violeta = TemaClaro ? Color.FromArgb("#6743C1") : Violeta;
         double total = (double)Math.Max(0, Completadas) + Math.Max(0, Pendientes) + Math.Max(0, Vencidas);
         double[] valores = { Math.Max(0, Completadas), Math.Max(0, Pendientes), Math.Max(0, Vencidas) };
-        Color[] colores = { Verde, Ambar, Rosa };
+        Color[] colores = TemaClaro
+            ? new[] { Color.FromArgb("#187B55"), Color.FromArgb("#B47713"), Color.FromArgb("#BC365D") }
+            : new[] { Verde, Ambar, Rosa };
         if (Tipo == "Segmentos" || Tipo == "Curso")
         {
             canvas.FillColor = fondo;
@@ -37,7 +42,7 @@ public sealed class GraficoReporte : GraphicsView, IDrawable
             if (Tipo == "Curso")
             {
                 float ancho = (float)Math.Clamp(Fraccion, 0d, 1d) * w;
-                if (ancho > 0) { canvas.FillColor = Violeta; canvas.FillRoundedRectangle(0, 0, ancho, h, Math.Min(h / 2, ancho / 2)); }
+                if (ancho > 0) { canvas.FillColor = violeta; canvas.FillRoundedRectangle(0, 0, ancho, h, Math.Min(h / 2, ancho / 2)); }
             }
             else if (total > 0)
             {
@@ -63,7 +68,7 @@ public sealed class GraficoReporte : GraphicsView, IDrawable
         {
             double angulo = valores[i] / total * Math.PI * 2;
             if (angulo <= 0) continue;
-            canvas.StrokeColor = Tipo == "Cumplimiento" ? Violeta : colores[i];
+            canvas.StrokeColor = Tipo == "Cumplimiento" ? violeta : colores[i];
             var path = new PathF();
             int pasos = Math.Max(2, (int)Math.Ceiling(angulo * 32));
             for (int j = 0; j <= pasos; j++)
